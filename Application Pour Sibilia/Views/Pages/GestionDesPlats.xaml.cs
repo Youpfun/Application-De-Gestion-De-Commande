@@ -18,15 +18,33 @@ namespace Application_Pour_Sibilia.Views.Pages
     /// <summary>
     /// Logique d'interaction pour GestionDesPlats.xaml
     /// </summary>
+    /// 
+        public class Plat
+    {
+        public string Nom { get; set; }
+        public string Categorie { get; set; }
+        public string SousCategorie { get; set; }
+        public string Disponibilite { get; set; }
+    }
     public partial class GestionDesPlats : Page
     {
+
         public GestionDesPlats()
         {
             InitializeComponent();
+            var plats = new List<Plat>
+            {
+                new Plat { Nom = "Tranche de jambon", Categorie = "dessert", SousCategorie = "fromage", Disponibilite = "Toute saison" },
+                new Plat { Nom = "Escragot", Categorie = "Entrée", SousCategorie = "Jambon", Disponibilite = "Toute saison" },
+                new Plat { Nom = "Bouliste", Categorie = "plat", SousCategorie = "fddd", Disponibilite = "Toute saison" }
+            };
+            PlatsDataGrid.ItemsSource = plats;
         }
         private void CreePlat_Click(object sender, RoutedEventArgs e)
         {
 
         }
+
     }
+
 }
