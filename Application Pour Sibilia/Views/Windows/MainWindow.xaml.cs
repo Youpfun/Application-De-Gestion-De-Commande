@@ -22,6 +22,8 @@ namespace Application_Pour_Sibilia.Views.Windows
             SystemThemeWatcher.Watch(this);
 
             InitializeComponent();
+            ConnexionWindow connexionWindow = new ConnexionWindow();
+            connexionWindow.ShowDialog();
             SetPageService(navigationViewPageProvider);
 
             navigationService.SetNavigationControl(RootNavigation);

@@ -10,19 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wpf.Ui.Controls;
 
-namespace Application_Pour_Sibilia.Views.Pages
+namespace Application_Pour_Sibilia.Views.Windows
 {
     /// <summary>
-    /// Logique d'interaction pour PageConnexion.xaml
+    /// Logique d'interaction pour ConnexionWindow.xaml
     /// </summary>
-    public partial class PageConnexion : Page
+    public partial class ConnexionWindow : FluentWindow
     {
-        public PageConnexion()
+        public ConnexionWindow()
         {
             InitializeComponent();
+        }
+
+        private void SeConnecter_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
