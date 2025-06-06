@@ -4,46 +4,91 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace Application_Pour_Sibilia.ViewModels.Pages
 {
-    public partial class GestionClientViewModel : ObservableObject, INavigationAware
+    public partial class GestionClientViewModel : ObservableObject
     {
-        private bool _isInitialized = false;
+        private string nomClient;
+        private string prenomClient;
+        private string telClient;
+        private string adresseRueClient;
+        private string adresseCPClient;
+        private string adresseVilleClient;
 
-        [ObservableProperty]
-        private IEnumerable<DataColor> _colors;
-
-        public Task OnNavigatedToAsync()
+        public string NomClient
         {
-            if (!_isInitialized)
-                InitializeViewModel();
+            get
+            {
+                return this.nomClient;
+            }
 
-            return Task.CompletedTask;
+            set
+            {
+                this.nomClient = value;
+            }
         }
 
-        public Task OnNavigatedFromAsync() => Task.CompletedTask;
-
-        private void InitializeViewModel()
+        public string PrenomClient
         {
-            var random = new Random();
-            var colorCollection = new List<DataColor>();
+            get
+            {
+                return this.prenomClient;
+            }
 
-            for (int i = 0; i < 8192; i++)
-                colorCollection.Add(
-                    new DataColor
-                    {
-                        Color = new SolidColorBrush(
-                            Color.FromArgb(
-                                (byte)200,
-                                (byte)random.Next(0, 250),
-                                (byte)random.Next(0, 250),
-                                (byte)random.Next(0, 250)
-                            )
-                        )
-                    }
-                );
+            set
+            {
+                this.prenomClient = value;
+            }
+        }
 
-            Colors = colorCollection;
+        public string TelClient
+        {
+            get
+            {
+                return this.telClient;
+            }
 
-            _isInitialized = true;
+            set
+            {
+                this.telClient = value;
+            }
+        }
+
+        public string AdresseRueClient
+        {
+            get
+            {
+                return this.adresseRueClient;
+            }
+
+            set
+            {
+                this.adresseRueClient = value;
+            }
+        }
+
+        public string AdresseCPClient
+        {
+            get
+            {
+                return this.adresseCPClient;
+            }
+
+            set
+            {
+                this.adresseCPClient = value;
+            }
+        }
+
+        public string AdresseVilleClient
+        {
+            get
+            {
+                return this.adresseVilleClient;
+            }
+
+            set
+            {
+                this.adresseVilleClient = value;
+            }
         }
     }
 }

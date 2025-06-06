@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application_Pour_Sibilia.DB
+namespace Application_Pour_Sibilia.Models
 {
     public class LogError
     {
