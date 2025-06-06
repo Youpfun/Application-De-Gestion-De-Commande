@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace Application_Pour_Sibilia.Views.Pages
 {
     /// <summary>
-    /// Logique d'interaction pour GestionDesPlats.xaml
+    /// Logique d'interaction pour GestionDesPlatsPage.xaml
     /// </summary>
     /// 
         public class Plat
@@ -26,10 +26,10 @@ namespace Application_Pour_Sibilia.Views.Pages
         public string SousCategorie { get; set; }
         public string Disponibilite { get; set; }
     }
-    public partial class GestionDesPlats : Page
+    public partial class GestionDesPlatsPage : Page
     {
 
-        public GestionDesPlats()
+        public GestionDesPlatsPage()
         {
             InitializeComponent();
             var plats = new List<Plat>

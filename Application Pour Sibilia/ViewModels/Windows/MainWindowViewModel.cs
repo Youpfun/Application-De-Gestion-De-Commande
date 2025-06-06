@@ -27,7 +27,7 @@ namespace Application_Pour_Sibilia.ViewModels.Windows
             {
                 Content = "Gestion des plats",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
-                TargetPageType = typeof(Views.Pages.GestionDesPlats)
+                TargetPageType = typeof(Views.Pages.GestionDesPlatsPage)
             }
         };
 
