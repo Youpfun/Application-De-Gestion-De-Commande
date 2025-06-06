@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Application_Pour_Sibilia.Views.Pages
 {
     /// <summary>
-    /// Logique d'interaction pour GestionClient.xaml
+    /// Logique d'interaction pour ConsulterCommandePage.xaml
     /// </summary>
-    public partial class GestionClient : Page
+    public partial class ConsulterCommandePage : Page
     {
-        public GestionClient()
+        public ConsulterCommandePage()
         {
             InitializeComponent();
         }

@@ -53,6 +53,10 @@ namespace Application_Pour_Sibilia
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
+                services.AddSingleton<GestionClientPage>();
+                services.AddSingleton<GestionClientViewModel>();
+                services.AddSingleton<ConsulterCommandePage>();
+                services.AddSingleton<ConsulterCommandeViewModel>();
             }).Build();
 
         /// <summary>

@@ -4,7 +4,7 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace Application_Pour_Sibilia.ViewModels.Pages
 {
-    public partial class DataViewModel : ObservableObject
+    public partial class ConsulterCommandeViewModel : ObservableObject
     {
         
     }
