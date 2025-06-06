@@ -48,6 +48,8 @@ namespace Application_Pour_Sibilia
 
                 services.AddSingleton<DashboardPage>();
                 services.AddSingleton<DashboardViewModel>();
+                services.AddSingleton<GestionDesPlatsPage>();
+                services.AddSingleton<GestionDesPlatsViewModel>();
                 services.AddSingleton<DataPage>();
                 services.AddSingleton<GestionDesPlats>();
                 services.AddSingleton<CreationCommandePage>();
@@ -55,6 +57,10 @@ namespace Application_Pour_Sibilia
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
+                services.AddSingleton<GestionClientPage>();
+                services.AddSingleton<GestionClientViewModel>();
+                services.AddSingleton<ConsulterCommandePage>();
+                services.AddSingleton<ConsulterCommandeViewModel>();
             }).Build();
 
         /// <summary>
