@@ -19,15 +19,21 @@ namespace Application_Pour_Sibilia.ViewModels.Windows
             },
             new NavigationViewItem()
             {
-                Content = "Data",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
-                TargetPageType = typeof(Views.Pages.DataPage)
-            },
-            new NavigationViewItem()
-            {
                 Content = "Gestion des plats",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
                 TargetPageType = typeof(Views.Pages.GestionDesPlatsPage)
+            },
+            new NavigationViewItem()
+            {
+                Content = "Client",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
+                TargetPageType = typeof(Views.Pages.GestionClientPage)
+            },
+            new NavigationViewItem()
+            {
+                Content = "Commande",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
+                TargetPageType = typeof(Views.Pages.ConsulterCommandePage)
             }
         };
 

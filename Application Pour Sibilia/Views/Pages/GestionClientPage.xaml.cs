@@ -3,11 +3,11 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace Application_Pour_Sibilia.Views.Pages
 {
-    public partial class DataPage : INavigableView<DataViewModel>
+    public partial class GestionClientPage : INavigableView<GestionClientViewModel>
     {
-        public DataViewModel ViewModel { get; }
+        public GestionClientViewModel ViewModel { get; }
 
-        public DataPage(DataViewModel viewModel)
+        public GestionClientPage(GestionClientViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = this;
