@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Application_Pour_Sibilia.Models
 {
-    class Client
+    public class Client
     {
         private string nomClient;
         private string prenomClient;
@@ -14,9 +16,13 @@ namespace Application_Pour_Sibilia.Models
         private string adresseRueClient;
         private string adresseCPClient;
         private string adresseVilleClient;
-
-        public Client(string nomClient, string prenomClient, string telClient, string adresseRueClient, string adresseCPClient, string adresseVilleClient)
+        public Client()
         {
+        }
+
+        public Client( string nomClient, string prenomClient, string telClient, string adresseRueClient, string adresseCPClient, string adresseVilleClient)
+        {
+            
             this.NomClient = nomClient;
             this.PrenomClient = prenomClient;
             this.TelClient = telClient;
@@ -114,5 +120,24 @@ namespace Application_Pour_Sibilia.Models
                 this.adresseVilleClient = value;
             }
         }
+
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
+        public List<Client> FindAll()
+        {
+            List<Client> lesClients = new List<Client>();
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from client;"))
+            {
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+                foreach (DataRow dr in dt.Rows)
+                    lesClients.Add(new Client((String)dr["nomclient"], (String)dr["prenomclient"],
+                   (String)dr["tel"], (String)dr["adresserue"], (String)dr["adressecp"], (String)dr["adresseville"]));
+            }
+            return lesClients;
+        }
+
+
     }
 }

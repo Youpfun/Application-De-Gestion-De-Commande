@@ -8,8 +8,7 @@
     xmlns:models="clr-namespace:Application_Pour_Sibilia.Models"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="GestionClientPage"
-    d:DataContext="{d:DesignInstance local:GestionClientPage,
-                                     IsDesignTimeCreatable=False}"
+    d:DataContext="{d:DesignInstance local:GestionClientPage,IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
@@ -19,6 +18,37 @@
     mc:Ignorable="d">
 
     <Grid>
-        <ui:Button>Test</ui:Button>
+        <ui:TextBox HorizontalAlignment="Left" Margin="118,33,0,0" TextWrapping="Wrap" Text="" PlaceholderText="Entre un nom" VerticalAlignment="Top" Width="120"/>
+        <DataGrid Margin="23,101,34,24" Background="#FFE2E0E0" AutoGenerateColumns="False"
+                  IsReadOnly="True" ItemsSource="{Binding LesClients}">
+            <DataGrid.Columns>
+                <DataGridTextColumn  
+                    Width="*"
+                    Binding="{Binding NomClient, ValidatesOnExceptions=True}"
+                    Header="Nom" />
+                <DataGridTextColumn  
+                    Width="*"
+                    Binding="{Binding PrenomClient , ValidatesOnExceptions=True}"
+                    Header="Prenom" />
+                <DataGridTextColumn  
+                    Width="*"
+                    Binding="{Binding TelClient, ValidatesOnExceptions=True}"
+                    Header="Telephone" />
+                <DataGridTextColumn  
+                    Width="*"
+                    Binding="{Binding AdresseRueClient, ValidatesOnExceptions=True}"
+                    Header="Rue" />
+                <DataGridTextColumn  
+                    Width="*"
+                    Binding="{Binding AdresseCPClient, ValidatesOnExceptions=True}"
+                    Header="Code Postal" />
+                <DataGridTextColumn  
+                     Width="*"
+                     Binding="{Binding AdresseVilleClient, ValidatesOnExceptions=True}"
+                     Header="Ville" />
+
+
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

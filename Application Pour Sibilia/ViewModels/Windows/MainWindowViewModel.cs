@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Application_Pour_Sibilia.Views.Windows;
+using System.Collections.ObjectModel;
 using Wpf.Ui.Controls;
 
 namespace Application_Pour_Sibilia.ViewModels.Windows
@@ -34,6 +35,12 @@ namespace Application_Pour_Sibilia.ViewModels.Windows
                 Content = "Commande",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
                 TargetPageType = typeof(Views.Pages.ConsulterCommandePage)
+            },
+            new NavigationViewItem()
+            {
+                Content = "Créé Commande",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
+                TargetPageType = typeof(Views.Pages.CreationCommandePage)
             }
         };
 
