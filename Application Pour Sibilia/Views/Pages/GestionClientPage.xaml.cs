@@ -14,7 +14,9 @@ namespace Application_Pour_Sibilia.Views.Pages
         {
             ViewModel = viewModel;
             DataContext = this;
-            ChargeData();
+            DataContext = new GestionClientViewModel();
+
+            //ChargeData();
             InitializeComponent();
 
         }

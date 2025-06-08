@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Media;
 using Application_Pour_Sibilia.Models;
 using Wpf.Ui.Abstractions.Controls;
@@ -8,11 +9,20 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
     public partial class GestionClientViewModel : ObservableObject
     {
         [ObservableProperty]
-        private ObservableCollection<Client> lesClients = new()
+        private ObservableCollection<Client> lesClients;
+        public GestionClientViewModel()
         {
-            new Client("Étienne","Roland","0799284957","rue de Hamon","20094","Marie" )
+            ChargerClients();
+        }
 
-        };
+        private void ChargerClients()
+        {
+            Client repo = new Client();
+            var clients = repo.FindAll();
+            LesClients = new ObservableCollection<Client>(clients);
+        }
+
+
 
     }
 

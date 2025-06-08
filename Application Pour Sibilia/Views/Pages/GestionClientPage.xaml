@@ -16,22 +16,22 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d">
-
+   
     <Grid>
-        <ui:TextBox HorizontalAlignment="Left" Margin="118,33,0,0" TextWrapping="Wrap" Text="" PlaceholderText="Entre un nom" VerticalAlignment="Top" Width="120"/>
-        <DataGrid Margin="23,101,34,24" Background="#FFE2E0E0" AutoGenerateColumns="False"
+        <ui:TextBox HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" Text="" PlaceholderText="Entre un nom" VerticalAlignment="Top" Width="164"/>
+        <DataGrid Margin="10,101,10,24" Background="#FF5F5C5C" AutoGenerateColumns="False"
                   IsReadOnly="True" ItemsSource="{Binding LesClients}">
             <DataGrid.Columns>
                 <DataGridTextColumn  
-                    Width="*"
+                    Width="85"
                     Binding="{Binding NomClient, ValidatesOnExceptions=True}"
                     Header="Nom" />
                 <DataGridTextColumn  
-                    Width="*"
+                    Width="90"
                     Binding="{Binding PrenomClient , ValidatesOnExceptions=True}"
                     Header="Prenom" />
                 <DataGridTextColumn  
-                    Width="*"
+                    Width="100"
                     Binding="{Binding TelClient, ValidatesOnExceptions=True}"
                     Header="Telephone" />
                 <DataGridTextColumn  
@@ -39,16 +39,15 @@
                     Binding="{Binding AdresseRueClient, ValidatesOnExceptions=True}"
                     Header="Rue" />
                 <DataGridTextColumn  
-                    Width="*"
+                    Width="80"
                     Binding="{Binding AdresseCPClient, ValidatesOnExceptions=True}"
                     Header="Code Postal" />
                 <DataGridTextColumn  
                      Width="*"
                      Binding="{Binding AdresseVilleClient, ValidatesOnExceptions=True}"
                      Header="Ville" />
-
-
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
+        
 </Page>

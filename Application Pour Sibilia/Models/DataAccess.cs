@@ -11,7 +11,7 @@ namespace Application_Pour_Sibilia.Models
     public class DataAccess
     {
         private static readonly DataAccess instance = new DataAccess();
-        private readonly string connectionString = "Host=srv-peda-new;Port=5432;Username=postgres;Password=postgres;Database=SAE201;Options='-c search_path=public'";
+        private readonly string connectionString = "Host=localhost;Port=5432;Username=postgres;Password=postgres;Database=SAE201;Options='-c search_path=public'";
         private NpgsqlConnection connection;
 
         public static DataAccess Instance
