@@ -1,0 +1,77 @@
+﻿<Window x:Name="Windowclient" x:Class="Application_Pour_Sibilia.Views.Windows.WindowClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Application_Pour_Sibilia.Views.Windows"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="Client" Height="480" Width="300">
+     <StackPanel x:Name="FormClient" Margin="0,0,0,1" Background="#FF282629">
+     <Label
+         Width="150"
+         Height="26"
+         Content="Nom" FontWeight="Bold" />
+     <TextBox
+         x:Name="textNom"
+         Width="238"
+         Text="{Binding NomClient, ValidatesOnExceptions=True}"
+         TextWrapping="Wrap" />
+     <Label
+         Width="150"
+         Height="26"
+         Content="Prenom" FontWeight="Bold" />
+     <TextBox
+         x:Name="textPrenom"
+         Width="238"
+         Text="{Binding PrenomClient, ValidatesOnExceptions=True}"
+         TextWrapping="Wrap" />
+     <Label
+         Width="150"
+         Height="26"
+         Content="Numero de Telephone"
+         RenderTransformOrigin="0.543,-0.153" FontWeight="Bold" />
+     <TextBox
+         x:Name="textTel"
+         Width="238"
+         Text="{Binding TelClient, ValidatesOnExceptions=True}"
+         TextWrapping="Wrap" />
+     <Label
+        Width="150"
+        Height="26"
+        Content="Adresse Rue" FontWeight="Bold" />
+     <TextBox
+        x:Name="textRue"
+        Width="238"
+        Text="{Binding AdresseRueClient, ValidatesOnExceptions=True}"
+        TextWrapping="Wrap" />
+     <Label
+        Width="150"
+        Height="26"
+        Content="Code postal" FontWeight="Bold" />
+     <TextBox
+        x:Name="textCP"
+        Width="238"
+        Text="{Binding AdresseCPClient, ValidatesOnExceptions=True}"
+        TextWrapping="Wrap" />
+     <Label
+        Width="150"
+        Height="26"
+        Content="Ville"
+        RenderTransformOrigin="0.543,-0.153" FontWeight="Bold" />
+     <TextBox
+        x:Name="textVille"
+        Width="238"
+        Text="{Binding AdresseVilleClient, ValidatesOnExceptions=True}"
+        TextWrapping="Wrap" />
+        <Button
+         x:Name="butValider"
+         Width="238"
+         Height="35"
+         Margin="0,20,0,0"
+         Click="butValider_Click"
+         Content="Valider"
+         RenderTransformOrigin="0.507,0.695" HorizontalAlignment="Center" />
+ </StackPanel>
+</Window>

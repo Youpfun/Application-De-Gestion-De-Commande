@@ -17,6 +17,10 @@ namespace Application_Pour_Sibilia.Models
             this.Nom = nom;
             this.LesClients = new ObservableCollection<Client>(new Client().FindAll());
         }
+        public Magasin():this("")
+        {
+            
+        }
 
         public string Nom
         {
