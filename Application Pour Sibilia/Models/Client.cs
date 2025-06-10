@@ -44,7 +44,7 @@ namespace Application_Pour_Sibilia.Models
             this.AdresseVilleClient = adresseVilleClient;
         }
 
-        public Client(string nomClient, string prenomClient, string telClient, string adresseRueClient, string adresseCPClient, string adresseVilleClient, int idClient) : this(nomClient, prenomClient, telClient, adresseRueClient, adresseCPClient, adresseVilleClient)
+        public Client(int idClient,string nomClient, string prenomClient, string telClient, string adresseRueClient, string adresseCPClient, string adresseVilleClient) : this(nomClient, prenomClient, telClient, adresseRueClient, adresseCPClient, adresseVilleClient)
         {
             this.IdClient = idClient;
         }
