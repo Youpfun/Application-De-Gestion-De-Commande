@@ -5,8 +5,10 @@ using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace Application_Pour_Sibilia.Models
 {

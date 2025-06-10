@@ -3,6 +3,7 @@ using Application_Pour_Sibilia.ViewModels.Pages;
 using Application_Pour_Sibilia.Views.Windows;
 using System;
 using System.Collections.ObjectModel;
+using System.Net;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Wpf.Ui.Abstractions.Controls;
@@ -26,6 +27,7 @@ namespace Application_Pour_Sibilia.Views.Pages
             InitializeComponent();
             reClient.Items.Filter = RechercheMotClefClient;
             LeMagasin = new Magasin();
+            DataContext = LeMagasin;
         }
         public bool RechercheMotClefClient(object obj)
         {
@@ -55,6 +57,7 @@ namespace Application_Pour_Sibilia.Views.Pages
                     {
                         unClient.IdClient = unClient.Create();
                         LeMagasin.LesClients.Add(unClient);
+                        CollectionViewSource.GetDefaultView(reClient.ItemsSource).Refresh();
                     }
                     catch (Exception ex)
                     {
