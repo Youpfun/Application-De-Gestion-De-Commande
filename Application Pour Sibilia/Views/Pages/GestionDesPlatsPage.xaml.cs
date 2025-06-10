@@ -96,33 +96,5 @@ namespace Application_Pour_Sibilia.Views.Pages
             //    MessageBox.Show("Veuillez sélectionner un plat à modifier.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             //}
         }
-
-        private void buttonSupprimer_Click(object sender, RoutedEventArgs e)
-        {
-            if (rePlat.SelectedItem != null)
-            {
-                Plat platSelectionne = (Plat)rePlat.SelectedItem;
-                MessageBoxResult result = MessageBox.Show($"Êtes-vous sûr de vouloir supprimer le plat '{platSelectionne.NomPlat}' ?",
-                                                        "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-                    try
-                    {
-                        // Ici vous devrez implémenter la méthode Delete() dans la classe Plat
-                        // platSelectionne.Delete();
-                        LeMagasin.LesPlats.Remove(platSelectionne);
-                        MessageBox.Show("Le plat a été supprimé avec succès.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Le Plat n'a pas pu être supprimé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Veuillez sélectionner un plat à supprimer.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
     }
 }
