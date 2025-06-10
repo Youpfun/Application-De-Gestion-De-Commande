@@ -14,32 +14,32 @@ namespace Application_Pour_Sibilia.ViewModels.Windows
         {
             new NavigationViewItem()
             {
-                Content = "Menu principale",
+                Content = "Menu principal",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
                 TargetPageType = typeof(Views.Pages.DashboardPage)
             },
             new NavigationViewItem()
             {
                 Content = "Gestion des plats",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
+                Icon = new SymbolIcon { Symbol = SymbolRegular.DocumentTable24 },
                 TargetPageType = typeof(Views.Pages.GestionDesPlatsPage)
             },
             new NavigationViewItem()
             {
                 Content = "Client",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
+                Icon = new SymbolIcon { Symbol = SymbolRegular.PeopleCommunity24 },
                 TargetPageType = typeof(Views.Pages.GestionClientPage)
             },
             new NavigationViewItem()
             {
                 Content = "Commande",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
+                Icon = new SymbolIcon { Symbol = SymbolRegular.BoxSearch24 },
                 TargetPageType = typeof(Views.Pages.ConsulterCommandePage)
             },
             new NavigationViewItem()
             {
                 Content = "Créer Commande",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Food24 },
                 TargetPageType = typeof(Views.Pages.CreationCommandePage)
             }
         };
