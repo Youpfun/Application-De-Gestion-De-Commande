@@ -25,7 +25,7 @@ namespace Application_Pour_Sibilia.Views.Pages
           
             InitializeComponent();
             reClient.Items.Filter = RechercheMotClefClient;
-
+            LeMagasin = new Magasin();
         }
         public bool RechercheMotClefClient(object obj)
         {
