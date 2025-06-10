@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace Application_Pour_Sibilia.Models
 {
@@ -11,11 +12,13 @@ namespace Application_Pour_Sibilia.Models
     {
         private string nom;
         private ObservableCollection<Client> lesClients;
+        private ObservableCollection<Plat> lesPlats;
 
         public Magasin(string nom)
         {
             this.Nom = nom;
             this.LesClients = new ObservableCollection<Client>(new Client().FindAll());
+            this.LesPlats = new ObservableCollection<Plat>(new Plat().FindAll());
         }
         public Magasin():this("")
         {
@@ -47,6 +50,20 @@ namespace Application_Pour_Sibilia.Models
                 this.lesClients = value;
             }
         }
+        public ObservableCollection<Plat> LesPlats
+        {
+            get
+            {
+                return this.lesPlats;
+            }
+
+            set
+            {
+                this.lesPlats = value;
+            }
+        }
+
+
     }
 
     

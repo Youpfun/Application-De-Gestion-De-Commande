@@ -13,121 +13,73 @@
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Cursor="">
 
-    <Grid>
-        <StackPanel>
-
-            <ui:Button Width="334" Height="40"
-               FontSize="16" FontWeight="Bold"
-               Background="#D0021B" Foreground="White"
-               VerticalAlignment="Top" Margin="0,0,0,0"
-               Command="{Binding AjouterPlatCommand}">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock Text="&#xE710;" FontFamily="Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                    <TextBlock Text="Ajouter un plat" VerticalAlignment="Center"/>
-                </StackPanel>
-            </ui:Button>
-
-            <Separator Margin="0,10" Background="{DynamicResource SystemAccentColorLight3}" Width="400" HorizontalAlignment="Left" />
-
-            <ui:AutoSuggestBox PlaceholderText="Search..." Margin="0,20,0,0" VerticalAlignment="Top" 
-                               Width="300" Height="35" HorizontalAlignment="Left"/>
-
-            <DataGrid x:Name="PlatsDataGrid"
-              ItemsSource="{Binding Plats}"
-              AutoGenerateColumns="False"
-              HeadersVisibility="Column"
-              RowHeight="50"
-              CanUserAddRows="False"
-              CanUserDeleteRows="False"
-              IsReadOnly="True"
-              GridLinesVisibility="None"
-              ColumnHeaderHeight="40"
-              BorderThickness="0"
-              Background="Transparent">
-
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="*" />
-                    <DataGridTextColumn Header="Catégorie" Binding="{Binding Categorie}" Width="*" />
-                    <DataGridTextColumn Header="Sous-catégorie" Binding="{Binding SousCategorie}" Width="*" />
-                    <DataGridTextColumn Header="Disponibilité" Binding="{Binding Disponibilite}" Width="*" />
-
-                    <!-- Colonne icônes -->
-                    <DataGridTemplateColumn Header="Actions" Width="120">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,0">
-
-                                    <!-- Icône Modifier -->
-                                    <TextBlock Text="&#xE104;" 
-                                               FontFamily="Segoe MDL2 Assets" 
-                                               FontSize="16" 
-                                               Foreground="#2196F3"
-                                               Cursor="Hand"
-                                               ToolTip="Modifier"
-                                               Margin="8,0"
-                                               VerticalAlignment="Center">
-                                        <TextBlock.InputBindings>
-                                            <MouseBinding Command="{Binding DataContext.ModifierPlatCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                          CommandParameter="{Binding}"
-                                                          MouseAction="LeftClick"/>
-                                        </TextBlock.InputBindings>
-                                        <TextBlock.Style>
-                                            <Style TargetType="TextBlock">
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Foreground" Value="#1976D2"/>
-                                                        <Setter Property="RenderTransform">
-                                                            <Setter.Value>
-                                                                <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBlock.Style>
-                                    </TextBlock>
-
-                                    <!-- Icône Supprimer -->
-                                    <TextBlock Text="&#xE107;" 
-                                               FontFamily="Segoe MDL2 Assets" 
-                                               FontSize="16" 
-                                               Foreground="#F44336"
-                                               Cursor="Hand"
-                                               ToolTip="Supprimer"
-                                               Margin="8,0"
-                                               VerticalAlignment="Center">
-                                        <TextBlock.InputBindings>
-                                            <MouseBinding Command="{Binding DataContext.SupprimerPlatCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                          CommandParameter="{Binding}"
-                                                          MouseAction="LeftClick"/>
-                                        </TextBlock.InputBindings>
-                                        <TextBlock.Style>
-                                            <Style TargetType="TextBlock">
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Foreground" Value="#D32F2F"/>
-                                                        <Setter Property="RenderTransform">
-                                                            <Setter.Value>
-                                                                <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBlock.Style>
-                                    </TextBlock>
-
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                </DataGrid.Columns>
-            </DataGrid>
-
+    <Grid Cursor="">
+        <ui:TextBox x:Name="textMotClefPlat" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" Text="" PlaceholderText="Rechercher un Plat" VerticalAlignment="Top" Width="164" TextChanged="textMotClefPlat_TextChanged"/>
+        <DataGrid x:Name="rePlat" Margin="10,101,10,24" AutoGenerateColumns="False"
+                  IsReadOnly="True" ItemsSource="{Binding LesPlats}">
+            <DataGrid.Columns>
+                <DataGridTextColumn  
+                    Width="*"
+                    Binding="{Binding NomPlat, ValidatesOnExceptions=True}"
+                    Header="Nom du Plat" />
+                <DataGridTextColumn  
+                    Width="100"
+                    Binding="{Binding PrixUnitaire, ValidatesOnExceptions=True, StringFormat=C2}"
+                    Header="Prix Unitaire" />
+                <DataGridTextColumn  
+                    Width="120"
+                    Binding="{Binding DelaiPreparation, ValidatesOnExceptions=True}"
+                    Header="Délai Préparation (min)" />
+                <DataGridTextColumn  
+                    Width="110"
+                    Binding="{Binding NbPersonnes, ValidatesOnExceptions=True}"
+                    Header="Nb Personnes" />
+                <DataGridTextColumn  
+                    Width="110"
+                    Binding="{Binding NumSousCategorie, ValidatesOnExceptions=True}"
+                    Header="Sous-Catégorie" />
+                <DataGridTextColumn  
+                     Width="80"
+                     Binding="{Binding NumPeriode, ValidatesOnExceptions=True}"
+                     Header="Période" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel x:Name="formulairePlat" Visibility="Collapsed"  Background="#FF8B8B8B" Margin="0,101,0,72">
+            <ui:TextBox x:Name="inputNomPlat" PlaceholderText="Nom du Plat"/>
+            <ui:TextBox x:Name="inputPrixUnitaire" PlaceholderText="Prix Unitaire"/>
+            <ui:TextBox x:Name="inputDelaiPreparation" PlaceholderText="Délai de Préparation (minutes)"/>
+            <ui:TextBox x:Name="inputNbPersonnes" PlaceholderText="Nombre de Personnes"/>
+            <ui:TextBox x:Name="inputNumSousCategorie" PlaceholderText="Numéro Sous-Catégorie"/>
+            <ui:TextBox x:Name="inputNumPeriode" PlaceholderText="Numéro Période"/>
         </StackPanel>
-
+        <ui:Button x:Name="buttonNouveau" Width="174" Height="54"
+            FontSize="16" FontWeight="Bold"
+            Background="#D0021B" Foreground="White"
+            VerticalAlignment="Top" Margin="226,22,0,0" Click="buttonNouveau_Click">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="&#xE710;" FontFamily="Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <TextBlock Text="Nouveau plat" VerticalAlignment="Center"/>
+            </StackPanel>
+        </ui:Button>
+        <ui:Button x:Name="buttonModifier" Width="174" Height="54"
+            FontSize="16" FontWeight="Bold"
+            Background="#D0021B" Foreground="White"
+            VerticalAlignment="Top" Margin="419,22,0,0" Click="buttonModifier_Click">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="&#xE104;" FontFamily="Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <TextBlock Text="Modifier Plat" VerticalAlignment="Center"/>
+            </StackPanel>
+        </ui:Button>
+        <ui:Button x:Name="buttonSupprimer" Width="174" Height="54"
+            FontSize="16" FontWeight="Bold"
+            Background="#D0021B" Foreground="White"
+            VerticalAlignment="Top" Margin="598,22,0,0" Click="buttonSupprimer_Click">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="&#xE107;" FontFamily="Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <TextBlock Text="Supprimer plat" VerticalAlignment="Center"/>
+            </StackPanel>
+        </ui:Button>
     </Grid>
 </Page>
