@@ -204,7 +204,7 @@ namespace Application_Pour_Sibilia.Models
         public List<Plat> FindAll()
         {
             List<Plat> lesPlats = new List<Plat>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from plat;"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select p.nomplat,p.prixunitaire,p.delaipreparation,p.nbpersonnes,c.nomsouscategorie,pe.LIBELLEPERIODE from plat p join souscategorie c on p.NUMSOUSCATEGORIE=c.NUMSOUSCATEGORIE join periode pe on p.numperiode=pe.numperiode"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
@@ -215,8 +215,8 @@ namespace Application_Pour_Sibilia.Models
                         (String)dr["nomplat"],
                         Convert.ToDecimal(dr["prixunitaire"]),
                         Convert.ToInt32(dr["delaipreparation"]),
-                        Convert.ToInt32(dr["nbpersonnes"]),
-                        Convert.ToInt32(dr["numplat"])
+                        (String)dr["nomsouscategorie"],
+                        (String)dr["LIBELLEPERIODE"]
                     ));
                 }
             }
