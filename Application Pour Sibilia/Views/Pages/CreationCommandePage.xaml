@@ -46,37 +46,25 @@
                         <StackPanel Margin="10,0,0,0">
                             <Label Content="Quantité :" VerticalAlignment="Center" />
                             <ui:NumberBox Width="150" MinWidth="150" />
+                            <Button x:Name="buttonAjouterACommande" Content="Ajouter" Background="LightGreen" Foreground="White" HorizontalAlignment="Stretch" Height="32" VerticalAlignment="Stretch" />
+                            <Button Content="Voir détails" Background="Red" Foreground="White" HorizontalAlignment="Stretch" Height="32" VerticalAlignment="Stretch" Margin="39,0,0,0" />
+
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
+                
                 <StackPanel Orientation="Horizontal" Margin="0,10">
                     <TextBlock Text="Prix : 100€" VerticalAlignment="Center" Margin="0,0,10,0" />
                     <Slider Width="200" Minimum="0" Maximum="100" Value="50" Margin="20,0,0,0" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Disponibilité" VerticalAlignment="Center" Margin="0,0,10,0" />
+                    <TextBlock Text="Disponibilité : Binding boolean pour savoir si c'est dispo" VerticalAlignment="Center" Margin="0,0,10,0" />
                 </StackPanel>
 
 
 
                 <!-- Produits List -->
-                <WrapPanel Margin="0,0,0,20" Height="100">
-                    <Border Width="250" Height="100" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="0,10,10,10">
-                        <StackPanel Width="200" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <TextBlock Text="Binding plat" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10,0,0" />
-                            <TextBlock Text="Binding prix €" Width="90" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                            <Button Content="Voir détails" Background="Red" Foreground="White" HorizontalAlignment="Right" Height="32" />
-                        </StackPanel>
-                    </Border>
-                    <Border Width="250" Height="100" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="0,10,10,10" Margin="6,0,0,0">
-                        <StackPanel Width="200" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <TextBlock Text="Biding plat" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10,0,0" />
-                            <TextBlock Text="Binding prix €" Width="90" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                            <Button Content="Voir détails" Background="Red" Foreground="White" HorizontalAlignment="Right" Height="32" />
-                        </StackPanel>
-                    </Border>
-                    <!-- Dupliquer ce bloc pour d'autres produits -->
-                </WrapPanel>
+                
             </StackPanel>
 
             <!-- Right Section - Info Commande -->
@@ -111,7 +99,7 @@
                                 <TextBlock Text="250g" />
                                 <TextBlock Text="100g" />
                             </StackPanel>
-                            <StackPanel x:Name="spPrix" Orientation="Vertical" Grid.Column="3" HorizontalAlignment="Center">
+                            <StackPanel x:Name="spPrix" Orientation="Vertical" Grid.Column="2" HorizontalAlignment="Center">
                                 <TextBlock Text="166€"/>
                                 <TextBlock Text="200€"/>
                                 <TextBlock Text="300€"/>
