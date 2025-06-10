@@ -21,6 +21,16 @@ namespace Application_Pour_Sibilia.Models
         private bool retiree;
         private double prixTotal;
 
+                public Commande(int idCommande, int idClient, int idEmploye, DateTime dateCommande, DateTime dateRetraitPrevue, bool payee, bool retiree, double prixTotal) : this(idCommande)
+        {
+            this.IdClient = idClient;
+            this.IdEmploye = idEmploye;
+            this.DateCommande = dateCommande;
+            this.DateRetraitPrevue = dateRetraitPrevue;
+            this.Payee = payee;
+            this.Retiree = retiree;
+            this.PrixTotal = prixTotal;
+        }
         public int IdCommande
         {
             get
@@ -133,27 +143,22 @@ namespace Application_Pour_Sibilia.Models
         {
         }
 
-        public Commande(int idCommande, int idClient, int idEmploye, DateTime dateCommande, DateTime dateRetraitPrevue, bool payee, bool retiree, double prixTotal) : this(idCommande)
-        {
-            this.IdClient = idClient;
-            this.IdEmploye = idEmploye;
-            this.DateCommande = dateCommande;
-            this.DateRetraitPrevue = dateRetraitPrevue;
-            this.Payee = payee;
-            this.Retiree = retiree;
-            this.PrixTotal = prixTotal;
-        }
-
         public List<Commande> FindAll()
         {
             List<Commande> lesCommandes = new List<Commande>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from commmande;"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from commande;"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
-                    lesCommandes.Add(new Commande((int)dr["numcommande"], (int)dr["numclient"],
-                   (int)dr["numemploye"], (DateTime)dr["datecommande"], (DateTime)dr["dateretraitprevue"], 
-                   (bool)dr["payee"], (bool)dr["retiree"], (double)dr["prixtotal"]));
+                    lesCommandes.Add(new Commande(
+                        (int)dr["numcommande"], 
+                        (int)dr["numclient"],
+                        (int)dr["numemploye"], 
+                        (DateTime)dr["datecommande"], 
+                        (DateTime)dr["dateretraitprevue"], 
+                        (bool)dr["payee"], 
+                        (bool)dr["retiree"], 
+                        Convert.ToDouble(dr["prixtotal"])));
             }
             return lesCommandes;
         }
@@ -173,13 +178,13 @@ namespace Application_Pour_Sibilia.Models
 
         public void Read()
         {
-            using (var cmdSelect = new NpgsqlCommand("select * from  commande  where numcommande =@IdCommande;"))
+            using (var cmdSelect = new NpgsqlCommand("select * from commande where numcommande =@IdCommande;"))
             {
                 cmdSelect.Parameters.AddWithValue("IdCommande", this.IdCommande);
 
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-                this.IdClient = (int)dt.Rows[0]["idclient"];
-                this.IdEmploye = (int)dt.Rows[0]["idemploye"];
+                this.IdClient = (int)dt.Rows[0]["numclient"];
+                this.IdEmploye = (int)dt.Rows[0]["numemploye"];
                 this.DateCommande = (DateTime)dt.Rows[0]["datecommande"];
                 this.DateRetraitPrevue = (DateTime)dt.Rows[0]["dateretraitprevue"];
                 this.Payee = (bool)dt.Rows[0]["payee"];
