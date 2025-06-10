@@ -27,7 +27,7 @@ namespace Application_Pour_Sibilia.Views.Windows
 
         private void SeConnecter_Click(object sender, RoutedEventArgs e)
         {
-
+            this.DialogResult = true;
         }
     }
 }

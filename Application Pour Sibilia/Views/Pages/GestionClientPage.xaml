@@ -16,7 +16,8 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d">
-
+
+
     <Grid Cursor="">
         <ui:TextBox x:Name="textMotClefClient" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" Text="" PlaceholderText="Rechercher un client" VerticalAlignment="Top" Width="164" TextChanged="textMotClefClient_TextChanged"/>
         <DataGrid x:Name="reClient" Margin="10,101,10,24" AutoGenerateColumns="False"

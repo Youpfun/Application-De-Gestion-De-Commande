@@ -38,7 +38,7 @@ namespace Application_Pour_Sibilia.ViewModels.Windows
             },
             new NavigationViewItem()
             {
-                Content = "Créé Commande",
+                Content = "Créer Commande",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
                 TargetPageType = typeof(Views.Pages.CreationCommandePage)
             }
