@@ -9,25 +9,34 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
     {
 
         [ObservableProperty]
-        private ObservableCollection<Plat> plats = new()
+        private ObservableCollection<Plat> lesPlats;
+        [ObservableProperty]
+        private string motClefPlat;
+        public GestionDesPlatsViewModel()
         {
-            new Plat { Nom = "Tranche de jambon", Categorie = "Entrée", SousCategorie = "Jambon", Disponibilite = "Toute saison" },
-            new Plat { Nom = "Escargot", Categorie = "Plats", SousCategorie = "la boeme", Disponibilite = "hiver" },
-            new Plat { Nom = "tech paff", Categorie = "dessert", SousCategorie = "st maritin", Disponibilite = "ete" }
-        };
+            ChargerPlats();
+
+        }
+
+        private void ChargerPlats()
+        {
+            Plat repo = new Plat();
+            var plats = repo.FindAll();
+            LesPlats = new ObservableCollection<Plat>(plats);
+        }
 
         // Commandes pour les actions
         [RelayCommand]
         private void ModifierPlat(Plat plat)
         {
             // Action pour modifier un plat
-            System.Diagnostics.Debug.WriteLine($"Modifier : {plat.Nom}");
+            //System.Diagnostics.Debug.WriteLine($"Modifier : {plat.Nom}");
         }
 
         [RelayCommand]
         private void SupprimerPlat(Plat plat)
         {
-            Plats.Remove(plat);
+            //Plats.Remove(plat);
         }
     }
 }
