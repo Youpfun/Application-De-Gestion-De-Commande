@@ -160,6 +160,55 @@ namespace Application_Pour_Sibilia.Models
                 this.idClient = value;
             }
         }
+        public int Create()
+        {
+            int nb = 0;
+            using (var cmdInsert = new NpgsqlCommand("insert into client (nomclient,prenomclient,tel,adresserue,adressecp,adresseville ) values (@nomclient,@prenomclient,@tel,@adresserue,@adressecp,@adresseville) RETURNING numclient"))
+            {
+                cmdInsert.Parameters.AddWithValue("nomclient", this.NomClient);
+                cmdInsert.Parameters.AddWithValue("prenomclient", this.PrenomClient);
+                cmdInsert.Parameters.AddWithValue("tel", this.TelClient);
+                cmdInsert.Parameters.AddWithValue("adresserue", this.AdresseRueClient);
+                cmdInsert.Parameters.AddWithValue("adressecp", this.AdresseCPClient);
+                cmdInsert.Parameters.AddWithValue("adresseville", this.AdresseVilleClient);
+                nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
+            }
+            this.IdClient = nb;
+            return nb;
+        }
+        public void Read()
+        {
+            using (var cmdSelect = new NpgsqlCommand("select * from  client  where numclient =@numclient;"))
+            {
+                cmdSelect.Parameters.AddWithValue("numclient", this.IdClient);
+
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+                this.NomClient = (String)dt.Rows[0]["nomclient"];
+                this.PrenomClient = (String)dt.Rows[0]["prenomclient"];
+                this.TelClient = (String)dt.Rows[0]["tel"];
+                this.AdresseRueClient = (String)dt.Rows[0]["adresserue"];
+                this.AdresseCPClient = (String)dt.Rows[0]["adressecp"];
+                this.AdresseVilleClient = (String)dt.Rows[0]["adresseville"];
+
+            }
+
+        }
+
+
+        public int Update()
+        {
+            using (var cmdUpdate = new NpgsqlCommand("update client set nomclient =@nomclient ,  prenomclient = @prenomclient,  tel = @tel , adresserue =@adresserue ,  adressecp = @adressecp,  adresseville = @adresseville  where numclient =@IdClient;"))
+            {
+                cmdUpdate.Parameters.AddWithValue("nomclient", this.NomClient);
+                cmdUpdate.Parameters.AddWithValue("prenomclient", this.PrenomClient);
+                cmdUpdate.Parameters.AddWithValue("tel", this.TelClient);
+                cmdUpdate.Parameters.AddWithValue("adresserue", this.AdresseRueClient);
+                cmdUpdate.Parameters.AddWithValue("adressecp", this.AdresseCPClient);
+                cmdUpdate.Parameters.AddWithValue("adresseville", this.AdresseVilleClient);
+                cmdUpdate.Parameters.AddWithValue("numclient", this.IdClient);
+                return DataAccess.Instance.ExecuteSet(cmdUpdate);
+            }
+        }
 
         public override bool Equals(object? obj)
         {
@@ -177,54 +226,8 @@ namespace Application_Pour_Sibilia.Models
             }
             return lesClients;
         }
-        public void Read()
-        {
-            using (var cmdSelect = new NpgsqlCommand("select * from  client  where numclient =@IdClient;"))
-            {
-                cmdSelect.Parameters.AddWithValue("IdClient", this.IdClient);
 
-                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-                this.NomClient = (String)dt.Rows[0]["nomclient"];
-                this.PrenomClient = (String)dt.Rows[0]["prenomclient"];
-                this.TelClient = (String)dt.Rows[0]["tel"];
-                this.AdresseRueClient = (String)dt.Rows[0]["adresserue"];
-                this.AdresseCPClient = (String)dt.Rows[0]["adressecp"];
-                this.AdresseVilleClient = (String)dt.Rows[0]["adresseville"];
-
-            }
-
-        }
-        public int Create()
-        {
-            int nb = 0;
-            using (var cmdInsert = new NpgsqlCommand("insert into client (nomclient,prenomclient,tel,adresserue,adressecp,adresseville) values (@nomclient,@prenomclient,@tel,@adresserue,@adressecp,@adresseville) RETURNING numclient"))
-            {
-                cmdInsert.Parameters.AddWithValue("nomclient", this.NomClient);
-                cmdInsert.Parameters.AddWithValue("prenomclient", this.PrenomClient);
-                cmdInsert.Parameters.AddWithValue("tel", this.TelClient);
-                cmdInsert.Parameters.AddWithValue("adresserue", this.AdresseRueClient);
-                cmdInsert.Parameters.AddWithValue("adressecp", this.AdresseCPClient);
-                cmdInsert.Parameters.AddWithValue("adresseville", this.AdresseVilleClient);
-                nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
-            }
-            this.IdClient = nb;
-            return nb;
-        }
-
-        public int Update()
-        {
-            using (var cmdUpdate = new NpgsqlCommand("update client set nomclient =@nomclient ,  prenomclient = @prenomclient,  tel = @tel , adresserue =@adresserue ,  adressecp = @adressecp,  adresseville = @adresseville  where numclient =@IdClient;"))
-            {
-                cmdUpdate.Parameters.AddWithValue("nomclient", this.NomClient);
-                cmdUpdate.Parameters.AddWithValue("prenomclient", this.PrenomClient);
-                cmdUpdate.Parameters.AddWithValue("tel", this.TelClient);
-                cmdUpdate.Parameters.AddWithValue("adresserue", this.AdresseRueClient);
-                cmdUpdate.Parameters.AddWithValue("adressecp", this.AdresseCPClient);
-                cmdUpdate.Parameters.AddWithValue("adresseville", this.AdresseVilleClient);
-                cmdUpdate.Parameters.AddWithValue("numclient", this.IdClient);
-                return DataAccess.Instance.ExecuteSet(cmdUpdate);
-            }
-        }
+       
 
 
     }

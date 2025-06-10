@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,13 @@ namespace Application_Pour_Sibilia.Models
     public class DataAccess
     {
         private static readonly DataAccess instance = new DataAccess();
-        private readonly string connectionString = "Host=localhost;Port=5432;Username=postgres;Password=postgres;Database=SAE201;Options='-c search_path=public'";
+        private readonly string connectionString =
+            $"Host={ConfigurationManager.AppSettings["Host"]};"
+            + $"Port={ConfigurationManager.AppSettings["Port"]};"
+            + $"Username={ConfigurationManager.AppSettings["Username"]};"
+            + $"Password={ConfigurationManager.AppSettings["Password"]};"
+            + $"Database={ConfigurationManager.AppSettings["Database"]};"
+            + $"Options='-c search_path=\"{ConfigurationManager.AppSettings["Schema"]}\"'";
         private NpgsqlConnection connection;
 
         public static DataAccess Instance
