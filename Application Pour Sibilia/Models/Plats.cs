@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 
 namespace Application_Pour_Sibilia.Models
 {
@@ -14,7 +15,9 @@ namespace Application_Pour_Sibilia.Models
     {
         private int numPlat;
         private int numSousCategorie;
+        private string nomSousCategorie;
         private int numPeriode;
+        private string nomPeriode;
         private string nomPlat;
         private decimal prixUnitaire;
         private int delaiPreparation;
@@ -26,7 +29,6 @@ namespace Application_Pour_Sibilia.Models
         {
             this.NumPlat = numPlat;
         }
-
         public Plat()
         {
         }
@@ -40,7 +42,15 @@ namespace Application_Pour_Sibilia.Models
             this.DelaiPreparation = delaiPreparation;
             this.NbPersonnes = nbPersonnes;
         }
-
+        public Plat(string nomSousCategorie, string nomPeriode, string nomPlat, decimal prixUnitaire, int delaiPreparation, int nbPersonnes)
+        {
+            this.NomSousCategorie = nomSousCategorie;
+            this.NomPeriode = nomPeriode;
+            this.NomPlat = nomPlat;
+            this.PrixUnitaire = prixUnitaire;
+            this.DelaiPreparation = delaiPreparation;
+            this.NbPersonnes = nbPersonnes;
+        }
         public Plat(int numSousCategorie, int numPeriode, string nomPlat, decimal prixUnitaire, int delaiPreparation, int nbPersonnes, int numPlat)
             : this(numSousCategorie, numPeriode, nomPlat, prixUnitaire, delaiPreparation, nbPersonnes)
         {
@@ -86,7 +96,34 @@ namespace Application_Pour_Sibilia.Models
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NumPeriode)));
             }
         }
-
+        public string NomPeriode
+        {
+            get
+            {
+                return this.nomPeriode;
+            }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value)) { throw new ArgumentException("Le nom de la période doit être renseigné"); }
+                if (value.Length > 50) { throw new ArgumentException("Le nom de la période doit avoir moins de 50 caractères"); }
+                this.nomPeriode = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NomPeriode)));
+            }
+        }
+        public string NomSousCategorie
+        {
+            get
+            {
+                return this.nomSousCategorie;
+            }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value)) { throw new ArgumentException("Le nom de la sous-catégorie doit être renseigné"); }
+                if (value.Length > 50) { throw new ArgumentException("Le nom de la sous-catégorie doit avoir moins de 50 caractères"); }
+                this.nomSousCategorie = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NomSousCategorie)));
+            }
+        }
         public string NomPlat
         {
             get
@@ -144,6 +181,8 @@ namespace Application_Pour_Sibilia.Models
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NbPersonnes)));
             }
         }
+
+
 
         public int Create()
         {
@@ -204,7 +243,7 @@ namespace Application_Pour_Sibilia.Models
         public List<Plat> FindAll()
         {
             List<Plat> lesPlats = new List<Plat>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select p.nomplat,p.prixunitaire,p.delaipreparation,p.nbpersonnes,c.nomsouscategorie,pe.LIBELLEPERIODE from plat p join souscategorie c on p.NUMSOUSCATEGORIE=c.NUMSOUSCATEGORIE join periode pe on p.numperiode=pe.numperiode"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT p.numplat, p.numsouscategorie, p.numperiode, p.nomplat, p.prixunitaire, p.delaipreparation, p.nbpersonnes, c.nomsouscategorie, pe.LIBELLEPERIODE FROM plat p JOIN souscategorie c ON p.NUMSOUSCATEGORIE = c.NUMSOUSCATEGORIE JOIN periode pe ON p.numperiode = pe.numperiode"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
@@ -212,12 +251,16 @@ namespace Application_Pour_Sibilia.Models
                     lesPlats.Add(new Plat(
                         Convert.ToInt32(dr["numsouscategorie"]),
                         Convert.ToInt32(dr["numperiode"]),
-                        (String)dr["nomplat"],
+                        (string)dr["nomplat"],
                         Convert.ToDecimal(dr["prixunitaire"]),
                         Convert.ToInt32(dr["delaipreparation"]),
-                        (String)dr["nomsouscategorie"],
-                        (String)dr["LIBELLEPERIODE"]
-                    ));
+                        Convert.ToInt32(dr["nbpersonnes"]),
+                        Convert.ToInt32(dr["numplat"])
+                    )
+                    {
+                        NomSousCategorie = dr["nomsouscategorie"].ToString()!,
+                        NomPeriode = dr["LIBELLEPERIODE"].ToString()!
+                    });
                 }
             }
             return lesPlats;
