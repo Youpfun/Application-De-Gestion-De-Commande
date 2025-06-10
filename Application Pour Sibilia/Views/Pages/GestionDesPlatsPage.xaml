@@ -38,11 +38,11 @@
                     Header="Nb Personnes" />
                 <DataGridTextColumn  
                     Width="110"
-                    Binding="{Binding NumSousCategorie, ValidatesOnExceptions=True}"
+                    Binding="{Binding NomSousCategorie, ValidatesOnExceptions=True}"
                     Header="Sous-Catégorie" />
                 <DataGridTextColumn  
                      Width="80"
-                     Binding="{Binding NumPeriode, ValidatesOnExceptions=True}"
+                     Binding="{Binding NomPeriode, ValidatesOnExceptions=True}"
                      Header="Période" />
             </DataGrid.Columns>
         </DataGrid>
