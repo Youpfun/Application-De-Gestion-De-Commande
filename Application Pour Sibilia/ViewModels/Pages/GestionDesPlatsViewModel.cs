@@ -24,19 +24,5 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             var plats = repo.FindAll();
             LesPlats = new ObservableCollection<Plat>(plats);
         }
-
-        // Commandes pour les actions
-        [RelayCommand]
-        private void ModifierPlat(Plat plat)
-        {
-            // Action pour modifier un plat
-            //System.Diagnostics.Debug.WriteLine($"Modifier : {plat.Nom}");
-        }
-
-        [RelayCommand]
-        private void SupprimerPlat(Plat plat)
-        {
-            //Plats.Remove(plat);
-        }
     }
 }

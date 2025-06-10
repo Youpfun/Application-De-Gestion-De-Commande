@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
+using System.Data.SqlClient;
 
 namespace Application_Pour_Sibilia.Models
 {

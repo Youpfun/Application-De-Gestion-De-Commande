@@ -1,19 +1,17 @@
 ﻿using Application_Pour_Sibilia.ViewModels.Pages;
-using Wpf.Ui.Abstractions.Controls;
+using System.Windows.Controls;
 
 namespace Application_Pour_Sibilia.Views.Pages
 {
-    public partial class CreationCommandePage : INavigableView<CreationCommandeViewModel>
+    public partial class CreationCommandePage : Page
     {
         public CreationCommandeViewModel ViewModel { get; }
 
-        public CreationCommandePage(CreationCommandeViewModel viewModel)
+        public CreationCommandePage()
         {
-            ViewModel = viewModel;
-            DataContext = this;
-
-            // Explicitly specify the namespace to resolve ambiguity
-            this.InitializeComponent();
+            InitializeComponent();
+            ViewModel = new CreationCommandeViewModel();
+            DataContext = ViewModel;
         }
     }
 }

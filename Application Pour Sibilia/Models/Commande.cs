@@ -189,8 +189,7 @@ namespace Application_Pour_Sibilia.Models
                 this.DateRetraitPrevue = (DateTime)dt.Rows[0]["dateretraitprevue"];
                 this.Payee = (bool)dt.Rows[0]["payee"];
                 this.Retiree = (bool)dt.Rows[0]["retiree"];
-                this.PrixTotal = (double)dt.Rows[0]["prixtotal"];
-
+                this.PrixTotal = Convert.ToDouble(dt.Rows[0]["prixtotal"]);
 
             }
 

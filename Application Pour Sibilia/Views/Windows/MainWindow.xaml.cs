@@ -23,7 +23,11 @@ namespace Application_Pour_Sibilia.Views.Windows
 
             InitializeComponent();
             ConnexionWindow connexionWindow = new ConnexionWindow();
-            connexionWindow.ShowDialog();
+            bool? result = connexionWindow.ShowDialog();
+            if (result == !true)
+            {
+                Environment.Exit(0);
+            }
             SetPageService(navigationViewPageProvider);
 
             navigationService.SetNavigationControl(RootNavigation);
