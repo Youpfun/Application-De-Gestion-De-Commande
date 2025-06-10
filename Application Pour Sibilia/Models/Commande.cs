@@ -151,8 +151,8 @@ namespace Application_Pour_Sibilia.Models
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
-                    lesCommandes.Add(new Commande((int)dr["idcommande"], (int)dr["idclient"],
-                   (int)dr["idemploye"], (DateTime)dr["datecommande"], (DateTime)dr["dateretraitprevue"], 
+                    lesCommandes.Add(new Commande((int)dr["numcommande"], (int)dr["numclient"],
+                   (int)dr["numemploye"], (DateTime)dr["datecommande"], (DateTime)dr["dateretraitprevue"], 
                    (bool)dr["payee"], (bool)dr["retiree"], (double)dr["prixtotal"]));
             }
             return lesCommandes;
@@ -171,55 +171,58 @@ namespace Application_Pour_Sibilia.Models
                    this.PrixTotal == commande.PrixTotal;
         }
 
-        //public void Read()
-        //{
-        //    using (var cmdSelect = new NpgsqlCommand("select * from  commande  where numcommande =@IdCommande;"))
-        //    {
-        //        cmdSelect.Parameters.AddWithValue("IdCommande", this.IdCommande);
+        public void Read()
+        {
+            using (var cmdSelect = new NpgsqlCommand("select * from  commande  where numcommande =@IdCommande;"))
+            {
+                cmdSelect.Parameters.AddWithValue("IdCommande", this.IdCommande);
 
-        //        DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-        //        this.IdClient = (int)dt.Rows[0]["idclient"];
-        //        this.IdEmploye = (int)dt.Rows[0]["idemploye"];
-        //        this.DateCommande = (DateTime)dt.Rows[0]["datecommande"];
-        //        this.DateRetraitPrevue = (DateTime)dt.Rows[0]["dateretraitprevue"];
-        //        this.Payee = (bool)dt.Rows[0]["payee"];
-        //        this.Retiree = (bool)dt.Rows[0]["retiree"];
-        //        this.PrixTotal = (double)dt.Rows[0]["prixtotal"];
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+                this.IdClient = (int)dt.Rows[0]["idclient"];
+                this.IdEmploye = (int)dt.Rows[0]["idemploye"];
+                this.DateCommande = (DateTime)dt.Rows[0]["datecommande"];
+                this.DateRetraitPrevue = (DateTime)dt.Rows[0]["dateretraitprevue"];
+                this.Payee = (bool)dt.Rows[0]["payee"];
+                this.Retiree = (bool)dt.Rows[0]["retiree"];
+                this.PrixTotal = (double)dt.Rows[0]["prixtotal"];
 
 
-        //    }
+            }
 
-        //}
-        //public int Create()
-        //{
-        //    int nb = 0;
-        //    using (var cmdInsert = new NpgsqlCommand("insert into client (nomclient,prenomclient,tel,adresserue,adressecp,adresseville) values (@nomclient,@prenomclient,@tel,@adresserue,@adressecp,@adresseville) RETURNING numclient"))
-        //    {
-        //        cmdInsert.Parameters.AddWithValue("nomclient", this.NomClient);
-        //        cmdInsert.Parameters.AddWithValue("prenomclient", this.PrenomClient);
-        //        cmdInsert.Parameters.AddWithValue("tel", this.TelClient);
-        //        cmdInsert.Parameters.AddWithValue("adresserue", this.AdresseRueClient);
-        //        cmdInsert.Parameters.AddWithValue("adressecp", this.AdresseCPClient);
-        //        cmdInsert.Parameters.AddWithValue("adresseville", this.AdresseVilleClient);
-        //        nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
-        //    }
-        //    this.IdClient = nb;
-        //    return nb;
-        //}
+        }
+        public int Create()
+        {
+            int nb = 0;
+            using (var cmdInsert = new NpgsqlCommand("insert into commande (numcommande,numclient,numemploye,datecommande,dateretraitprevue,payee,retiree,prixtotal) values (@numcommande,@numclient,@numemploye,@datecommande,@dateretraitprevue,@payee,@retiree,@prixtotal) RETURNING numcommande"))
+            {
+                cmdInsert.Parameters.AddWithValue("numcommande", this.IdCommande);
+                cmdInsert.Parameters.AddWithValue("numclient", this.IdClient);
+                cmdInsert.Parameters.AddWithValue("numemploye", this.IdEmploye);
+                cmdInsert.Parameters.AddWithValue("datecommande", this.DateCommande);
+                cmdInsert.Parameters.AddWithValue("dateretraitprevue", this.DateRetraitPrevue);
+                cmdInsert.Parameters.AddWithValue("payee", this.Payee);
+                cmdInsert.Parameters.AddWithValue("retiree", this.Retiree);
+                cmdInsert.Parameters.AddWithValue("prixtotal", this.PrixTotal);
+                nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
+            }
+            this.IdCommande = nb;
+            return nb;
+        }
 
-        //public int Update()
-        //{
-        //    using (var cmdUpdate = new NpgsqlCommand("update client set nomclient =@nomclient ,  prenomclient = @prenomclient,  tel = @tel , adresserue =@adresserue ,  adressecp = @adressecp,  adresseville = @adresseville  where numclient =@IdClient;"))
-        //    {
-        //        cmdUpdate.Parameters.AddWithValue("nomclient", this.NomClient);
-        //        cmdUpdate.Parameters.AddWithValue("prenomclient", this.PrenomClient);
-        //        cmdUpdate.Parameters.AddWithValue("tel", this.TelClient);
-        //        cmdUpdate.Parameters.AddWithValue("adresserue", this.AdresseRueClient);
-        //        cmdUpdate.Parameters.AddWithValue("adressecp", this.AdresseCPClient);
-        //        cmdUpdate.Parameters.AddWithValue("adresseville", this.AdresseVilleClient);
-        //        cmdUpdate.Parameters.AddWithValue("numclient", this.IdClient);
-        //        return DataAccess.Instance.ExecuteSet(cmdUpdate);
-        //    }
-        //}
+        public int Update()
+        {
+            using (var cmdUpdate = new NpgsqlCommand("update commande set numcommande = @numcommande ,  numclient = @numclient,  numemploye = @numemploye , datecommande = @datecommande ,  dateretraitprevue = @dateretraitprevue,  payee = @payee, retiree = @retiree, prixtotal = @prixtotal  where numcommande =@IdCommande;"))
+            {
+                cmdUpdate.Parameters.AddWithValue("numcommande", this.IdCommande);
+                cmdUpdate.Parameters.AddWithValue("numclient", this.IdClient);
+                cmdUpdate.Parameters.AddWithValue("numemploye", this.IdEmploye);
+                cmdUpdate.Parameters.AddWithValue("datecommande", this.DateCommande);
+                cmdUpdate.Parameters.AddWithValue("dateretraitprevue", this.DateRetraitPrevue);
+                cmdUpdate.Parameters.AddWithValue("payee", this.Payee);
+                cmdUpdate.Parameters.AddWithValue("retiree", this.Retiree);
+                cmdUpdate.Parameters.AddWithValue("prixtotal", this.PrixTotal);
+                return DataAccess.Instance.ExecuteSet(cmdUpdate);
+            }
+        }
     }
 }
