@@ -21,7 +21,7 @@ namespace Application_Pour_Sibilia.Models
         private bool retiree;
         private double prixTotal;
 
-                public Commande(int idCommande, int idClient, int idEmploye, DateTime dateCommande, DateTime dateRetraitPrevue, bool payee, bool retiree, double prixTotal) : this(idCommande)
+        public Commande(int idCommande, int idClient, int idEmploye, DateTime dateCommande, DateTime dateRetraitPrevue, bool payee, bool retiree, double prixTotal) : this(idCommande)
         {
             this.IdClient = idClient;
             this.IdEmploye = idEmploye;
