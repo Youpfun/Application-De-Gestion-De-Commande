@@ -33,6 +33,9 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         [ObservableProperty]
         private string motCleRecherche;
 
+        [ObservableProperty]
+        private decimal? motCleRecherchePrix;
+
         public CreationCommandeViewModel()
         {
             ChargerCategories();
@@ -72,12 +75,19 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             if (SelectedSousCategorie != null)
                 platsFiltres = platsFiltres.Where(p => p.NomSousCategorie == SelectedSousCategorie.NomSousCategorie);
 
+            if (MotCleRecherchePrix.HasValue)
+            {
+                platsFiltres = platsFiltres.Where(p => p.PrixUnitaire <= MotCleRecherchePrix.Value);
+            }
+
+
             LesPlats = new ObservableCollection<Plat>(platsFiltres);
         }
         [RelayCommand]
         private void ReinitialiserFiltres()
         {
             MotCleRecherche = string.Empty;
+            MotCleRecherchePrix = null;
             SelectedCategorie = null;
             SelectedSousCategorie = null;
 

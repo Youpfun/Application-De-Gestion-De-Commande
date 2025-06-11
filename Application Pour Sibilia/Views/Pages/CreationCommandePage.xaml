@@ -39,20 +39,31 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0,10">
                     <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Vertical" Width="150">
+                        <StackPanel>
+                            <StackPanel Orientation="Vertical" Width="150" Height="60" VerticalAlignment="Top">
                             <Label Content="Catégorie :" VerticalAlignment="Center" />
                             <ComboBox ItemsSource="{Binding LesCategories}" 
                                     DisplayMemberPath="NomCategorie" 
                                     SelectedItem="{Binding SelectedCategorie, Mode=TwoWay}">
                             </ComboBox>
                         </StackPanel>
-                        <StackPanel Margin="10,0,0,0">
+                            <StackPanel Margin="0,20,0,0">
+                                <Label Content="Prix :" VerticalAlignment="Center"/>
+                                <ui:NumberBox x:Name="PrixRecherche"
+                                              Value="{Binding MotCleRecherchePrix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                              VerticalAlignment="Center">
+                                </ui:NumberBox>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel>
+                        <StackPanel Margin="10,0,0,0" Height="60" VerticalAlignment="Top">
                             <Label Content="Sous-catégorie :" VerticalAlignment="Center" />
                             <ComboBox Width="150" 
                                     ItemsSource="{Binding LesSousCategories}" 
                                     DisplayMemberPath="NomSousCategorie" 
                                     SelectedItem="{Binding SelectedSousCategorie, Mode=TwoWay}" >
                             </ComboBox>
+                        </StackPanel>
                             <!-- Bouton de filtrage -->
                             <Button Content="Filtrer" Command="{Binding FiltrerPlatsCommand}" Margin="5"/>
                             <!-- Bouton de réinitialisation -->
