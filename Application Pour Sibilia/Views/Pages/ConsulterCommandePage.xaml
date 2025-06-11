@@ -14,8 +14,51 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid Margin="20">
-        
+    <Grid Margin="0">
+        <ui:TextBox x:Name="textGestionCommande" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" Text="" PlaceholderText="Rechercher un client" VerticalAlignment="Top" Width="164" TextChanged="textGestionCommande_TextChanged"/>
+        <TabControl IsEnabled="True">
+            <TabItem Header="Commandes a restituer du jour" Background="#D0021B">
+                
+            </TabItem>
+
+            <TabItem Header="Commandes a venir" Background="#D0021B">
+                
+            </TabItem>
+
+            <TabItem Header="Historique des commandes" Background="#D0021B">
+                <DataGrid x:Name="rechCommande" Margin="10,101,10,24" AutoGenerateColumns="False"
+    IsReadOnly="True" ItemsSource="{Binding LesGestionCommandes}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn  
+      Width="*"
+      Binding="{Binding NumCommande, ValidatesOnExceptions=True}"
+      Header="NumCommande" />
+                        <DataGridTextColumn  
+      Width="*"
+      Binding="{Binding NomClient , ValidatesOnExceptions=True}"
+      Header="NomClient" />
+                        <DataGridTextColumn  
+      Width="*"
+      Binding="{Binding TelClient, ValidatesOnExceptions=True}"
+      Header="Telephone" />
+                        <DataGridTextColumn  
+      Width="*"
+      Binding="{Binding DateRetraitPrevue, ValidatesOnExceptions=True}"
+      Header="Retrait" />
+                        <DataGridTextColumn  
+      Width="*"
+      Binding="{Binding NomVendeur, ValidatesOnExceptions=True}"
+      Header="Vendeur" />
+                        <DataGridTextColumn  
+       Width="*"
+       Binding="{Binding PrixTotal, ValidatesOnExceptions=True}"
+       Header="Prix" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </TabItem>
+        </TabControl>
+       
     </Grid>
 
 </Page>
