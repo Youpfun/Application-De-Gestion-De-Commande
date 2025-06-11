@@ -23,6 +23,8 @@ namespace Application_Pour_Sibilia.Models
         private decimal prixUnitaire;
         private int delaiPreparation;
         private int nbPersonnes;
+        private string nomCategorie;
+        private int numCategorie;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -34,7 +36,7 @@ namespace Application_Pour_Sibilia.Models
         {
         }
 
-        public Plat(int numSousCategorie, int numPeriode, string nomPlat, decimal prixUnitaire, int delaiPreparation, int nbPersonnes)
+        public Plat(int numSousCategorie, int numPeriode, string nomPlat, decimal prixUnitaire, int delaiPreparation, int nbPersonnes, string nomCategorie, int numCategorie)
         {
             this.NumSousCategorie = numSousCategorie;
             this.NumPeriode = numPeriode;
@@ -42,8 +44,10 @@ namespace Application_Pour_Sibilia.Models
             this.PrixUnitaire = prixUnitaire;
             this.DelaiPreparation = delaiPreparation;
             this.NbPersonnes = nbPersonnes;
+            this.NomCategorie = nomCategorie;
+            this.NumCategorie = numCategorie;
         }
-        public Plat(string nomSousCategorie, string nomPeriode, string nomPlat, decimal prixUnitaire, int delaiPreparation, int nbPersonnes)
+        public Plat(string nomSousCategorie, string nomPeriode, string nomPlat, decimal prixUnitaire, int delaiPreparation, int nbPersonnes, string nomCategorie, int numCategorie)
         {
             this.NomSousCategorie = nomSousCategorie;
             this.NomPeriode = nomPeriode;
@@ -51,9 +55,11 @@ namespace Application_Pour_Sibilia.Models
             this.PrixUnitaire = prixUnitaire;
             this.DelaiPreparation = delaiPreparation;
             this.NbPersonnes = nbPersonnes;
+            this.NomCategorie = nomCategorie;
+            this.NumCategorie = numCategorie;
         }
-        public Plat(int numSousCategorie, int numPeriode, string nomPlat, decimal prixUnitaire, int delaiPreparation, int nbPersonnes, int numPlat)
-            : this(numSousCategorie, numPeriode, nomPlat, prixUnitaire, delaiPreparation, nbPersonnes)
+        public Plat(int numSousCategorie, int numPeriode, string nomPlat, decimal prixUnitaire, int delaiPreparation, int nbPersonnes, int numPlat, string nomCategorie, int numCategorie)
+            : this(numSousCategorie, numPeriode, nomPlat, prixUnitaire, delaiPreparation, nbPersonnes, nomCategorie, numCategorie)
         {
             this.NumPlat = numPlat;
         }
@@ -183,7 +189,31 @@ namespace Application_Pour_Sibilia.Models
             }
         }
 
+        public string NomCategorie
+        {
+            get
+            {
+                return this.nomCategorie;
+            }
 
+            set
+            {
+                this.nomCategorie = value;
+            }
+        }
+
+        public int NumCategorie
+        {
+            get
+            {
+                return this.numCategorie;
+            }
+
+            set
+            {
+                this.numCategorie = value;
+            }
+        }
 
         public int Create()
         {
@@ -244,7 +274,7 @@ namespace Application_Pour_Sibilia.Models
         public List<Plat> FindAll()
         {
             List<Plat> lesPlats = new List<Plat>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT p.numplat, p.numsouscategorie, p.numperiode, p.nomplat, p.prixunitaire, p.delaipreparation, p.nbpersonnes, c.nomsouscategorie, pe.LIBELLEPERIODE FROM plat p JOIN souscategorie c ON p.NUMSOUSCATEGORIE = c.NUMSOUSCATEGORIE JOIN periode pe ON p.numperiode = pe.numperiode"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT p.numplat, p.numsouscategorie, p.numperiode, \r\np.nomplat, p.prixunitaire, p.delaipreparation, p.nbpersonnes, \r\nc.nomsouscategorie, pe.LIBELLEPERIODE, ca.numcategorie, ca.nomcategorie \r\nFROM plat p \r\nJOIN souscategorie c ON p.NUMSOUSCATEGORIE = c.NUMSOUSCATEGORIE \r\nJOIN periode pe ON p.numperiode = pe.numperiode\r\njoin categorie ca on ca.numcategorie = c.numcategorie"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
@@ -256,7 +286,9 @@ namespace Application_Pour_Sibilia.Models
                         Convert.ToDecimal(dr["prixunitaire"]),
                         Convert.ToInt32(dr["delaipreparation"]),
                         Convert.ToInt32(dr["nbpersonnes"]),
-                        Convert.ToInt32(dr["numplat"])
+                        Convert.ToInt32(dr["numplat"]),
+                        (string)dr["nomcategorie"],
+                        Convert.ToInt32(dr["numcategorie"])
                     )
                     {
                         NomSousCategorie = dr["nomsouscategorie"].ToString()!,
