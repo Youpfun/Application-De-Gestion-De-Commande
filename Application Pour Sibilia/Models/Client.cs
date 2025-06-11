@@ -44,9 +44,15 @@ namespace Application_Pour_Sibilia.Models
             this.AdresseVilleClient = adresseVilleClient;
         }
 
-        public Client(int idClient,string nomClient, string prenomClient, string telClient, string adresseRueClient, string adresseCPClient, string adresseVilleClient) : this(nomClient, prenomClient, telClient, adresseRueClient, adresseCPClient, adresseVilleClient)
+        public Client(int idClient,string nomClient, string prenomClient, string telClient, string adresseRueClient, string adresseCPClient, string adresseVilleClient)
         {
             this.IdClient = idClient;
+            this.NomClient = nomClient;
+            this.PrenomClient = prenomClient;
+            this.TelClient = telClient;
+            this.AdresseRueClient = adresseRueClient;
+            this.AdresseCPClient = adresseCPClient;
+            this.AdresseVilleClient = adresseVilleClient;
         }
 
         public string NomClient
@@ -199,8 +205,11 @@ namespace Application_Pour_Sibilia.Models
 
         public int Update()
         {
-            using (var cmdUpdate = new NpgsqlCommand("update client set nomclient =@nomclient ,  prenomclient = @prenomclient,  tel = @tel , adresserue =@adresserue ,  adressecp = @adressecp,  adresseville = @adresseville  where numclient =@IdClient;"))
+            using (var cmdUpdate = new NpgsqlCommand("update client set nomclient =@nomclient , " +
+                " prenomclient = @prenomclient,  tel = @tel , adresserue =@adresserue , " +
+                " adressecp = @adressecp,  adresseville = @adresseville  where numclient =@numclient;"))
             {
+                Console.WriteLine(this.IdClient);
                 cmdUpdate.Parameters.AddWithValue("nomclient", this.NomClient);
                 cmdUpdate.Parameters.AddWithValue("prenomclient", this.PrenomClient);
                 cmdUpdate.Parameters.AddWithValue("tel", this.TelClient);
@@ -211,11 +220,39 @@ namespace Application_Pour_Sibilia.Models
                 return DataAccess.Instance.ExecuteSet(cmdUpdate);
             }
         }
-
-        public override bool Equals(object? obj)
+        public void Delete()
         {
-            return base.Equals(obj);
+            using (NpgsqlCommand cmdDelete = new NpgsqlCommand("DELETE FROM client WHERE numclient = @numclient"))
+            {
+                cmdDelete.Parameters.AddWithValue("numclient", this.IdClient);
+                try
+                {
+                    int rowsAffected = DataAccess.Instance.ExecuteSet(cmdDelete);
+                    if (rowsAffected == 0)
+                    {
+                        throw new Exception("Aucun Client trouvé avec cet identifiant.");
+                    }
+                }
+                catch (NpgsqlException ex)
+                {
+                    // Gestion spécifique des erreurs PostgreSQL
+                    if (ex.SqlState == "23503") // Code d'erreur pour contrainte de clé étrangère
+                    {
+                        throw new Exception("Impossible de supprimer ce Client car il est relier a  des commandes. Veuillez d'abord supprimer les commandes associées.");
+                    }
+                    else
+                    {
+                        throw new Exception($"Erreur de base de données : {ex.Message}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Erreur lors de la suppression : {ex.Message}");
+                }
+            }
         }
+
+
         public List<Client> FindAll()
         {
             List<Client> lesClients = new List<Client>();
@@ -223,14 +260,22 @@ namespace Application_Pour_Sibilia.Models
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
-                    lesClients.Add(new Client((String)dr["nomclient"], (String)dr["prenomclient"],
+                    lesClients.Add(new Client((int)dr["numclient"],(String)dr["nomclient"], (String)dr["prenomclient"],
                    (String)dr["tel"], (String)dr["adresserue"], (String)dr["adressecp"], (String)dr["adresseville"]));
             }
             return lesClients;
         }
 
-       
-
-
+        public override bool Equals(object? obj)
+        {
+            return obj is Client client &&
+                   this.NomClient == client.NomClient &&
+                   this.PrenomClient == client.PrenomClient &&
+                   this.TelClient == client.TelClient &&
+                   this.AdresseRueClient == client.AdresseRueClient &&
+                   this.AdresseCPClient == client.AdresseCPClient &&
+                   this.AdresseVilleClient == client.AdresseVilleClient &&
+                   this.IdClient == client.IdClient;
+        }
     }
 }

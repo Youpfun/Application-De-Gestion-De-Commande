@@ -70,34 +70,38 @@ namespace Application_Pour_Sibilia.Views.Pages
         private void buttonModifier_Click(object sender, RoutedEventArgs e)
         {
             if (reClient.SelectedItem == null)
-                MessageBox.Show("Veuillez sélectionner un chien", "Attention",MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Veuillez sélectionner un Client", "Attention",MessageBoxButton.OK, MessageBoxImage.Information);
             else
             {
                 Client clientSelectionne = (Client)reClient.SelectedItem;
-                MessageBox.Show("", "" + reClient.SelectedIndex);
+                //MessageBox.Show("", "" + reClient.SelectedIndex);
                 Client copie = new Client(clientSelectionne.IdClient, clientSelectionne.NomClient,
                 clientSelectionne.PrenomClient, clientSelectionne.TelClient, clientSelectionne.AdresseRueClient
                 , clientSelectionne.AdresseCPClient, clientSelectionne.AdresseVilleClient);
-                WindowClient wChien = new WindowClient(copie, typeAction.Modifier);
-                bool? result = wChien.ShowDialog();
-                reClient.SelectedIndex = -1;
+                WindowClient wClient = new WindowClient(copie, typeAction.Modifier);
+                bool? result = wClient.ShowDialog();
+                Console.WriteLine(result);
+                //reClient.SelectedIndex = -1;
 
                 if (result == true)
                 {
                     try
                     {
-                        copie.Update();
+                        Console.WriteLine(clientSelectionne.IdClient);
                         clientSelectionne.NomClient = copie.NomClient;
                         clientSelectionne.PrenomClient = copie.PrenomClient;
                         clientSelectionne.TelClient = copie.TelClient;
                         clientSelectionne.AdresseRueClient = copie.AdresseRueClient;
                         clientSelectionne.AdresseCPClient = copie.AdresseCPClient;
                         clientSelectionne.AdresseVilleClient = copie.AdresseVilleClient;
-
+                        clientSelectionne.Update();
+                       
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Le chien n'a pas pu être modifié.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                        
+
+                        MessageBox.Show("Le Client n'a pas pu être modifié.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 CollectionViewSource.GetDefaultView(reClient.ItemsSource)?.Refresh();
@@ -108,7 +112,30 @@ namespace Application_Pour_Sibilia.Views.Pages
 
         private void buttonSupprimer_Click(object sender, RoutedEventArgs e)
         {
-
+            if (reClient.SelectedItem != null)
+            {
+                Client clientChoisit = (Client)reClient.SelectedItem;
+                MessageBoxResult result = MessageBox.Show($"Êtes-vous sûr de vouloir supprimer le Client '{clientChoisit.NomClient +" "+ clientChoisit.PrenomClient}' ?",
+                                                        "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        // Ici vous devrez implémenter la méthode Delete() dans la classe Plat
+                        clientChoisit.Delete();
+                        LeMagasin.LesClients.Remove(clientChoisit);
+                        MessageBox.Show("Le Client a été supprimé avec succès.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Le Client n'a pas pu être supprimé.\nErreur: {ex.Message}", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un Client à supprimer.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }
