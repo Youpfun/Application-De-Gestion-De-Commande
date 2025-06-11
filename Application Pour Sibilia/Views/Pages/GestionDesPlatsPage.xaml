@@ -46,18 +46,10 @@
                      Header="Période" />
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel x:Name="formulairePlat" Visibility="Collapsed"  Background="#FF8B8B8B" Margin="0,101,0,72">
-            <ui:TextBox x:Name="inputNomPlat" PlaceholderText="Nom du Plat"/>
-            <ui:TextBox x:Name="inputPrixUnitaire" PlaceholderText="Prix Unitaire"/>
-            <ui:TextBox x:Name="inputDelaiPreparation" PlaceholderText="Délai de Préparation (minutes)"/>
-            <ui:TextBox x:Name="inputNbPersonnes" PlaceholderText="Nombre de Personnes"/>
-            <ui:TextBox x:Name="inputNumSousCategorie" PlaceholderText="Numéro Sous-Catégorie"/>
-            <ui:TextBox x:Name="inputNumPeriode" PlaceholderText="Numéro Période"/>
-        </StackPanel>
         <ui:Button x:Name="buttonNouveau" Width="174" Height="54"
             FontSize="16" FontWeight="Bold"
             Background="#D0021B" Foreground="White"
-            VerticalAlignment="Top" Margin="226,22,0,0" Click="buttonNouveau_Click">
+            VerticalAlignment="Top" Margin="226,22,0,0" Click="buttonNouveauPlat_Click">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="&#xE710;" FontFamily="Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center" Margin="0,0,8,0"/>
                 <TextBlock Text="Nouveau plat" VerticalAlignment="Center"/>

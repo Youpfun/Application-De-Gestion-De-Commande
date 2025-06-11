@@ -2,6 +2,7 @@
 using Application_Pour_Sibilia.ViewModels.Pages;
 using Application_Pour_Sibilia.Views.Windows;
 using System;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -23,6 +24,7 @@ namespace Application_Pour_Sibilia.Views.Pages
             InitializeComponent();
             rePlat.Items.Filter = RechercheMotClefPlat;
             LeMagasin = new Magasin();
+            DataContext = LeMagasin;
         }
 
         public bool RechercheMotClefPlat(object obj)
@@ -41,24 +43,7 @@ namespace Application_Pour_Sibilia.Views.Pages
             CollectionViewSource.GetDefaultView(rePlat.ItemsSource).Refresh();
         }
 
-        private void buttonNouveau_Click(object sender, RoutedEventArgs e)
-        {
-            //Plat unPlat = new Plat();
-            //Windows.WindowPlat wPlat = new Windows.WindowPlat(unPlat, typeAction.Créer);
-            //bool? result = wPlat.ShowDialog();
-            //if (result == true)
-            //{
-            //    try
-            //    {
-            //        unPlat.NumPlat = unPlat.Create();
-            //        LeMagasin.LesPlats.Add(unPlat);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("Le Plat n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    }
-            //}
-        }
+
 
         private void buttonModifier_Click(object sender, RoutedEventArgs e)
         {
@@ -95,6 +80,28 @@ namespace Application_Pour_Sibilia.Views.Pages
             //{
             //    MessageBox.Show("Veuillez sélectionner un plat à modifier.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             //}
+        }
+
+        private void buttonNouveauPlat_Click(object sender, RoutedEventArgs e)
+        {
+            Plat unPlat = new Plat();
+            Windows.PlatWindow wPlat = new Windows.PlatWindow(unPlat, typeAction.Créer); 
+            bool? result = wPlat.ShowDialog();
+            if (result == true)
+            {
+                {
+                    try
+                    {
+                        unPlat.NumPlat = unPlat.Create();
+                        LeMagasin.LesPlats.Add(unPlat);
+                        CollectionViewSource.GetDefaultView(rePlat.ItemsSource).Refresh();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Le Plat n'a pas pu être crée.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
         }
     }
 }
