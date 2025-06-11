@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Application_Pour_Sibilia.Models
 {
@@ -15,31 +16,26 @@ namespace Application_Pour_Sibilia.Models
         {
             List<SousCategorie> sousCategories = new List<SousCategorie>();
 
-            // Mets ici ta propre chaîne de connexion
-            string connectionString = "Host=localhost;Port=5432;Database=SAE201;Username=postgres;Password=superuser";
-
-            using (var connection = new NpgsqlConnection(connectionString))
+            // Création de la commande SQL
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT numsouscategorie, nomsouscategorie, numcategorie FROM souscategorie;"))
             {
-                connection.Open();
+                // Exécution de la commande via la classe DataAccess centralisée
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
 
-                string query = "SELECT numsouscategorie, nomsouscategorie, numcategorie FROM souscategorie";
-
-                using (var cmd = new NpgsqlCommand(query, connection))
-                using (var reader = cmd.ExecuteReader())
+                // Parcours des lignes de résultat
+                foreach (DataRow dr in dt.Rows)
                 {
-                    while (reader.Read())
+                    sousCategories.Add(new SousCategorie
                     {
-                        sousCategories.Add(new SousCategorie
-                        {
-                            IdSousCategorie = reader.GetInt32(0),
-                            NomSousCategorie = reader.GetString(1),
-                            IdCategorie = reader.GetInt32(2)
-                        });
-                    }
+                        IdSousCategorie = (int)dr["numsouscategorie"],
+                        NomSousCategorie = (string)dr["nomsouscategorie"],
+                        IdCategorie = (int)dr["numcategorie"]
+                    });
                 }
             }
 
             return sousCategories;
         }
+
     }
 }

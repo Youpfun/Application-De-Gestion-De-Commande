@@ -13,7 +13,17 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         private SousCategorie sousCategorieRepo = new SousCategorie();
 
         private List<Plat> tousLesPlats;
-        private List<SousCategorie> toutesLesSousCategories;  // important pour le cascade
+        private List<SousCategorie> toutesLesSousCategories;
+        public ObservableCollection<string> LesPeriodes { get; set; } = new ObservableCollection<string>
+        {
+            "Hiver",
+            "Printemps",
+            "Été",
+            "Automne",
+            "Toute L Année",
+            "Période De Fêtes"
+        };
+
 
         [ObservableProperty]
         private ObservableCollection<Plat> lesPlats;
@@ -32,6 +42,12 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
 
         [ObservableProperty]
         private string motCleRecherche;
+
+        [ObservableProperty]
+        private decimal? motCleRecherchePrix;
+
+        [ObservableProperty]
+        private string motCleRecherchePeriode;
 
         public CreationCommandeViewModel()
         {
@@ -66,11 +82,42 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             if (!string.IsNullOrWhiteSpace(MotCleRecherche))
                 platsFiltres = platsFiltres.Where(p => p.NomPlat.Contains(MotCleRecherche, StringComparison.OrdinalIgnoreCase));
 
+            // Vérifie si une catégorie a été sélectionnée
             if (SelectedCategorie != null)
-                platsFiltres = platsFiltres.Where(p => p.NomCategorie == SelectedCategorie.NomCategorie);
+            {
+                // Récupère la liste de tous les IDs de sous-catégories qui appartiennent à la catégorie sélectionnée
+                var sousCategoriesDeLaCategorie = toutesLesSousCategories
+                    .Where(sc => sc.IdCategorie == SelectedCategorie.IdCategorie) // filtre uniquement les sous-catégories de cette catégorie
+                    .Select(sc => sc.IdSousCategorie) // extrait uniquement les IDs des sous-catégories
+                    .ToList(); // transforme le résultat en liste pour pouvoir l'utiliser plus tard dans le filtre
 
+                // Filtre les plats : on ne garde que les plats dont la sous-catégorie appartient à la liste récupérée
+                platsFiltres = platsFiltres.Where(p => sousCategoriesDeLaCategorie.Contains(p.NumSousCategorie));
+            }
+
+            // Vérifie si une sous-catégorie a été sélectionnée
             if (SelectedSousCategorie != null)
-                platsFiltres = platsFiltres.Where(p => p.NomSousCategorie == SelectedSousCategorie.NomSousCategorie);
+            {
+                // Filtre les plats : on ne garde que ceux qui correspondent à la sous-catégorie sélectionnée
+                platsFiltres = platsFiltres.Where(p => p.NumSousCategorie == SelectedSousCategorie.IdSousCategorie);
+            }
+
+
+            if (MotCleRecherchePrix.HasValue)
+            {
+                platsFiltres = platsFiltres.Where(p => p.PrixUnitaire <= MotCleRecherchePrix.Value);
+            }
+
+            if (!string.IsNullOrWhiteSpace(MotCleRecherchePeriode))
+            {
+                var periodeNormRecherche = MotCleRecherchePeriode.Trim().ToLower();
+                platsFiltres = platsFiltres.Where(p =>
+                    !string.IsNullOrWhiteSpace(p.NomPeriode) &&
+                    p.NomPeriode.Trim().ToLower() == periodeNormRecherche
+                );
+            }
+
+
 
             LesPlats = new ObservableCollection<Plat>(platsFiltres);
         }
@@ -78,6 +125,8 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         private void ReinitialiserFiltres()
         {
             MotCleRecherche = string.Empty;
+            MotCleRecherchePrix = null;
+            MotCleRecherchePeriode = string.Empty;
             SelectedCategorie = null;
             SelectedSousCategorie = null;
 

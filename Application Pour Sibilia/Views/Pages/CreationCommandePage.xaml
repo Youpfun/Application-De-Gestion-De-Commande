@@ -39,42 +39,74 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0,10">
                     <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Vertical" Width="150">
-                            <Label Content="Catégorie :" VerticalAlignment="Center" />
-                            <ComboBox ItemsSource="{Binding LesCategories}" 
+                        <StackPanel>
+                            <StackPanel Orientation="Vertical" Width="150" Height="60" VerticalAlignment="Top">
+                                <Label Content="Catégorie :" VerticalAlignment="Center" />
+                                <ComboBox ItemsSource="{Binding LesCategories}" 
                                     DisplayMemberPath="NomCategorie" 
                                     SelectedItem="{Binding SelectedCategorie, Mode=TwoWay}">
-                            </ComboBox>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Margin="0,20,0,0">
+                                <Label Content="Prix :" VerticalAlignment="Center"/>
+                                <ui:NumberBox x:Name="PrixRecherche"
+                                              Value="{Binding MotCleRecherchePrix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                              VerticalAlignment="Center">
+                                </ui:NumberBox>
+                            </StackPanel>
+                            <StackPanel Margin="0,10,0,0">
+                                <Button Content="Filtrer" 
+                                        Command="{Binding FiltrerPlatsCommand}" 
+                                        Background="#B2627272"/>
+                            </StackPanel>
                         </StackPanel>
-                        <StackPanel Margin="10,0,0,0">
+                        <StackPanel>
+                        <StackPanel Margin="10,0,0,0" Height="60" VerticalAlignment="Top">
                             <Label Content="Sous-catégorie :" VerticalAlignment="Center" />
                             <ComboBox Width="150" 
                                     ItemsSource="{Binding LesSousCategories}" 
                                     DisplayMemberPath="NomSousCategorie" 
                                     SelectedItem="{Binding SelectedSousCategorie, Mode=TwoWay}" >
                             </ComboBox>
-                            <!-- Bouton de filtrage -->
-                            <Button Content="Filtrer" Command="{Binding FiltrerPlatsCommand}" Margin="5"/>
-                            <!-- Bouton de réinitialisation -->
-                            <Button Content="Réinitialiser" Command="{Binding ReinitialiserFiltresCommand}" Margin="5"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="10,20,0,0">
+                            <Label Content="Période :" VerticalAlignment="Center"/>
+                                <ComboBox Width="150" 
+                                          ItemsSource="{Binding LesPeriodes}"
+                                          Text="{Binding MotCleRecherchePeriode, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                            <StackPanel Margin="10,0,0,0">
+                                <Button Content="Réinitialiser" 
+                                        Command="{Binding ReinitialiserFiltresCommand}" 
+                                        Margin="0,10,0,0"
+                                        Background="#B2627272"/>
+                            </StackPanel>
                         </StackPanel>
                         <StackPanel Margin="10,0,0,0">
-                            <Label Content="Quantité :" VerticalAlignment="Center" />
-                            <ui:NumberBox Width="150" MinWidth="150" />
-                            <Button x:Name="buttonAjouterACommande" Content="Ajouter" Background="LightGreen" Foreground="White" HorizontalAlignment="Stretch" Height="32" VerticalAlignment="Stretch" />
-                            <Button Content="Voir détails" Background="Red" Foreground="White" HorizontalAlignment="Stretch" Height="32" VerticalAlignment="Stretch" Margin="39,0,0,0" />
-
+                            <StackPanel Orientation="Vertical" Width="150" Height="60" VerticalAlignment="Top">
+                                <Label Content="Quantité :" VerticalAlignment="Center" />
+                                <ui:NumberBox Width="150" MinWidth="150" />
+                            </StackPanel>
+                            <StackPanel Margin="0,45,0,0">
+                                <Button x:Name="buttonAjouterACommande" 
+                                        Content="Ajouter" 
+                                        Background="#FF4DD04D" 
+                                        Foreground="White" 
+                                        HorizontalAlignment="Stretch" 
+                                        Height="32" 
+                                        VerticalAlignment="Stretch" />
+                            </StackPanel>
+                            <StackPanel>
+                                <Button Content="Voir détails" 
+                                        Background="#FF3760B7" 
+                                        Foreground="White" 
+                                        HorizontalAlignment="Stretch" 
+                                        Height="32" 
+                                        VerticalAlignment="Stretch" Margin="0,13,0,0" />
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
 
-                </StackPanel>
-                
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Prix : 100€" VerticalAlignment="Center" Margin="0,0,10,0" />
-                    <Slider Width="200" Minimum="0" Maximum="100" Value="50" Margin="20,0,0,0" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Disponibilité : Binding boolean pour savoir si c'est dispo" VerticalAlignment="Center" Margin="0,0,10,0" />
                 </StackPanel>
                 
                 <!-- Produits List -->
@@ -148,10 +180,20 @@
                     Width="Auto"
                     Binding="{Binding NomSousCategorie, ValidatesOnExceptions=True}"
                     Header="Sous-Catégorie" />
-                <DataGridTextColumn  
-                    Width="Auto"
-                    Binding="{Binding NomPeriode, ValidatesOnExceptions=True}"
-                    Header="Période" />
+                <DataGridTextColumn Width="Auto" Binding="{Binding NomPeriode, ValidatesOnExceptions=True}" Header="Période">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding EstDisponible}" Value="True">
+                                    <Setter Property="Background" Value="#FF15C11C"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding EstDisponible}" Value="False">
+                                    <Setter Property="Background" Value="Red"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </ui:DataGrid>
     </Grid>
