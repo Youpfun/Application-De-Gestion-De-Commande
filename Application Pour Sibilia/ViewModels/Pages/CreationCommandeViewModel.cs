@@ -49,6 +49,18 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         [ObservableProperty]
         private string motCleRecherchePeriode;
 
+        [ObservableProperty]
+        private int quantiteSelectionnee = 1;
+
+        [ObservableProperty]
+        private Plat platSelectionne;
+
+        [ObservableProperty]
+        private ObservableCollection<LigneCommande> lignesCommande = new ObservableCollection<LigneCommande>();
+
+        public decimal TotalTTC => LignesCommande.Sum(l => l.PrixTTC);
+
+
         public CreationCommandeViewModel()
         {
             ChargerCategories();
@@ -155,6 +167,25 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
 
             // réinitialiser la sous-catégorie sélectionnée
             SelectedSousCategorie = null;
+        }
+
+        [RelayCommand]
+        private void AjouterPlat()
+        {
+            if (PlatSelectionne != null && QuantiteSelectionnee > 0)
+            {
+                var existant = LignesCommande.FirstOrDefault(l => l.Plat.NumPlat == PlatSelectionne.NumPlat);
+                if (existant != null)
+                {
+                    existant.Quantite += QuantiteSelectionnee;
+                }
+                else
+                {
+                    LignesCommande.Add(new LigneCommande { Plat = PlatSelectionne, Quantite = QuantiteSelectionnee });
+                }
+
+                OnPropertyChanged(nameof(TotalTTC));
+            }
         }
 
     }
