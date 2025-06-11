@@ -49,14 +49,6 @@
                      Header="Ville" />
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel x:Name="formulaireClient" Visibility="Collapsed"  Background="#FF8B8B8B" Margin="0,101,0,72">
-            <ui:TextBox x:Name="inputNom" PlaceholderText="Nom"/>
-            <ui:TextBox x:Name="inputPrenom" PlaceholderText="Prenom"/>
-            <ui:TextBox x:Name="inputTelephone" PlaceholderText="Telephone"/>
-            <ui:TextBox x:Name="inputRue" PlaceholderText="Rue"/>
-            <ui:TextBox x:Name="inputCodePost" PlaceholderText="Code Postal"/>
-            <ui:TextBox x:Name="inputVille" PlaceholderText="Ville"/>
-        </StackPanel>
         <ui:Button x:Name="buttonNouveau" Width="174" Height="54"
             FontSize="16" FontWeight="Bold"
             Background="#D0021B" Foreground="White"
