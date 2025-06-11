@@ -58,6 +58,9 @@ namespace Application_Pour_Sibilia
                 services.AddSingleton<GestionClientViewModel>();
                 services.AddSingleton<ConsulterCommandePage>();
                 services.AddSingleton<ConsulterCommandeViewModel>();
+                services.AddSingleton<PlatWindow>();
+                services.AddSingleton<ConnexionWindow>();
+                //services.AddSingleton<WindowCLient>();
             }).Build();
 
         /// <summary>
