@@ -13,5 +13,6 @@ namespace Application_Pour_Sibilia.Views.Pages
             ViewModel = new CreationCommandeViewModel();
             DataContext = ViewModel;
         }
+
     }
 }

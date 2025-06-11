@@ -7,6 +7,8 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
 {
     public partial class GestionDesPlatsViewModel : ObservableObject
     {
+        public ObservableCollection<Plat> TousLesPlats { get; set; } = new();
+        public ObservableCollection<Plat> PlatsFiltres { get; set; } = new();
 
         [ObservableProperty]
         private ObservableCollection<Plat> lesPlats;
@@ -24,5 +26,7 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             var plats = repo.FindAll();
             LesPlats = new ObservableCollection<Plat>(plats);
         }
+
+
     }
 }
