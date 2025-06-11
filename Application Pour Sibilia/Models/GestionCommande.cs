@@ -130,7 +130,7 @@ namespace Application_Pour_Sibilia.Models
         public List<GestionCommande> FindAll()
         {
             List<GestionCommande> lesGestionCommandes = new List<GestionCommande>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select c.numcommande, CONCAT(cl.nomclient, ' ', cl.prenomclient) AS nomClient,cl.tel,c.DATERETRAITPREVUE, CONCAT(e.nomemploye, ' ', e.prenomemploye) AS Vendeur, c.prixtotal from commande c join client cl on c.numclient = cl.numclient join employe e on c.numemploye=e.numemploye"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select c.numcommande, CONCAT(cl.nomclient, ' ', cl.prenomclient) AS nomClient,cl.tel,c.DATERETRAITPREVUE, CONCAT(e.nomemploye, ' ', e.prenomemploye) AS Vendeur, c.prixtotal from commande c join client cl on c.numclient = cl.numclient join employe e on c.numemploye=e.numemploye order by DATERETRAITPREVUE desc"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)

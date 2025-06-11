@@ -14,10 +14,9 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         public ConsulterCommandeViewModel()
         {
             ChargerCommandes();
-
         }
 
-        private void ChargerCommandes()
+        public void ChargerCommandes()
         {
             GestionCommande repo = new GestionCommande();
             var commandes = repo.FindAll();

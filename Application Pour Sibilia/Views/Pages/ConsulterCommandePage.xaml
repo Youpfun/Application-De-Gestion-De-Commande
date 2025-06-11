@@ -6,59 +6,34 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="ConsulterCommandePage"
-    d:DataContext="{d:DesignInstance local:GestionDesPlatsPage,IsDesignTimeCreatable=False}"
+    d:DataContext="{d:DesignInstance local:GestionClientPage,IsDesignTimeCreatable=False}" 
     d:DesignHeight="450"
     d:DesignWidth="800"
-    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+   
     mc:Ignorable="d">
 
     <Grid Margin="0">
-        <ui:TextBox x:Name="textGestionCommande" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" Text="" PlaceholderText="Rechercher un client" VerticalAlignment="Top" Width="164" TextChanged="textGestionCommande_TextChanged"/>
-        <TabControl IsEnabled="True">
-            <TabItem Header="Commandes a restituer du jour" Background="#D0021B">
-                
-            </TabItem>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
 
-            <TabItem Header="Commandes a venir" Background="#D0021B">
-                
-            </TabItem>
 
-            <TabItem Header="Historique des commandes" Background="#D0021B">
-                <DataGrid x:Name="rechCommande" Margin="10,101,10,24" AutoGenerateColumns="False"
-    IsReadOnly="True" ItemsSource="{Binding LesGestionCommandes}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn  
-      Width="*"
-      Binding="{Binding NumCommande, ValidatesOnExceptions=True}"
-      Header="NumCommande" />
-                        <DataGridTextColumn  
-      Width="*"
-      Binding="{Binding NomClient , ValidatesOnExceptions=True}"
-      Header="NomClient" />
-                        <DataGridTextColumn  
-      Width="*"
-      Binding="{Binding TelClient, ValidatesOnExceptions=True}"
-      Header="Telephone" />
-                        <DataGridTextColumn  
-      Width="*"
-      Binding="{Binding DateRetraitPrevue, ValidatesOnExceptions=True}"
-      Header="Retrait" />
-                        <DataGridTextColumn  
-      Width="*"
-      Binding="{Binding NomVendeur, ValidatesOnExceptions=True}"
-      Header="Vendeur" />
-                        <DataGridTextColumn  
-       Width="*"
-       Binding="{Binding PrixTotal, ValidatesOnExceptions=True}"
-       Header="Prix" />
-                    </DataGrid.Columns>
-                </DataGrid>
+        
+        <ui:Button x:Name="button_Ajourdhui" Width="174" Height="54"
+                FontSize="16" FontWeight="Bold"
+                Background="#D0021B" Foreground="White"
+                VerticalAlignment="Top" Margin="425,14,0,0" Click="button_Ajourdhui_Click">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Aujourd'hui" VerticalAlignment="Center"/>
+            </StackPanel>
+        </ui:Button>
+        <ui:Button x:Name="button_Toutes" Width="174" Height="54"
+        FontSize="16" FontWeight="Bold"
+        Background="#D0021B" Foreground="White"
+        VerticalAlignment="Top" Margin="616,14,0,0" Click="button_Toutes_Click">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Toutes" VerticalAlignment="Center"/>
+            </StackPanel>
+        </ui:Button>
 
-            </TabItem>
-        </TabControl>
-       
     </Grid>
 
 </Page>

@@ -33,6 +33,7 @@ namespace Application_Pour_Sibilia.Views.Windows
             navigationService.SetNavigationControl(RootNavigation);
         }
 
+
         #region INavigationWindow methods
 
         public INavigationView GetNavigation() => RootNavigation;
