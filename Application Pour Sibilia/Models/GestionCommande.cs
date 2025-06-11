@@ -17,6 +17,16 @@ namespace Application_Pour_Sibilia.Models
         private DateTime dateRetraitPrevue;
         private string nomVendeur;
         private double prixTotal;
+        public GestionCommande()
+        { }
+
+        public GestionCommande(int numCommande, string telClient, DateTime dateRetraitPrevue, double prixTotal)
+        {
+            this.NumCommande = numCommande;
+            this.TelClient = telClient;
+            this.DateRetraitPrevue = dateRetraitPrevue;
+            this.PrixTotal = prixTotal;
+        }
 
         public GestionCommande(int numCommande, string nomClient, string telClient, DateTime dateRetraitPrevue, string nomVendeur, double prixTotal)
         {
@@ -105,17 +115,29 @@ namespace Application_Pour_Sibilia.Models
                 this.prixTotal = value;
             }
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is GestionCommande commande &&
+                   this.NumCommande == commande.NumCommande &&
+                   this.NomClient == commande.NomClient &&
+                   this.TelClient == commande.TelClient &&
+                   this.DateRetraitPrevue == commande.DateRetraitPrevue &&
+                   this.NomVendeur == commande.NomVendeur &&
+                   this.PrixTotal == commande.PrixTotal;
+        }
+
         public List<GestionCommande> FindAll()
         {
-            List<GestionCommande> lesCommandes = new List<GestionCommande>();
+            List<GestionCommande> lesGestionCommandes = new List<GestionCommande>();
             using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select c.numcommande, CONCAT(cl.nomclient, ' ', cl.prenomclient) AS nomClient,cl.tel,c.DATERETRAITPREVUE, CONCAT(e.nomemploye, ' ', e.prenomemploye) AS Vendeur, c.prixtotal from commande c join client cl on c.numclient = cl.numclient join employe e on c.numemploye=e.numemploye"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
-                    lesCommandes.Add(new GestionCommande((int)dr["numcommande"], (String)dr["nomClient"], (String)dr["tel"], (DateTime)dr["DATERETRAITPREVUE"],
-                   (String)dr["Vendeur"], (double)dr["prixtotal"]));
+                    lesGestionCommandes.Add(new GestionCommande((int)dr["numcommande"], (String)dr["nomClient"], (String)dr["tel"], (DateTime)dr["DATERETRAITPREVUE"],
+                   (String)dr["Vendeur"], (double)(decimal)dr["prixtotal"]));
             }
-            return lesCommandes;
+            return lesGestionCommandes;
         }
     }
 }

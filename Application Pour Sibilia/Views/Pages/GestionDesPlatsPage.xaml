@@ -41,6 +41,10 @@
                     Binding="{Binding NomSousCategorie, ValidatesOnExceptions=True}"
                     Header="Sous-Catégorie" />
                 <DataGridTextColumn  
+                    Width="120"
+                    Binding="{Binding NomCategorie, ValidatesOnExceptions=True}"
+                    Header="Catégorie" />
+                <DataGridTextColumn  
                      Width="120"
                      Binding="{Binding NomPeriode, ValidatesOnExceptions=True}"
                      Header="Période" />

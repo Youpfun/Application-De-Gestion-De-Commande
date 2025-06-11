@@ -9,6 +9,7 @@
     Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
     Width="1260"
     Height="650"
+    WindowState="Maximized"
     d:DataContext="{d:DesignInstance local:MainWindow,IsDesignTimeCreatable=True}"
     d:DesignHeight="450"
     d:DesignWidth="800"

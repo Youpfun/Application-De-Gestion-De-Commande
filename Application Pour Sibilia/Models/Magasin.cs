@@ -13,12 +13,14 @@ namespace Application_Pour_Sibilia.Models
         private string nom;
         private ObservableCollection<Client> lesClients;
         private ObservableCollection<Plat> lesPlats;
+        private ObservableCollection<GestionCommande> lesGestionCommandes;
 
         public Magasin(string nom)
         {
             this.Nom = nom;
             this.LesClients = new ObservableCollection<Client>(new Client().FindAll());
             this.LesPlats = new ObservableCollection<Plat>(new Plat().FindAll());
+            this.LesGestionCommandes = new ObservableCollection<GestionCommande>(new GestionCommande().FindAll());
         }
         public Magasin():this("")
         {
@@ -63,7 +65,18 @@ namespace Application_Pour_Sibilia.Models
             }
         }
 
+        public ObservableCollection<GestionCommande> LesGestionCommandes
+        {
+            get
+            {
+                return this.lesGestionCommandes;
+            }
 
+            set
+            {
+                this.lesGestionCommandes = value;
+            }
+        }
     }
 
     
