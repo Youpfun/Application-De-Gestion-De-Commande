@@ -10,8 +10,7 @@ namespace Application_Pour_Sibilia.Views.Pages
         public CreationCommandePage()
         {
             InitializeComponent();
-            ViewModel = new CreationCommandeViewModel();
-            DataContext = ViewModel;
+            DataContext = new CreationCommandeViewModel();
         }
 
     }

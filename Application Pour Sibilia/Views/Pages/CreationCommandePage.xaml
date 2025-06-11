@@ -16,32 +16,47 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Grid Margin="20,20,20,20">
+        <Grid Margin="20,20,20,160">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <!-- Left Section -->
+            
             <StackPanel Grid.Column="0">
                 <TextBlock Text="Recherche de produit" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,10" />
-                <ui:TextBox Width="300" x:Name="txtRecherche" PlaceholderText="Entrée un mot-clé" MinWidth="300" Height="30" Padding="10,8,10,8" FontSize="11" Margin="0,0,0,0" HorizontalAlignment="Left" />
+                <ui:TextBox Width="300" 
+                            x:Name="txtRecherche" 
+                            PlaceholderText="Entrée un mot-clé"
+                            Text="{Binding MotCleRecherche, UpdateSourceTrigger=PropertyChanged}" 
+                            MinWidth="300" 
+                            Height="30" 
+                            Padding="10,8,10,8" 
+                            FontSize="11" 
+                            Margin="0,0,0,0" 
+                            HorizontalAlignment="Left" />
 
                 <StackPanel Orientation="Horizontal" Margin="0,10">
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical" Width="150">
                             <Label Content="Catégorie :" VerticalAlignment="Center" />
-                            <ComboBox x:Name="comboCategorie" MinWidth="150" >
-                                <ComboBoxItem Content="Charcuterie" />
-                                <ComboBoxItem Content="Traiteur" />
+                            <ComboBox ItemsSource="{Binding LesCategories}" 
+                                    DisplayMemberPath="NomCategorie" 
+                                    SelectedItem="{Binding SelectedCategorie, Mode=TwoWay}">
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Margin="10,0,0,0">
                             <Label Content="Sous-catégorie :" VerticalAlignment="Center" />
-                            <ComboBox x:Name="comboSousCategorie" Width="150" MinWidth="150" >
-                                <ComboBoxItem Content="Entée" />
-                                <ComboBoxItem Content="Plat" />
+                            <ComboBox Width="150" 
+                                    ItemsSource="{Binding LesSousCategories}" 
+                                    DisplayMemberPath="NomSousCategorie" 
+                                    SelectedItem="{Binding SelectedSousCategorie, Mode=TwoWay}" >
                             </ComboBox>
+                            <!-- Bouton de filtrage -->
+                            <Button Content="Filtrer" Command="{Binding FiltrerPlatsCommand}" Margin="5"/>
+                            <!-- Bouton de réinitialisation -->
+                            <Button Content="Réinitialiser" Command="{Binding ReinitialiserFiltresCommand}" Margin="5"/>
                         </StackPanel>
                         <StackPanel Margin="10,0,0,0">
                             <Label Content="Quantité :" VerticalAlignment="Center" />
@@ -54,23 +69,21 @@
 
                 </StackPanel>
                 
-                <StackPanel Orientation="Horizontal" Margin="0,10">
+                <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Prix : 100€" VerticalAlignment="Center" Margin="0,0,10,0" />
                     <Slider Width="200" Minimum="0" Maximum="100" Value="50" Margin="20,0,0,0" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Disponibilité : Binding boolean pour savoir si c'est dispo" VerticalAlignment="Center" Margin="0,0,10,0" />
                 </StackPanel>
-
-
-
+                
                 <!-- Produits List -->
                 
             </StackPanel>
 
             <!-- Right Section - Info Commande -->
             <StackPanel x:Name="spInfoCommande" Grid.Column="1" Margin="10,0,0,0" >
-                <TextBlock Text="Info commande : 1024" FontSize="22" FontWeight="SemiBold" Margin="0,0,0,0" HorizontalAlignment="Center" />
+                <TextBlock Text="Commande actuelle" FontSize="22" FontWeight="SemiBold" Margin="0,0,0,0" HorizontalAlignment="Center" />
                 <Border BorderBrush="Gray" BorderThickness="1" Padding="10">
                     <StackPanel>
                         <Grid x:Name="gridNomsColonnes">
@@ -111,6 +124,35 @@
                 <TextBlock Text="Total TTC : 666€" FontSize="18" FontWeight="SemiBold" Margin="0,10,0,0" HorizontalAlignment="Center" />
                 <Button Content="Valider la commande" Background="Red" Foreground="White" Margin="0,20,0,0" Height="40" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Stretch" />
             </StackPanel>
+            
         </Grid>
+        <ui:DataGrid Margin="20,290,20,20" ItemsSource="{Binding LesPlats}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn  
+                    Width="150"
+                    Binding="{Binding NomPlat, ValidatesOnExceptions=True}"
+                    Header="Nom du Plat" />
+                <DataGridTextColumn  
+                    Width="Auto"
+                    Binding="{Binding PrixUnitaire, ValidatesOnExceptions=True, StringFormat=C2}"
+                    Header="Prix Unitaire" />
+                <DataGridTextColumn  
+                    Width="Auto"
+                    Binding="{Binding DelaiPreparation, ValidatesOnExceptions=True}"
+                    Header="Délai Préparation" CanUserResize="True" />
+                <DataGridTextColumn  
+                    Width="Auto"
+                    Binding="{Binding NbPersonnes, ValidatesOnExceptions=True}"
+                    Header="Nb Personnes" />
+                <DataGridTextColumn  
+                    Width="Auto"
+                    Binding="{Binding NomSousCategorie, ValidatesOnExceptions=True}"
+                    Header="Sous-Catégorie" />
+                <DataGridTextColumn  
+                    Width="Auto"
+                    Binding="{Binding NomPeriode, ValidatesOnExceptions=True}"
+                    Header="Période" />
+            </DataGrid.Columns>
+        </ui:DataGrid>
     </Grid>
 </Page>
