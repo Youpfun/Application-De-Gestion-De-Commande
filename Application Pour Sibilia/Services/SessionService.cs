@@ -9,20 +9,20 @@ namespace Application_Pour_Sibilia.Services
 {
     public class SessionService : INotifyPropertyChanged
     {
-        private string _login;
-        private string _prenom;
-        private string _nom;
-        private int _numEmploye;
-        private int _roleEmploye; // Ajout du rôle de l'employé
+        private string login;
+        private string prenom;
+        private string nom;
+        private int numEmploye;
+        private int roleEmploye; // Ajout du rôle de l'employé
 
         public string Login
         {
-            get => _login;
+            get => login;
             set
             {
-                if (_login != value)
+                if (login != value)
                 {
-                    _login = value;
+                    login = value;
                     OnPropertyChanged(nameof(Login));
                 }
             }
@@ -30,12 +30,12 @@ namespace Application_Pour_Sibilia.Services
 
         public string Nom
         {
-            get => _nom;
+            get => nom;
             set
             {
-                if (_nom != value)
+                if (nom != value)
                 {
-                    _nom = value;
+                    nom = value;
                     OnPropertyChanged(nameof(Nom));
                 }
             }
@@ -43,12 +43,12 @@ namespace Application_Pour_Sibilia.Services
 
         public string Prenom
         {
-            get => _prenom;
+            get => prenom;
             set
             {
-                if (_prenom != value)
+                if (prenom != value)
                 {
-                    _prenom = value;
+                    prenom = value;
                     OnPropertyChanged(nameof(Prenom));
                 }
             }
@@ -56,12 +56,12 @@ namespace Application_Pour_Sibilia.Services
 
         public int NumEmploye
         {
-            get => _numEmploye;
+            get => numEmploye;
             set
             {
-                if (_numEmploye != value)
+                if (numEmploye != value)
                 {
-                    _numEmploye = value;
+                    numEmploye = value;
                     OnPropertyChanged(nameof(NumEmploye));
                 }
             }
@@ -69,12 +69,12 @@ namespace Application_Pour_Sibilia.Services
 
         public int RoleEmploye
         {
-            get => _roleEmploye;
+            get => roleEmploye;
             set
             {
-                if (_roleEmploye != value)
+                if (roleEmploye != value)
                 {
-                    _roleEmploye = value;
+                    roleEmploye = value;
                     OnPropertyChanged(nameof(RoleEmploye));
                 }
             }
