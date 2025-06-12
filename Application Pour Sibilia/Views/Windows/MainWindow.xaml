@@ -49,7 +49,18 @@
             PaneDisplayMode="Left"
             TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}">
             <ui:NavigationView.Header>
-                <ui:BreadcrumbBar x:Name="BreadcrumbBar" Margin="42,32,42,20" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ui:BreadcrumbBar x:Name="BreadcrumbBar" Margin="42,32,42,20" Grid.Column="0" />
+                    <TextBlock Text="{Binding ViewModel.WelcomeMessage}" 
+                               Grid.Column="1" 
+                               HorizontalAlignment="Right" 
+                               Margin="0,0,16,0"
+                               FontSize="14" />
+                </Grid>
             </ui:NavigationView.Header>
             <ui:NavigationView.AutoSuggestBox>
                 <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search">

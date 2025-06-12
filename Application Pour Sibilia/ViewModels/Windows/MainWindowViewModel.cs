@@ -1,4 +1,5 @@
-﻿using Application_Pour_Sibilia.Views.Windows;
+﻿using Application_Pour_Sibilia.Services;
+using Application_Pour_Sibilia.Views.Windows;
 using System.Collections.ObjectModel;
 using Wpf.Ui.Controls;
 
@@ -6,8 +7,44 @@ namespace Application_Pour_Sibilia.ViewModels.Windows
 {
     public partial class MainWindowViewModel : ObservableObject
     {
+        private readonly SessionService _sessionService;
+
         [ObservableProperty]
         private string _applicationTitle = "Application Pour Sibilia";
+
+        [ObservableProperty]
+        private string _welcomeMessage;
+
+        public MainWindowViewModel(SessionService sessionService)
+        {
+            _sessionService = sessionService;
+            // Écoute des changements de prénom et de nom
+            _sessionService.PropertyChanged += (sender, e) => 
+            {
+                if (e.PropertyName == nameof(SessionService.Prenom) || 
+                    e.PropertyName == nameof(SessionService.Nom))
+                    UpdateWelcomeMessage();
+            };
+            
+            // Initialisation du message de bienvenue
+            UpdateWelcomeMessage();
+        }
+
+        private void UpdateWelcomeMessage()
+        {
+            bool hasPrenom = !string.IsNullOrEmpty(_sessionService.Prenom);
+            bool hasNom = !string.IsNullOrEmpty(_sessionService.Nom);
+            
+            string userInfo = "";
+            if (hasPrenom && hasNom)
+                userInfo = $" {_sessionService.Prenom} {_sessionService.Nom}";
+            else if (hasPrenom)
+                userInfo = $" {_sessionService.Prenom}";
+            else if (hasNom)
+                userInfo = $" {_sessionService.Nom}";
+            
+            WelcomeMessage = $"Connecté en tant que : {userInfo}";
+        }
 
         [ObservableProperty]
         private ObservableCollection<object> _menuItems = new()
