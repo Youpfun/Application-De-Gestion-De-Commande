@@ -20,7 +20,7 @@
         <ui:Button x:Name="button_Ajourdhui" Width="120" Height="34"
                 FontSize="16" FontWeight="Bold"
                 Background="#D0021B" Foreground="White"
-                VerticalAlignment="Top" Margin="425,20,0,0" Click="button_Ajourdhui_Click">
+                VerticalAlignment="Top" Margin="425,11,0,0" Click="button_Ajourdhui_Click">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="Aujourd'hui" VerticalAlignment="Center"/>
             </StackPanel>
@@ -28,7 +28,7 @@
         <ui:Button x:Name="button_Toutes" Width="120" Height="34"
         FontSize="16" FontWeight="Bold"
         Background="#D0021B" Foreground="White"
-        VerticalAlignment="Top" Margin="555,20,0,0" Click="button_Toutes_Click">
+        VerticalAlignment="Top" Margin="555,11,0,0" Click="button_Toutes_Click">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="Toutes" VerticalAlignment="Center"/>
             </StackPanel>
