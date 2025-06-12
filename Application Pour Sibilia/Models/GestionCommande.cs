@@ -155,19 +155,19 @@ namespace Application_Pour_Sibilia.Models
             }
             return lesGestionCommandes;
         }
-        //public List<GestionCommande> FindAllCommandeAujourdhui()
-        //{
-        //    List<GestionCommande> lesGestionCommandes = new List<GestionCommande>();
-        //    using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select c.numcommande, CONCAT(cl.nomclient, ' ', cl.prenomclient) AS nomClient,cl.tel,c.DATERETRAITPREVUE, CONCAT(e.nomemploye, ' ', e.prenomemploye) AS Vendeur, c.prixtotal, c.payee from commande c join client cl on c.numclient = cl.numclient join employe e on c.numemploye=e.numemploye where DATERETRAITPREVUE = Current_date order by payee desc"))
-        //    {
-        //        DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-        //        foreach (DataRow dr in dt.Rows)
-        //            lesGestionCommandes.Add(new GestionCommande((int)dr["numcommande"], (String)dr["nomClient"], (String)dr["tel"], (DateTime)dr["DATERETRAITPREVUE"],
-        //           (String)dr["Vendeur"], (double)(decimal)dr["prixtotal"], (bool)dr["payee"]));
-        //    }
-        //    return lesGestionCommandes;
-        //}
-        
+        public List<GestionCommande> FindAllCommandeAujourdhui()
+        {
+            List<GestionCommande> lesCommandesDuJour = new List<GestionCommande>();
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select c.numcommande, CONCAT(cl.nomclient, ' ', cl.prenomclient) AS nomClient,cl.tel,c.DATERETRAITPREVUE, CONCAT(e.nomemploye, ' ', e.prenomemploye) AS Vendeur, c.prixtotal, c.payee from commande c join client cl on c.numclient = cl.numclient join employe e on c.numemploye=e.numemploye where DATERETRAITPREVUE = Current_date order by payee desc"))
+            {
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+                foreach (DataRow dr in dt.Rows)
+                    lesCommandesDuJour.Add(new GestionCommande((int)dr["numcommande"], (String)dr["nomClient"], (String)dr["tel"], (DateTime)dr["DATERETRAITPREVUE"],
+                   (String)dr["Vendeur"], (double)(decimal)dr["prixtotal"], (bool)dr["payee"]));
+            }
+            return lesCommandesDuJour;
+        }
+
     }
 }
 

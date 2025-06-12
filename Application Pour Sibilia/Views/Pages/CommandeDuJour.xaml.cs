@@ -31,14 +31,15 @@ namespace Application_Pour_Sibilia.Views.Pages
             ViewModel = viewModel;
             DataContext = this;
             DataContext = new ConsulterCommandeViewModel();
+
             InitializeComponent();
+
             //rechCommande.Items.Filter = RechercheMotClefClient;
         }
 
-        private void button_Recuperer_Click(object sender, RoutedEventArgs e)
+        private void buttonRecuperer_Click(object sender, RoutedEventArgs e)
         {
 
         }
-        
     }
 }

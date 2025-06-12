@@ -14,6 +14,7 @@ namespace Application_Pour_Sibilia.Models
         private ObservableCollection<Client> lesClients;
         private ObservableCollection<Plat> lesPlats;
         private ObservableCollection<GestionCommande> lesGestionCommandes;
+        private ObservableCollection<GestionCommande> lesCommandesDuJour;
 
         public Magasin(string nom)
         {
@@ -21,6 +22,8 @@ namespace Application_Pour_Sibilia.Models
             this.LesClients = new ObservableCollection<Client>(new Client().FindAll());
             this.LesPlats = new ObservableCollection<Plat>(new Plat().FindAll());
             this.LesGestionCommandes = new ObservableCollection<GestionCommande>(new GestionCommande().FindAll());
+            this.LesCommandesDuJour = new ObservableCollection<GestionCommande>(new GestionCommande().FindAllCommandeAujourdhui());
+
         }
         public Magasin():this("")
         {
@@ -75,6 +78,19 @@ namespace Application_Pour_Sibilia.Models
             set
             {
                 this.lesGestionCommandes = value;
+            }
+        }
+
+        public ObservableCollection<GestionCommande> LesCommandesDuJour
+        {
+            get
+            {
+                return this.lesCommandesDuJour;
+            }
+
+            set
+            {
+                this.lesCommandesDuJour = value;
             }
         }
     }
