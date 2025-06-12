@@ -6,7 +6,7 @@
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
 
-        Title="Pilot - Connexion"
+        Title="Sibilia - Connexion"
         Width="600"
         Height="400"
 
@@ -29,7 +29,7 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <ui:Image Source="pack://application:,,,/Assets/logo.jpg"
                   Width="240" Height="70" Stretch="Fill" Margin="0,0,0,20" HorizontalAlignment="Center"/>
-        
+
             <ui:TextBlock Text="Connexion à Sibilia"
                        FontSize="36" FontWeight="Bold"
                        HorizontalAlignment="Center"
@@ -38,11 +38,13 @@
             <ui:TextBox Width="334" Height="35"  Padding="10,0"
                      VerticalContentAlignment="Center"
                      x:Name="usernameBox"
+                     KeyDown="Input_KeyDown"
                      Margin="0,0,0,5"/>
             <Label Content="Mot de passe" FontSize="16"/>
             <ui:PasswordBox Width="334" Height="35"  Padding="10,0"
                      VerticalContentAlignment="Center"
                      x:Name="passwordBox"
+                     KeyDown="Input_KeyDown"
                      Margin="0,0,0,10"/>
             <TextBlock x:Name="ErrorTxt"
                        Foreground="#E4FF1E1E"
