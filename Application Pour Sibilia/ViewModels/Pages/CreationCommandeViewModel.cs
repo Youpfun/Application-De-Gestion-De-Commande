@@ -1,6 +1,8 @@
 ﻿using Application_Pour_Sibilia.Models;
+using Application_Pour_Sibilia.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -12,7 +14,7 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         private Categorie categorieRepo = new Categorie();
         private SousCategorie sousCategorieRepo = new SousCategorie();
         private Client _clientSelectionne;
-
+        private readonly SessionService _sessionService;
 
         private List<Plat> tousLesPlats;
         private List<SousCategorie> toutesLesSousCategories;
@@ -74,6 +76,7 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
                 OnPropertyChanged(nameof(DateRetraitPrevue));
             }
         }
+        
         public decimal TotalTTC
         {
             get
@@ -91,11 +94,18 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
                 OnPropertyChanged(nameof(ClientSelectionne));
             }
         }
+        
+        public int NumeroEmployeConnecte
+        {
+            get { return _sessionService.NumEmploye; }
+        }
 
         public CreationCommandeViewModel()
         {
+            // Récupération du service de session pour accéder au numéro d'employé
+            _sessionService = App.Services.GetRequiredService<SessionService>();
+            
             lignesCommande = new ObservableCollection<LigneCommande>();
-
             lignesCommande.CollectionChanged += (s, e) => OnPropertyChanged(nameof(TotalTTC));
 
             ChargerCategories();
@@ -164,10 +174,9 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
                 );
             }
 
-
-
             LesPlats = new ObservableCollection<Plat>(platsFiltres);
         }
+        
         [RelayCommand]
         private void ReinitialiserFiltres()
         {
@@ -180,7 +189,6 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             LesSousCategories = new ObservableCollection<SousCategorie>(toutesLesSousCategories);
 
             FiltrerPlats();
-
         }
 
         // ⚠ Le cascade dynamique : appelé quand la catégorie change
@@ -222,6 +230,5 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
                 OnPropertyChanged(nameof(TotalTTC));
             }
         }
-
     }
 }

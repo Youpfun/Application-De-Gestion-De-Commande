@@ -74,15 +74,15 @@ namespace Application_Pour_Sibilia.Views.Pages
                 (
                     0, // idCommande généré automatiquement par la BDD
                     ViewModel.ClientSelectionne.IdClient,
-                    1, // IdEmploye (par exemple celui connecté, à adapter)
+                    ViewModel.NumeroEmployeConnecte, // Utilisation du numéro d'employé connecté
                     DateTime.Now,
                     ViewModel.DateRetraitPrevue.Value,
                     false, // Payée
                     false, // Retirée
-                    ViewModel.TotalTTC// Prix total à calculer si tu veux
+                    ViewModel.TotalTTC // Prix total
                 );
 
-                // Sauvegarde en base (je suppose que tu as un Create() comme pour les clients)
+                // Sauvegarde en base
                 nouvelleCommande.IdCommande = nouvelleCommande.Create();
 
                 MessageBox.Show("Commande enregistrée avec succès !", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
