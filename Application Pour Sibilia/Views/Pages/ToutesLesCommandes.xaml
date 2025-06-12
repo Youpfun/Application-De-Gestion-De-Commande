@@ -14,10 +14,13 @@
       Title="ToutesLesCommandes">
 
     <Grid Margin="0">
-        <ui:TextBox x:Name="textGestionToutesCommandes" HorizontalAlignment="Left" Margin="10,40,0,0" TextWrapping="Wrap" Text="" PlaceholderText="Rechercher un client" VerticalAlignment="Top" Width="161"  Height="34" TextChanged="textGestionToutesCommandes_TextChanged"/>
-        <DataGrid x:Name="rechCommande"  Margin="0,79,0,0" AutoGenerateColumns="False"
-                     IsReadOnly="False" ItemsSource="{Binding LesGestionCommandes}" RenderTransformOrigin="0.501,0.462"  >
-            <DataGrid.Columns>
+        <ui:TextBox x:Name="textGestionToutesCommandes" HorizontalAlignment="Left" 
+              Margin="10,40,0,0" TextWrapping="Wrap" Text="" PlaceholderText="Rechercher un client" 
+              VerticalAlignment="Top" Width="161"  Height="34" TextChanged="textGestionToutesCommandes_TextChanged" 
+                    Cursor="IBeam"/>
+        <ui:DataGrid x:Name="rechCommande"  Margin="0,79,0,0" AutoGenerateColumns="False"
+                     IsReadOnly="true" ItemsSource="{Binding LesGestionCommandes}" RenderTransformOrigin="0.501,0.462"  >
+            <ui:DataGrid.Columns>
                 <DataGridTextColumn  
                      Width="*"
                      Binding="{Binding NumCommande, ValidatesOnExceptions=True}"
@@ -43,10 +46,11 @@
                       Binding="{Binding PrixTotal, ValidatesOnExceptions=True}"
                       Header="Prix" />
                 <DataGridCheckBoxColumn Header="Est payée"
-                  Binding="{Binding EstPayee,Mode=TwoWay}" />
-            
-            </DataGrid.Columns>
-        </DataGrid>
+                  Binding="{Binding EstPayee,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"
+                                        />
+
+            </ui:DataGrid.Columns>
+        </ui:DataGrid>
 
     </Grid>
 </Page>

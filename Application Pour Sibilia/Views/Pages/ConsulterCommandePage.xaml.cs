@@ -33,16 +33,16 @@ namespace Application_Pour_Sibilia.Views.Pages
             DataContext = this;
             DataContext = new ConsulterCommandeViewModel();
             InitializeComponent();
-            MainFrame.Navigate(new CommandeDuJour(ViewModel));
+            FrameConsulterCommande.Navigate(new CommandeDuJour(ViewModel));
         }
         private void button_Toutes_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new ToutesLesCommandes(ViewModel));
+            FrameConsulterCommande.Navigate(new ToutesLesCommandes(ViewModel));
         }
 
         private void button_Ajourdhui_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new CommandeDuJour(ViewModel));
+            FrameConsulterCommande.Navigate(new CommandeDuJour(ViewModel));
         }
     }
 }

@@ -9,48 +9,85 @@
       Title="CommandeDuJour">
 
     <Grid>
-        <ui:TextBox  HorizontalAlignment="Left" Margin="10,40,0,0" TextWrapping="Wrap" Text="" PlaceholderText="Rechercher un client" VerticalAlignment="Top" Width="161"  Height="34" />
-        <ui:TextBlock Text="A RECUPERER"  Width="174" Height="30"
- FontSize="16" FontWeight="Bold"
- Background="#D0021B" Margin="10,94,0,0" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Left"/>
-        <DataGrid Margin="0,129,0,191">
+        <ui:TextBox   HorizontalAlignment="Left" Margin="10,40,0,0" TextWrapping="Wrap" Text="" PlaceholderText="Rechercher un client" VerticalAlignment="Top" Width="161"  Height="34" />
+        <StackPanel  Orientation="Horizontal">
+            <ui:Button x:Name="button_Recuperer"  Background="#D0021B" Content="Récupérée" Margin="400,74,0,0" VerticalAlignment="Top" Click="button_Recuperer_Click"/>
+            <ui:Button  Background="#D0021B" Content="Voir détails" Margin="50,74,0,0" VerticalAlignment="Top"/>
+        </StackPanel>
+        <ui:TextBlock  Text="A RECUPERER"  Width="174" Height="30"
+            FontSize="16" FontWeight="Bold"
+            Background="#D0021B" Margin="10,94,0,0" VerticalAlignment="Top" 
+            TextAlignment="Center" HorizontalAlignment="Left"/>
+        <DataGrid Margin="0,129,0,107">
             <DataGrid.Columns>
                 <DataGridTextColumn  
-         Width="*"
-         Binding="{Binding NumCommande, ValidatesOnExceptions=True}"
-         Header="NumCommande" />
+                    Width="*"
+                    Binding="{Binding NumCommande, ValidatesOnExceptions=True}"
+                    Header="NumCommande" />
                 <DataGridTextColumn  
-         Width="*"
-         Binding="{Binding NomClient , ValidatesOnExceptions=True}"
-         Header="NomClient" />
+                    Width="*"
+                    Binding="{Binding NomClient , ValidatesOnExceptions=True}"
+                    Header="NomClient" />
                 <DataGridTextColumn  
-         Width="*"
-         Binding="{Binding TelClient, ValidatesOnExceptions=True}"
-         Header="Telephone" />
+                    Binding="{Binding TelClient, ValidatesOnExceptions=True}"
+                    Width="*"
+                    Header="Telephone" />
                 <DataGridTextColumn  
-         Width="*"
-         Binding="{Binding DateRetraitPrevue, ValidatesOnExceptions=True}"
-         Header="Retrait" />
+                    Width="*"
+                    Binding="{Binding DateRetraitPrevue, ValidatesOnExceptions=True}"
+                    Header="Retrait" />
                 <DataGridTextColumn  
-         Width="*"
-         Binding="{Binding NomVendeur, ValidatesOnExceptions=True}"
-         Header="Vendeur" />
+                    Width="*"
+                    Binding="{Binding NomVendeur, ValidatesOnExceptions=True}"
+                    Header="Vendeur" />
                 <DataGridTextColumn  
-          Width="*"
-          Binding="{Binding PrixTotal, ValidatesOnExceptions=True}"
-          Header="Prix" />
-            <DataGridCheckBoxColumn Header="Est payée"
-                Binding="{Binding EstPayee,Mode=TwoWay}" />
+                    Width="*"
+                    Binding="{Binding PrixTotal, ValidatesOnExceptions=True}"
+                    Header="Prix" />
+                <DataGridCheckBoxColumn Header="Est payée"
+                    Binding="{Binding EstPayee,Mode=TwoWay}" />
+              
             </DataGrid.Columns>
 
         </DataGrid>
         <ui:TextBlock Text="RECUPERER"  Width="174" Height="30"
-FontSize="16" FontWeight="Bold"
-Background="#D0021B" Margin="10,297,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" TextAlignment="Center"/>
-        <DataGrid Margin="0,333,0,0">
+     FontSize="16" FontWeight="Bold"
+     Background="#D0021B" Margin="10,348,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" 
+     TextAlignment="Center"/>
 
+        <DataGrid Margin="0,383,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn  
+                Width="*"
+                Binding="{Binding NumCommande, ValidatesOnExceptions=True}"
+                Header="NumCommande" />
+            <DataGridTextColumn  
+                Width="*"
+                Binding="{Binding NomClient , ValidatesOnExceptions=True}"
+                Header="NomClient" />
+            <DataGridTextColumn  
+                Binding="{Binding TelClient, ValidatesOnExceptions=True}"
+                Width="*"
+                Header="Telephone" />
+            <DataGridTextColumn  
+                Width="*"
+                Binding="{Binding DateRetraitPrevue, ValidatesOnExceptions=True}"
+                Header="Retrait" />
+            <DataGridTextColumn  
+                Width="*"
+                Binding="{Binding NomVendeur, ValidatesOnExceptions=True}"
+                Header="Vendeur" />
+            <DataGridTextColumn  
+                Width="*"
+                Binding="{Binding PrixTotal, ValidatesOnExceptions=True}"
+                Header="Prix" />
+                <DataGridCheckBoxColumn Header="Est payée"
+        Binding="{Binding EstPayee,Mode=TwoWay}" />
+
+            </DataGrid.Columns>
 
         </DataGrid>
+        
 
     </Grid>
 </Page>

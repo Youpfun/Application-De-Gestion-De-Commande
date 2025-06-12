@@ -17,6 +17,7 @@ namespace Application_Pour_Sibilia.Models
         private DateTime dateRetraitPrevue;
         private string nomVendeur;
         private double prixTotal;
+        private bool estPayee;
         public GestionCommande()
         { }
 
@@ -28,7 +29,7 @@ namespace Application_Pour_Sibilia.Models
             this.PrixTotal = prixTotal;
         }
 
-        public GestionCommande(int numCommande, string nomClient, string telClient, DateTime dateRetraitPrevue, string nomVendeur, double prixTotal)
+        public GestionCommande(int numCommande, string nomClient, string telClient, DateTime dateRetraitPrevue, string nomVendeur, double prixTotal, bool estPayee)
         {
             this.NumCommande = numCommande;
             this.NomClient = nomClient;
@@ -36,6 +37,7 @@ namespace Application_Pour_Sibilia.Models
             this.DateRetraitPrevue = dateRetraitPrevue;
             this.NomVendeur = nomVendeur;
             this.PrixTotal = prixTotal;
+            this.EstPayee = estPayee;
         }
 
         public int NumCommande
@@ -116,6 +118,19 @@ namespace Application_Pour_Sibilia.Models
             }
         }
 
+        public bool EstPayee
+        {
+            get
+            {
+                return this.estPayee;
+            }
+
+            set
+            {
+                this.estPayee = value;
+            }
+        }
+
         public override bool Equals(object? obj)
         {
             return obj is GestionCommande commande &&
@@ -124,21 +139,35 @@ namespace Application_Pour_Sibilia.Models
                    this.TelClient == commande.TelClient &&
                    this.DateRetraitPrevue == commande.DateRetraitPrevue &&
                    this.NomVendeur == commande.NomVendeur &&
-                   this.PrixTotal == commande.PrixTotal;
+                   this.PrixTotal == commande.PrixTotal &&
+                   this.EstPayee == commande.EstPayee;
         }
 
         public List<GestionCommande> FindAll()
         {
             List<GestionCommande> lesGestionCommandes = new List<GestionCommande>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select c.numcommande, CONCAT(cl.nomclient, ' ', cl.prenomclient) AS nomClient,cl.tel,c.DATERETRAITPREVUE, CONCAT(e.nomemploye, ' ', e.prenomemploye) AS Vendeur, c.prixtotal from commande c join client cl on c.numclient = cl.numclient join employe e on c.numemploye=e.numemploye order by DATERETRAITPREVUE desc"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select c.numcommande, CONCAT(cl.nomclient, ' ', cl.prenomclient) AS nomClient,cl.tel,c.DATERETRAITPREVUE, CONCAT(e.nomemploye, ' ', e.prenomemploye) AS Vendeur, c.prixtotal, c.payee from commande c join client cl on c.numclient = cl.numclient join employe e on c.numemploye=e.numemploye order by DATERETRAITPREVUE desc"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
                     lesGestionCommandes.Add(new GestionCommande((int)dr["numcommande"], (String)dr["nomClient"], (String)dr["tel"], (DateTime)dr["DATERETRAITPREVUE"],
-                   (String)dr["Vendeur"], (double)(decimal)dr["prixtotal"]));
+                   (String)dr["Vendeur"], (double)(decimal)dr["prixtotal"], (bool)dr["payee"]));
             }
             return lesGestionCommandes;
         }
+        //public List<GestionCommande> FindAllCommandeAujourdhui()
+        //{
+        //    List<GestionCommande> lesGestionCommandes = new List<GestionCommande>();
+        //    using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select c.numcommande, CONCAT(cl.nomclient, ' ', cl.prenomclient) AS nomClient,cl.tel,c.DATERETRAITPREVUE, CONCAT(e.nomemploye, ' ', e.prenomemploye) AS Vendeur, c.prixtotal, c.payee from commande c join client cl on c.numclient = cl.numclient join employe e on c.numemploye=e.numemploye where DATERETRAITPREVUE = Current_date order by payee desc"))
+        //    {
+        //        DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+        //        foreach (DataRow dr in dt.Rows)
+        //            lesGestionCommandes.Add(new GestionCommande((int)dr["numcommande"], (String)dr["nomClient"], (String)dr["tel"], (DateTime)dr["DATERETRAITPREVUE"],
+        //           (String)dr["Vendeur"], (double)(decimal)dr["prixtotal"], (bool)dr["payee"]));
+        //    }
+        //    return lesGestionCommandes;
+        //}
+        
     }
 }
 

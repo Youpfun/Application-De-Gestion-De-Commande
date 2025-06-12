@@ -34,16 +34,11 @@ namespace Application_Pour_Sibilia.Views.Pages
             InitializeComponent();
             //rechCommande.Items.Filter = RechercheMotClefClient;
         }
-        //public bool RechercheMotClefClient(object obj)
-        //{
-        //    if (String.IsNullOrEmpty(textGestionCommandeDuJour.Text))
-        //        return true;
-        //    Models.GestionCommande uneGestionCommande = (GestionCommande)obj;
-        //    return uneGestionCommande.NomClient.StartsWith(textGestionCommandeDuJour.Text, StringComparison.OrdinalIgnoreCase);
-        //}
-        //private void textGestionCommande_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    CollectionViewSource.GetDefaultView(rechCommande.ItemsSource).Refresh();
-        //}
+
+        private void button_Recuperer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        
     }
 }
