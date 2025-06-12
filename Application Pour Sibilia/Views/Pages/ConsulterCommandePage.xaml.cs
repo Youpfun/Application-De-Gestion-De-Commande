@@ -30,8 +30,7 @@ namespace Application_Pour_Sibilia.Views.Pages
         public ConsulterCommandePage(ConsulterCommandeViewModel viewModel)
         {
             ViewModel = viewModel;
-            DataContext = this;
-            DataContext = new ConsulterCommandeViewModel();
+            DataContext = ViewModel;
             InitializeComponent();
             FrameConsulterCommande.Navigate(new CommandeDuJour(ViewModel));
         }

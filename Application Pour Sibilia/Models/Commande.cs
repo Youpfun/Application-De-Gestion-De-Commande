@@ -21,7 +21,7 @@ namespace Application_Pour_Sibilia.Models
         private bool retiree;
         private double prixTotal;
 
-        public Commande(int idCommande, int idClient, int idEmploye, DateTime dateCommande, DateTime dateRetraitPrevue, bool payee, bool retiree, double prixTotal) : this(idCommande)
+        public Commande(int idCommande, int idClient, int idEmploye, DateTime dateCommande, DateTime dateRetraitPrevue, bool payee, bool retiree, decimal prixTotal) : this(idCommande)
         {
             this.IdClient = idClient;
             this.IdEmploye = idEmploye;
@@ -122,16 +122,16 @@ namespace Application_Pour_Sibilia.Models
             }
         }
 
-        public double PrixTotal
+        public decimal PrixTotal
         {
             get
             {
-                return this.prixTotal;
+                return (decimal)this.prixTotal;
             }
 
             set
             {
-                this.prixTotal = value;
+                this.prixTotal = (double)value;
             }
         }
 
@@ -158,7 +158,7 @@ namespace Application_Pour_Sibilia.Models
                         (DateTime)dr["dateretraitprevue"], 
                         (bool)dr["payee"], 
                         (bool)dr["retiree"], 
-                        Convert.ToDouble(dr["prixtotal"])));
+                        (decimal)(dr["prixtotal"])));
             }
             return lesCommandes;
         }
@@ -189,7 +189,7 @@ namespace Application_Pour_Sibilia.Models
                 this.DateRetraitPrevue = (DateTime)dt.Rows[0]["dateretraitprevue"];
                 this.Payee = (bool)dt.Rows[0]["payee"];
                 this.Retiree = (bool)dt.Rows[0]["retiree"];
-                this.PrixTotal = Convert.ToDouble(dt.Rows[0]["prixtotal"]);
+                this.PrixTotal = (decimal)(dt.Rows[0]["prixtotal"]);
 
             }
 
@@ -197,9 +197,11 @@ namespace Application_Pour_Sibilia.Models
         public int Create()
         {
             int nb = 0;
-            using (var cmdInsert = new NpgsqlCommand("insert into commande (numcommande,numclient,numemploye,datecommande,dateretraitprevue,payee,retiree,prixtotal) values (@numcommande,@numclient,@numemploye,@datecommande,@dateretraitprevue,@payee,@retiree,@prixtotal) RETURNING numcommande"))
+            using (var cmdInsert = new NpgsqlCommand(
+                    "INSERT INTO commande (numclient, numemploye, datecommande, dateretraitprevue, payee, retiree, prixtotal) " +
+                    "VALUES (@numclient, @numemploye, @datecommande, @dateretraitprevue, @payee, @retiree, @prixtotal) " +
+                    "RETURNING numcommande"))
             {
-                cmdInsert.Parameters.AddWithValue("numcommande", this.IdCommande);
                 cmdInsert.Parameters.AddWithValue("numclient", this.IdClient);
                 cmdInsert.Parameters.AddWithValue("numemploye", this.IdEmploye);
                 cmdInsert.Parameters.AddWithValue("datecommande", this.DateCommande);
