@@ -23,9 +23,9 @@
 
         <!-- Ligne 1 : Recherche et filtres -->
         <StackPanel Orientation="Horizontal" Margin="0,0,0,10" Grid.Row="0">
-            <ui:TextBox Width="250" Height="34" PlaceholderText="Rechercher un client" 
+            <ui:TextBox x:Name="textRechercheClientQuiARecup" Width="250" Height="34" PlaceholderText="Rechercher un client" 
                         Text="{Binding RechercheClient, UpdateSourceTrigger=PropertyChanged}"
-                        Margin="0,0,20,0"/>
+                        Margin="0,0,20,0" TextChanged="textRechercheClientQuiARecup_TextChanged"/>
             <ui:Button x:Name="buttonRecuperer" Content="Récupérée" Height="34" Width="120"
                        Command="{Binding MarquerCommeRecupereeCommand}" Background="#D0021B" Margin="0,0,10,0"
                        FontWeight="Bold" Click="buttonRecuperer_Click"/>

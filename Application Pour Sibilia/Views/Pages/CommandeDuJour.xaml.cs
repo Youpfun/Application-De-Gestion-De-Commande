@@ -37,7 +37,7 @@ namespace Application_Pour_Sibilia.Views.Pages
             DataContext = new ConsulterCommandeViewModel();
 
             InitializeComponent();
-
+            commandeRecupere.Items.Filter = RechercheMotCefNomClientRecup;
             //rechCommande.Items.Filter = RechercheMotClefClient;
         }
 
@@ -68,8 +68,21 @@ namespace Application_Pour_Sibilia.Views.Pages
 
                     MessageBox.Show("La commande n'a pas pu être récupéré.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                CollectionViewSource.GetDefaultView(commandeARecup.ItemsSource)?.Refresh();
+                CollectionViewSource.GetDefaultView(commandeRecupere.ItemsSource)?.Refresh();
             }
-        } 
+        }
+
+        private void textRechercheClientQuiARecup_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(commandeRecupere.ItemsSource).Refresh();
+        }
+        public bool RechercheMotCefNomClientRecup(object obj)
+        {
+            if (String.IsNullOrEmpty(textRechercheClientQuiARecup.Text))
+                return true;
+            GestionCommande comRecup = obj as GestionCommande;
+            return (comRecup.NomClient.StartsWith(textRechercheClientQuiARecup.Text, StringComparison.OrdinalIgnoreCase)
+            );
+        }
     }
 }

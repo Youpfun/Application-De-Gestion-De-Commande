@@ -35,7 +35,7 @@ namespace Application_Pour_Sibilia.Views.Pages
                 return true;
             Client unClient = obj as Client;
             return (unClient.NomClient.StartsWith(textMotClefClient.Text, StringComparison.OrdinalIgnoreCase)
-            || unClient.TelClient.StartsWith(textMotClefClient.Text, StringComparison.OrdinalIgnoreCase) 
+            || unClient.PrenomClient.StartsWith(textMotClefClient.Text, StringComparison.OrdinalIgnoreCase) 
             || unClient.AdresseCPClient.StartsWith(textMotClefClient.Text, StringComparison.OrdinalIgnoreCase) 
             || unClient.AdresseVilleClient.StartsWith(textMotClefClient.Text, StringComparison.OrdinalIgnoreCase)
             || unClient.AdresseRueClient.StartsWith(textMotClefClient.Text, StringComparison.OrdinalIgnoreCase));
