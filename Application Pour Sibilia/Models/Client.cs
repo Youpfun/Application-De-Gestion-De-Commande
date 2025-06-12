@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using Application_Pour_Sibilia.Views.Pages;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -252,7 +253,37 @@ namespace Application_Pour_Sibilia.Models
             }
         }
 
-
+        public void Ajouter()
+        {
+            using (NpgsqlCommand cmdAdd = new NpgsqlCommand("INSERT FROM client WHERE numclient = @numclient"))
+            {
+                cmdAdd.Parameters.AddWithValue("numclient", this.IdClient);
+                try
+                {
+                    int rowsAffected = DataAccess.Instance.ExecuteSet(cmdAdd);
+                    if (rowsAffected == 0)
+                    {
+                        throw new Exception("Aucun Client trouvé avec cet identifiant.");
+                    }
+                }
+                catch (NpgsqlException ex)
+                {
+                    // Gestion spécifique des erreurs PostgreSQL
+                    if (ex.SqlState == "23503") // Code d'erreur pour contrainte de clé étrangère
+                    {
+                        throw new Exception("Impossible d'ajouter ce Client car il est relier a des commandes. Veuillez d'abord terminer les commandes associées.");
+                    }
+                    else
+                    {
+                        throw new Exception($"Erreur de base de données : {ex.Message}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Erreur lors de la suppression : {ex.Message}");
+                }
+            }
+        }
         public List<Client> FindAll()
         {
             List<Client> lesClients = new List<Client>();

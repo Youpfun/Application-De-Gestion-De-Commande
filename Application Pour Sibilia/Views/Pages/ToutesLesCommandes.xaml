@@ -43,7 +43,7 @@
                      Header="Vendeur" />
                 <DataGridTextColumn  
                       Width="*"
-                      Binding="{Binding PrixTotal, ValidatesOnExceptions=True}"
+                      Binding="{Binding PrixTotal, ValidatesOnExceptions=True, StringFormat={}{0:N2} €}"
                       Header="Prix" />
                 <DataGridCheckBoxColumn Header="Est payée"
                   Binding="{Binding EstPayee,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"

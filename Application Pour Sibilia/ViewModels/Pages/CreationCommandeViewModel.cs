@@ -11,6 +11,8 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         private Plat platRepo = new Plat();
         private Categorie categorieRepo = new Categorie();
         private SousCategorie sousCategorieRepo = new SousCategorie();
+        private Client _clientSelectionne;
+
 
         private List<Plat> tousLesPlats;
         private List<SousCategorie> toutesLesSousCategories;
@@ -55,14 +57,47 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         [ObservableProperty]
         private Plat platSelectionne;
 
+        private DateTime? dateRetraitPrevue;
+
         [ObservableProperty]
         private ObservableCollection<LigneCommande> lignesCommande = new ObservableCollection<LigneCommande>();
 
-        public decimal TotalTTC => LignesCommande.Sum(l => l.PrixTTC);
+        public DateTime? DateRetraitPrevue
+        {
+            get 
+            { 
+                return dateRetraitPrevue; 
+            }
+            set
+            {
+                dateRetraitPrevue = value;
+                OnPropertyChanged(nameof(DateRetraitPrevue));
+            }
+        }
+        public decimal TotalTTC
+        {
+            get
+            {
+                return LignesCommande.Sum(lc => lc.PrixTTC);
+            }
+        }
 
+        public Client ClientSelectionne
+        {
+            get { return _clientSelectionne; }
+            set
+            {
+                _clientSelectionne = value;
+                OnPropertyChanged(nameof(ClientSelectionne));
+            }
+        }
 
         public CreationCommandeViewModel()
         {
+            lignesCommande = new ObservableCollection<LigneCommande>();
+
+            lignesCommande.CollectionChanged += (s, e) => OnPropertyChanged(nameof(TotalTTC));
+
             ChargerCategories();
             ChargerSousCategories();
             ChargerPlats();
