@@ -32,17 +32,7 @@ namespace Application_Pour_Sibilia.ViewModels.Windows
 
         private void UpdateWelcomeMessage()
         {
-            bool hasPrenom = !string.IsNullOrEmpty(_sessionService.Prenom);
-            bool hasNom = !string.IsNullOrEmpty(_sessionService.Nom);
-            
-            string userInfo = "";
-            if (hasPrenom && hasNom)
-                userInfo = $" {_sessionService.Prenom} {_sessionService.Nom}";
-            else if (hasPrenom)
-                userInfo = $" {_sessionService.Prenom}";
-            else if (hasNom)
-                userInfo = $" {_sessionService.Nom}";
-            
+            string userInfo = $"{_sessionService.Prenom} {_sessionService.Nom}";
             WelcomeMessage = $"Connecté en tant que : {userInfo}";
         }
 

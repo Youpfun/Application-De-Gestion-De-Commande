@@ -12,6 +12,7 @@ namespace Application_Pour_Sibilia.Services
         private string _login;
         private string _prenom;
         private string _nom;
+        private int _numEmploye;
 
         public string Login
         {
@@ -38,6 +39,7 @@ namespace Application_Pour_Sibilia.Services
                 }
             }
         }
+
         public string Prenom
         {
             get => _prenom;
@@ -47,6 +49,19 @@ namespace Application_Pour_Sibilia.Services
                 {
                     _prenom = value;
                     OnPropertyChanged(nameof(Prenom));
+                }
+            }
+        }
+
+        public int NumEmploye
+        {
+            get => _numEmploye;
+            set
+            {
+                if (_numEmploye != value)
+                {
+                    _numEmploye = value;
+                    OnPropertyChanged(nameof(NumEmploye));
                 }
             }
         }
