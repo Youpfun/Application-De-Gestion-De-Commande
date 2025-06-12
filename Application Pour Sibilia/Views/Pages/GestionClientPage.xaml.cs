@@ -137,5 +137,39 @@ namespace Application_Pour_Sibilia.Views.Pages
                 MessageBox.Show("Veuillez sélectionner un Client à supprimer.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
+        private void buttonAjouterCommande_Click(object sender, RoutedEventArgs e)
+        {
+            if (reClient.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez sélectionner un client", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            Client clientSelectionne = (Client)reClient.SelectedItem;
+
+            CreationCommandePage pageCreationCommande = new CreationCommandePage(clientSelectionne);
+            NavigationService?.Navigate(pageCreationCommande);
+        }
+
+        private void buttonAjouterALaCommande_Click(object sender, RoutedEventArgs e)
+        {
+            // Vérifie qu'un client est bien sélectionné
+            if (reClient.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez sélectionner un client.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            // Récupère le client sélectionné
+            Client clientSelectionne = (Client)reClient.SelectedItem;
+
+            // Crée une instance de la page de création de commande en passant le client
+            CreationCommandePage pageCreationCommande = new CreationCommandePage(clientSelectionne);
+
+            // Effectue la navigation
+            NavigationService?.Navigate(pageCreationCommande);
+        }
+
     }
 }

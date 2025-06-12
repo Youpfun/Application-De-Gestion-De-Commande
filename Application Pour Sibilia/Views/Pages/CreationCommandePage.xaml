@@ -15,8 +15,8 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-        <Grid Margin="20,20,20,20">
-            <Grid.RowDefinitions>
+    <Grid Margin="20,20,20,20">
+        <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -29,7 +29,11 @@
             <!-- Left Section -->
             
             <StackPanel Grid.Row="0" Grid.Column="0">
-                <TextBlock Text="Recherche de produit" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,10" />
+                <TextBlock Text="Recherche de produit" 
+                           FontSize="18" FontWeight="SemiBold" 
+                           Margin="0,0,0,10" 
+                           HorizontalAlignment="Left" />
+            <StackPanel Orientation="Horizontal">
                 <ui:TextBox Width="300" 
                             x:Name="txtRecherche" 
                             PlaceholderText="Entrée un mot-clé"
@@ -40,8 +44,19 @@
                             FontSize="11" 
                             Margin="0,0,0,0" 
                             HorizontalAlignment="Left" />
-
-                <StackPanel Orientation="Horizontal" Margin="0,10">
+                <ui:Button x:Name="buttonSelectionClient"
+                           FontSize="16" FontWeight="Bold"
+                           Background="#D0021B" Foreground="White"
+                           VerticalAlignment="Stretch" Margin="25,0,0,0" 
+                           HorizontalAlignment="Stretch" 
+                           Padding="11,5,11,6" 
+                           Click="buttonSelectionClient_Click">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="Selectionner un client" VerticalAlignment="Center" FontSize="12"/>
+                    </StackPanel>
+                </ui:Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10">
                     <StackPanel Orientation="Horizontal">
                         <StackPanel>
                             <StackPanel Orientation="Vertical" Width="150" Height="60" VerticalAlignment="Top">
@@ -94,25 +109,17 @@
                                               Value="{Binding QuantiteSelectionnee, Mode=TwoWay}"
                                               Minimum="1" />
                             </StackPanel>
-                            <StackPanel Margin="0,45,0,0">
-                                <Button x:Name="buttonAjouterACommande" 
+                        <StackPanel Margin="0,45,0,0">
+                            <Button x:Name="buttonAjouterACommande" 
                                         Content="Ajouter" 
                                         Command="{Binding AjouterPlatCommand}"
-                                        Background="#FF4DD04D" 
+                                        Background="#FF3ACB3A" 
                                         Foreground="White" 
                                         HorizontalAlignment="Stretch" 
                                         Height="32" 
                                         VerticalAlignment="Stretch" />
-                            </StackPanel>
-                            <StackPanel>
-                                <Button Content="Voir détails" 
-                                        Background="#FF3760B7" 
-                                        Foreground="White" 
-                                        HorizontalAlignment="Stretch" 
-                                        Height="32" 
-                                        VerticalAlignment="Stretch" Margin="0,13,0,0" />
-                            </StackPanel>
                         </StackPanel>
+                    </StackPanel>
                     </StackPanel>
 
                 </StackPanel>
@@ -122,10 +129,19 @@
             </StackPanel>
 
             <!-- Right Section - Info Commande -->
-            <ScrollViewer x:Name="ScrollCommande" Grid.Row="0" Grid.Column="1" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" MaxHeight="266" >
+            <ScrollViewer x:Name="ScrollCommande" Grid.Row="0" Grid.Column="1" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" MaxHeight="266" Margin="0,0,0,20" >
                 <StackPanel x:Name="spInfoCommande" Grid.Column="1" Margin="10,0,0,0" >
                     <TextBlock Text="Commande actuelle" FontSize="22" FontWeight="SemiBold" Margin="0,0,0,0" HorizontalAlignment="Center" />
-                    <Border BorderBrush="Gray" BorderThickness="1" Padding="10">
+                <StackPanel x:Name="spInfoClient" HorizontalAlignment="Center">
+                    <TextBlock Text="Informations client :" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                    <Separator Margin="0,0,0,5" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,5">
+                        <TextBlock Text="{Binding ClientSelectionne.NomClient}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding ClientSelectionne.PrenomClient}" Margin="10,0,0,0" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding ClientSelectionne.TelClient}" Margin="10,0,0,0" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
+                <Border BorderBrush="Gray" BorderThickness="1" Padding="10">
                         <ItemsControl ItemsSource="{Binding LignesCommande}" >
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -145,14 +161,15 @@
                     </Border>
                     <TextBlock Text="{Binding TotalTTC, StringFormat=Total TTC : {0:N2} €}" 
                                FontSize="18" FontWeight="SemiBold" Margin="0,10,0,0" HorizontalAlignment="Center" />
-                    <Button Content="Valider la commande" Background="Red" Foreground="White" Height="40" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Button Content="Valider la commande" Background="#D0021B" Foreground="White" Height="40" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </StackPanel>
             </ScrollViewer>
 
         <ui:DataGrid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,0" 
                      ItemsSource="{Binding LesPlats}" 
                      SelectedItem="{Binding PlatSelectionne, Mode=TwoWay}" 
-                     AutoGenerateColumns="False">
+                     AutoGenerateColumns="False"
+                     IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn  
                     Width="150"
