@@ -3,7 +3,6 @@ using Application_Pour_Sibilia.ViewModels.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,29 +19,33 @@ using Wpf.Ui.Abstractions.Controls;
 namespace Application_Pour_Sibilia.Views.Pages
 {
     /// <summary>
-    /// Logique d'interaction pour ConsulterCommandePage.xaml
+    /// Logique d'interaction pour ToutesLesCommandes.xaml
     /// </summary>
-    public partial class ConsulterCommandePage : INavigableView<ConsulterCommandeViewModel>
+    public partial class ToutesLesCommandes : INavigableView<ConsulterCommandeViewModel>
 
     {
         public ConsulterCommandeViewModel ViewModel { get; }
         public Magasin LeMagasin { get; set; }
-        public ConsulterCommandePage(ConsulterCommandeViewModel viewModel)
+        public ToutesLesCommandes(ConsulterCommandeViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = this;
             DataContext = new ConsulterCommandeViewModel();
             InitializeComponent();
-            MainFrame.Navigate(new CommandeDuJour(ViewModel));
+            rechCommande.Items.Filter = RechercheMotClefClient;
         }
-        private void button_Toutes_Click(object sender, RoutedEventArgs e)
+        public bool RechercheMotClefClient(object obj)
         {
-            MainFrame.Navigate(new ToutesLesCommandes(ViewModel));
-        }
+            if (String.IsNullOrEmpty(textGestionToutesCommandes.Text))
+                return true;
+            Models.GestionCommande uneGestionCommande = (GestionCommande)obj;
+            return uneGestionCommande.NomClient.StartsWith(textGestionToutesCommandes.Text, StringComparison.OrdinalIgnoreCase);
+        } 
+        
 
-        private void button_Ajourdhui_Click(object sender, RoutedEventArgs e)
+        private void textGestionToutesCommandes_TextChanged(object sender, TextChangedEventArgs e)
         {
-            MainFrame.Navigate(new CommandeDuJour(ViewModel));
+            CollectionViewSource.GetDefaultView(rechCommande.ItemsSource).Refresh();
         }
     }
 }
