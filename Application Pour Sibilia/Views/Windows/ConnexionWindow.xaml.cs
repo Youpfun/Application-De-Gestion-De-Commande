@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Application_Pour_Sibilia.Services;
+using Application_Pour_Sibilia.ViewModels.Windows;
+using System.Configuration;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows.Media.Animation;
+using Wpf.Ui;
 using Wpf.Ui.Controls;
+using static Application_Pour_Sibilia.ViewModels.Windows.MainWindowViewModel;
 
 namespace Application_Pour_Sibilia.Views.Windows
 {
@@ -20,14 +15,37 @@ namespace Application_Pour_Sibilia.Views.Windows
     /// </summary>
     public partial class ConnexionWindow : FluentWindow
     {
-        public ConnexionWindow()
+        public ConnexionWindowViewModel ViewModel { get; set; }
+        private readonly SessionService sessionService;
+
+        public ConnexionWindow(SessionService sessionService)
         {
             InitializeComponent();
+            ViewModel = App.Services.GetRequiredService<ConnexionWindowViewModel>();
+            DataContext = ViewModel;
+            this.sessionService = sessionService;
+
+            if (ConfigurationManager.AppSettings["NeedAuth"] == "false")
+            {
+                sessionService.Login = ConfigurationManager.AppSettings["Login"];
+                this.Loaded += (s, e) =>
+                {
+                    this.DialogResult = true;
+                    this.Close();
+                };
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
         }
 
         private void SeConnecter_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            ErrorTxt.Text = ViewModel.Connection(usernameBox.Text, passwordBox.Password);
+            if (sessionService.Login is not null)
+                this.DialogResult = true;
         }
     }
 }

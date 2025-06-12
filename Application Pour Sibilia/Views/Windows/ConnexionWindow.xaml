@@ -37,11 +37,16 @@
             <Label Content="Identifiant" FontSize="16"/>
             <ui:TextBox Width="334" Height="35"  Padding="10,0"
                      VerticalContentAlignment="Center"
+                     x:Name="usernameBox"
                      Margin="0,0,0,5"/>
             <Label Content="Mot de passe" FontSize="16"/>
             <ui:PasswordBox Width="334" Height="35"  Padding="10,0"
                      VerticalContentAlignment="Center"
+                     x:Name="passwordBox"
                      Margin="0,0,0,10"/>
+            <TextBlock x:Name="ErrorTxt"
+                       Foreground="#E4FF1E1E"
+                       Margin="0,0,0,15"/>
             <ui:Button Content="Se connecter"
             Width="334" Height="40" FontSize="16"
             FontWeight="Bold"
