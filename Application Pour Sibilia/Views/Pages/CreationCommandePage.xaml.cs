@@ -10,8 +10,14 @@ namespace Application_Pour_Sibilia.Views.Pages
         public CreationCommandePage()
         {
             InitializeComponent();
-            DataContext = new CreationCommandeViewModel();
-        }
+            ViewModel = new CreationCommandeViewModel();
+            DataContext = ViewModel;
 
+            ViewModel.LignesCommande.CollectionChanged += LignesCommande_CollectionChanged;
+        }
+        private void LignesCommande_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            ScrollCommande?.ScrollToEnd();
+        }
     }
 }
