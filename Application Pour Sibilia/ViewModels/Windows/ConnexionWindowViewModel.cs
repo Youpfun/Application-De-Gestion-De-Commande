@@ -27,7 +27,7 @@ namespace Application_Pour_Sibilia.ViewModels.Windows
 
                 try
                 {
-                    var cmd = new NpgsqlCommand("SELECT login, prenomemploye, nomemploye, numemploye FROM employe WHERE login = @login AND password = @password;");
+                    var cmd = new NpgsqlCommand("SELECT login, prenomemploye, nomemploye, numemploye, numrole FROM employe WHERE login = @login AND password = @password;");
                     cmd.Parameters.AddWithValue("login", username);
                     cmd.Parameters.AddWithValue("password", password);
                     
@@ -39,6 +39,7 @@ namespace Application_Pour_Sibilia.ViewModels.Windows
                         sessionService.Prenom = result.Rows[0]["prenomemploye"].ToString();
                         sessionService.Nom = result.Rows[0]["nomemploye"].ToString();
                         sessionService.NumEmploye = Convert.ToInt32(result.Rows[0]["numemploye"]);
+                        sessionService.RoleEmploye = Convert.ToInt32(result.Rows[0]["numrole"]);
                         return sessionService.Login;
                     }
                     else message = "Informations incorrectes";

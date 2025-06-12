@@ -13,6 +13,7 @@ namespace Application_Pour_Sibilia.Services
         private string _prenom;
         private string _nom;
         private int _numEmploye;
+        private int _roleEmploye; // Ajout du rôle de l'employé
 
         public string Login
         {
@@ -65,6 +66,25 @@ namespace Application_Pour_Sibilia.Services
                 }
             }
         }
+
+        public int RoleEmploye
+        {
+            get => _roleEmploye;
+            set
+            {
+                if (_roleEmploye != value)
+                {
+                    _roleEmploye = value;
+                    OnPropertyChanged(nameof(RoleEmploye));
+                }
+            }
+        }
+
+        // Méthode pratique pour vérifier si l'employé est un vendeur (rôle 1)
+        public bool EstVendeur => RoleEmploye == 1;
+
+        // Méthode pratique pour vérifier si l'employé peut créer des plats
+        public bool PeutCreerPlats => RoleEmploye != 1;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
