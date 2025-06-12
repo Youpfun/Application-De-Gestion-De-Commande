@@ -74,14 +74,12 @@ namespace Application_Pour_Sibilia.Views.Pages
             else
             {
                 Client clientSelectionne = (Client)reClient.SelectedItem;
-                //MessageBox.Show("", "" + reClient.SelectedIndex);
                 Client copie = new Client(clientSelectionne.IdClient, clientSelectionne.NomClient,
                 clientSelectionne.PrenomClient, clientSelectionne.TelClient, clientSelectionne.AdresseRueClient
                 , clientSelectionne.AdresseCPClient, clientSelectionne.AdresseVilleClient);
                 WindowClient wClient = new WindowClient(copie, typeAction.Modifier);
                 bool? result = wClient.ShowDialog();
                 Console.WriteLine(result);
-                //reClient.SelectedIndex = -1;
 
                 if (result == true)
                 {

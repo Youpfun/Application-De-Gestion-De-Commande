@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Application_Pour_Sibilia.Views.Pages"
       d:DataContext="{d:DesignInstance local:CommandeDuJour,IsDesignTimeCreatable=False}"
-      d:DesignHeight="450" 
+      d:DesignHeight="490" 
       d:DesignWidth="800"
       ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
       ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -13,16 +13,16 @@
       mc:Ignorable="d" 
       
       Title="CommandeDuJour">
-    <Grid Margin="20">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="45" />
+            <RowDefinition Height="34"/>
+            <RowDefinition Height="70*" />
+            <RowDefinition Height="95*" />
         </Grid.RowDefinitions>
 
         <!-- Ligne 1 : Recherche et filtres -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,0,0,10" Grid.Row="0">
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10" Grid.Row="0">
             <ui:TextBox Width="250" Height="34" PlaceholderText="Rechercher un client" 
                         Text="{Binding RechercheClient, UpdateSourceTrigger=PropertyChanged}"
                         Margin="0,0,20,0"/>
@@ -35,11 +35,11 @@
         <TextBlock Text="Commandes du jour à récupérer" FontSize="18" FontWeight="Bold" Margin="0,0,0,10" Grid.Row="1" />
 
         <!-- Ligne 3 : DataGrid Commandes à récupérer -->
-        
-        <ui:DataGrid Grid.Row="2" ItemsSource="{Binding LesCommandesDuJour}"
+
+        <ui:DataGrid x:Name="commandeARecup" Grid.Row="2" ItemsSource="{Binding LesCommandesDuJour}"
                      AutoGenerateColumns="False" HeadersVisibility="Column"
                      SelectedItem="{Binding CommandeSelectionnee, Mode=TwoWay}"
-                     IsReadOnly="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                     IsReadOnly="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,16">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="NumCommande" Binding="{Binding NumCommande}" Width="*" />
                 <DataGridTextColumn Header="NomClient" Binding="{Binding NomClient}" Width="*" />
@@ -55,8 +55,8 @@
         <StackPanel Grid.Row="3" >
             <TextBlock Text="Commandes récupérées" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
 
-            <ui:DataGrid ItemsSource="{Binding LesCommandesRecuperees}"
-                         AutoGenerateColumns="False" HeadersVisibility="Column" Height="133" IsReadOnly="True"
+            <ui:DataGrid x:Name="commandeRecupere" ItemsSource="{Binding LesCommandesRecupere}"
+                         AutoGenerateColumns="False" HeadersVisibility="Column" Height="200" IsReadOnly="True"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="NumCommande" Binding="{Binding NumCommande}" Width="*" />

@@ -12,11 +12,14 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         [ObservableProperty]
         private ObservableCollection<GestionCommande> lesCommandesDuJour;
         [ObservableProperty]
+        private ObservableCollection<GestionCommande> lesCommandesRecupere;
+        [ObservableProperty]
         private string motClefCommande;
         public ConsulterCommandeViewModel()
         {
             ChargerCommandes();
             ChargerCommandeDuJour();
+            ChargerCommandeRecupere();
         }
 
         public void ChargerCommandes()
@@ -32,6 +35,15 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             LesCommandesDuJour = new ObservableCollection<GestionCommande>(commandes);
 
         }
+        public void ChargerCommandeRecupere()
+        {
+            GestionCommande recup = new GestionCommande();
+            var commandes = recup.FindAllCommandeRecupere();
+            LesCommandesRecupere = new ObservableCollection<GestionCommande>(commandes);
+
+        }
+        
+
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using Application_Pour_Sibilia.Models;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,6 +19,7 @@ namespace Application_Pour_Sibilia.Models
         private string nomVendeur;
         private double prixTotal;
         private bool estPayee;
+        private bool retiree;
         public GestionCommande()
         { }
 
@@ -28,7 +30,6 @@ namespace Application_Pour_Sibilia.Models
             this.DateRetraitPrevue = dateRetraitPrevue;
             this.PrixTotal = prixTotal;
         }
-
         public GestionCommande(int numCommande, string nomClient, string telClient, DateTime dateRetraitPrevue, string nomVendeur, double prixTotal, bool estPayee)
         {
             this.NumCommande = numCommande;
@@ -38,6 +39,19 @@ namespace Application_Pour_Sibilia.Models
             this.NomVendeur = nomVendeur;
             this.PrixTotal = prixTotal;
             this.EstPayee = estPayee;
+        }
+            
+
+        public GestionCommande(int numCommande, string nomClient, string telClient, DateTime dateRetraitPrevue, string nomVendeur, double prixTotal, bool estPayee, bool retiree)
+        {
+            this.NumCommande = numCommande;
+            this.NomClient = nomClient;
+            this.TelClient = telClient;
+            this.DateRetraitPrevue = dateRetraitPrevue;
+            this.NomVendeur = nomVendeur;
+            this.PrixTotal = prixTotal;
+            this.EstPayee = estPayee;
+            this.Retiree = retiree;
         }
 
         public int NumCommande
@@ -131,6 +145,19 @@ namespace Application_Pour_Sibilia.Models
             }
         }
 
+        public bool Retiree
+        {
+            get
+            {
+                return this.retiree;
+            }
+
+            set
+            {
+                this.retiree = value;
+            }
+        }
+
         public override bool Equals(object? obj)
         {
             return obj is GestionCommande commande &&
@@ -140,7 +167,8 @@ namespace Application_Pour_Sibilia.Models
                    this.DateRetraitPrevue == commande.DateRetraitPrevue &&
                    this.NomVendeur == commande.NomVendeur &&
                    this.PrixTotal == commande.PrixTotal &&
-                   this.EstPayee == commande.EstPayee;
+                   this.EstPayee == commande.EstPayee &&
+                   this.Retiree == commande.Retiree;
         }
 
         public List<GestionCommande> FindAll()
@@ -158,7 +186,7 @@ namespace Application_Pour_Sibilia.Models
         public List<GestionCommande> FindAllCommandeAujourdhui()
         {
             List<GestionCommande> lesCommandesDuJour = new List<GestionCommande>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select c.numcommande, CONCAT(cl.nomclient, ' ', cl.prenomclient) AS nomClient,cl.tel,c.DATERETRAITPREVUE, CONCAT(e.nomemploye, ' ', e.prenomemploye) AS Vendeur, c.prixtotal, c.payee from commande c join client cl on c.numclient = cl.numclient join employe e on c.numemploye=e.numemploye where DATERETRAITPREVUE = Current_date order by payee desc"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select c.numcommande, CONCAT(cl.nomclient, ' ', cl.prenomclient) AS nomClient,cl.tel,c.DATERETRAITPREVUE, CONCAT(e.nomemploye, ' ', e.prenomemploye) AS Vendeur, c.prixtotal, c.payee, c.RETIREE from commande c join client cl on c.numclient = cl.numclient join employe e on c.numemploye=e.numemploye where DATERETRAITPREVUE = Current_date and c.retiree = false"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
@@ -167,8 +195,29 @@ namespace Application_Pour_Sibilia.Models
             }
             return lesCommandesDuJour;
         }
+        public List<GestionCommande> FindAllCommandeRecupere()
+        {
+            List<GestionCommande> lesCommandesRecupere = new List<GestionCommande>();
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select c.numcommande, CONCAT(cl.nomclient, ' ', cl.prenomclient) AS nomClient,cl.tel,c.DATERETRAITPREVUE, CONCAT(e.nomemploye, ' ', e.prenomemploye) AS Vendeur, c.prixtotal, c.payee,c.RETIREE from commande c join client cl on c.numclient = cl.numclient join employe e on c.numemploye=e.numemploye where DATERETRAITPREVUE = Current_date and c.retiree = true"))
+            {
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+                foreach (DataRow dr in dt.Rows)
+                    lesCommandesRecupere.Add(new GestionCommande((int)dr["numcommande"], (String)dr["nomClient"], (String)dr["tel"], (DateTime)dr["DATERETRAITPREVUE"],
+                   (String)dr["Vendeur"], (double)(decimal)dr["prixtotal"], (bool)dr["payee"], (bool)dr["retiree"]));
+            }
+            return lesCommandesRecupere;
+        }
+        public int Update()
+        {
+            using (var cmdUpdate = new NpgsqlCommand("update commande set numcommande = @numcommande ,  payee = @payee,  retiree = @retiree   where numcommande =@NumCommande;"))
+            {
+                cmdUpdate.Parameters.AddWithValue("numcommande", this.NumCommande);
+                cmdUpdate.Parameters.AddWithValue("payee", this.EstPayee);
+                cmdUpdate.Parameters.AddWithValue("retiree", this.Retiree);
+                return DataAccess.Instance.ExecuteSet(cmdUpdate);
+            }
+        }
 
     }
 }
 
-    
