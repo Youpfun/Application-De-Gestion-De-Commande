@@ -1,4 +1,6 @@
-﻿using Application_Pour_Sibilia.ViewModels.Windows;
+﻿using Application_Pour_Sibilia.Services;
+using Application_Pour_Sibilia.ViewModels.Windows;
+using Microsoft.Extensions.DependencyInjection;
 using Wpf.Ui;
 using Wpf.Ui.Abstractions;
 using Wpf.Ui.Appearance;
@@ -21,13 +23,14 @@ namespace Application_Pour_Sibilia.Views.Windows
 
             SystemThemeWatcher.Watch(this);
 
-            InitializeComponent();
-            ConnexionWindow connexionWindow = new ConnexionWindow();
-            bool? result = connexionWindow.ShowDialog();
-            if (result == !true)
-            {
+            SessionService sessionService = App.Services.GetRequiredService<SessionService>();
+            ConnexionWindow connectionWindow = new ConnexionWindow(sessionService);
+            bool? result = connectionWindow.ShowDialog();
+            if (result != true)
                 Environment.Exit(0);
-            }
+
+            InitializeComponent();
+
             SetPageService(navigationViewPageProvider);
 
             navigationService.SetNavigationControl(RootNavigation);

@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Wpf.Ui;
 using Wpf.Ui.DependencyInjection;
+using static Application_Pour_Sibilia.ViewModels.Windows.MainWindowViewModel;
 
 namespace Application_Pour_Sibilia
 {
@@ -32,6 +33,7 @@ namespace Application_Pour_Sibilia
                 services.AddNavigationViewPageProvider();
 
                 services.AddHostedService<ApplicationHostService>();
+                services.AddSingleton<SessionService>();
 
                 // Theme manipulation
                 services.AddSingleton<IThemeService, ThemeService>();
@@ -45,6 +47,7 @@ namespace Application_Pour_Sibilia
                 // Main window with navigation
                 services.AddSingleton<INavigationWindow, MainWindow>();
                 services.AddSingleton<MainWindowViewModel>();
+                services.AddSingleton<ConnexionWindowViewModel>();
 
                 services.AddSingleton<DashboardPage>();
                 services.AddSingleton<DashboardViewModel>();
