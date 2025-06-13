@@ -175,7 +175,7 @@
                         Foreground="White" 
                         Height="40" FontSize="16" 
                         HorizontalAlignment="Center" 
-                        VerticalAlignment="Center" Click="buttonValiderCommande_Click" />
+                        VerticalAlignment="Center" Click="buttonValiderCommande_Click"/>
                 </StackPanel>
             </ScrollViewer>
 

@@ -230,5 +230,43 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
                 OnPropertyChanged(nameof(TotalTTC));
             }
         }
+        public void EnregistrerCommande()
+        {
+            // Vérifications de base avant insertion
+            if (ClientSelectionne == null)
+            {
+                throw new InvalidOperationException("Aucun client sélectionné !");
+            }
+            if (DateRetraitPrevue == null)
+            {
+                throw new InvalidOperationException("Aucune date de retrait prévue !");
+            }
+            if (LignesCommande.Count == 0)
+            {
+                throw new InvalidOperationException("Aucun plat dans la commande !");
+            }
+
+            // 1️⃣ On crée d’abord la commande principale
+            Commande commande = new Commande
+            {
+                IdClient = ClientSelectionne.IdClient,
+                IdEmploye = NumeroEmployeConnecte,
+                DateCommande = DateTime.Now,
+                DateRetraitPrevue = DateRetraitPrevue.Value,
+                Payee = false,
+                Retiree = false,
+                PrixTotal = TotalTTC
+            };
+
+            int numCommande = commande.Create();
+
+            // 2️⃣ Puis on enregistre chaque ligne de platCommande
+            foreach (var ligne in LignesCommande)
+            {
+                PlatCommande pc = new PlatCommande(numCommande, ligne.Plat.NumPlat, ligne.Quantite, ligne.Plat.PrixUnitaire);
+                pc.Create();
+            }
+        }
+
     }
 }

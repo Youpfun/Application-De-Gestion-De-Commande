@@ -47,11 +47,6 @@ namespace Application_Pour_Sibilia.Views.Pages
             NavigationService?.Navigate(gestionClientPage);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void buttonValiderCommande_Click(object sender, RoutedEventArgs e)
         {
             // Vérifie que les informations minimales sont bien renseignées
