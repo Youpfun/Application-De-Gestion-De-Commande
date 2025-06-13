@@ -135,7 +135,7 @@ namespace Application_Pour_Sibilia.Models
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
-                    lesDetailsPlats.Add(new PlatCommande((int)dr["numcommande"], (String)dr["nomplat"], (int)dr["quantite"],(decimal)dr["prix"]));
+                    lesDetailsPlats.Add(new PlatCommande((int)dr["numcommande"], (String)dr["nomplat"], (int)dr["quantite"],Convert.ToDecimal(dr["prix"])));
             }
             return lesDetailsPlats;
         }

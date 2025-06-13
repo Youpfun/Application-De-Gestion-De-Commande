@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Application_Pour_Sibilia.Models.Categorie">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAQAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Categorie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.Models.Client">
+    <Position X="3.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AgQAAAIIAAAAAEAAwAAQhAEogAECAEAEAAAAhAEAAAA=</HashCode>
+      <FileName>Models\Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.Models.Commande">
+    <Position X="5.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIwAAADAIAAIACAAiAAYAAAgCAAAAEQEAAQABAAMAAA=</HashCode>
+      <FileName>Models\Commande.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.Models.GestionCommande">
+    <Position X="7.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AoQBAADJIAAIACAAiAAQAAgIQAACAAQAAAEAAAgAAAA=</HashCode>
+      <FileName>Models\GestionCommande.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.Models.LigneCommande">
+    <Position X="1.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAgAAAAEAAAAAAA=</HashCode>
+      <FileName>Models\LigneCommande.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.Models.Magasin">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAQEAAAAAAAAIQIAAKQAAAAgAAAABQQAAAQ=</HashCode>
+      <FileName>Models\Magasin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.Models.PlatCommande">
+    <Position X="0.5" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAgAIAAAAAAQAAAAAAEAAEAAAQEKAAAgAAA=</HashCode>
+      <FileName>Models\PlatCommande.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.Models.Plat">
+    <Position X="10.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQQAQAAwAhQIAAAkAQQAIIggAACAEABAACACMAwEAA=</HashCode>
+      <FileName>Models\Plats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.Models.SousCategorie">
+    <Position X="8.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Models\SousCategorie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.Models.AppConfig">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Models\AppConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.Models.DataAccess">
+    <Position X="12.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAgAAAABIBAAAABAABAAQAgAABAAAAA=</HashCode>
+      <FileName>Models\DataAccess.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.Models.LogError">
+    <Position X="12.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\LogError.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.Resources.Translations">
+    <Position X="12.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Resources\Translations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.Services.ApplicationHostService">
+    <Position X="14.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAgAAAAAAAAQAAAAABgAA=</HashCode>
+      <FileName>Services\ApplicationHostService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Application_Pour_Sibilia.Services.SessionService">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAACAAAAIEAAIAAAgCACIAAAACAQAgAAEAI=</HashCode>
+      <FileName>Services\SessionService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Application_Pour_Sibilia.ViewModels.Pages.ConsulterCommandeViewModel">
+    <Position X="0.5" Y="9.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAABAAAAAAIAAAAAgAAAAAAREAAA=</HashCode>
+      <FileName>ViewModels\Pages\ConsulterCommandeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.ViewModels.Pages.CreationCommandeViewModel">
+    <Position X="4" Y="8" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>SAAgQAJAAAQCEEQEVAEAAAAAAgDRIgQCIBIAAQgIwAA=</HashCode>
+      <FileName>ViewModels\Pages\CreationCommandeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.ViewModels.Pages.DashboardViewModel">
+    <Position X="12.25" Y="9" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>ViewModels\Pages\DashboardViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.ViewModels.Pages.GestionClientViewModel">
+    <Position X="6.75" Y="8" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABBAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>ViewModels\Pages\GestionClientViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.ViewModels.Pages.GestionDesPlatsViewModel">
+    <Position X="9.5" Y="8.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQCAADAAQEAABAQAAAAAAQBQACAQAAAQgAAAQ=</HashCode>
+      <FileName>ViewModels\Pages\GestionDesPlatsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application_Pour_Sibilia.ViewModels.Pages.SettingsViewModel">
+    <Position X="14.5" Y="11" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAQgAAAEAAAAAAAAAAAAAAIQAAAAAAAQQACABA=</HashCode>
+      <FileName>ViewModels\Pages\SettingsViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Application_Pour_Sibilia.ViewModels.Windows.MainWindowViewModel">
+    <Position X="12.25" Y="11" Width="2" />
+    <NestedTypes>
+      <Class Name="Application_Pour_Sibilia.ViewModels.Windows.MainWindowViewModel.ConnexionWindowViewModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ViewModels\Windows\ConnexionWindowViewModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAggAAAAAAAEAAAAgAAAAAAAAAAAAAAAQBAABAAAAA=</HashCode>
+      <FileName>ViewModels\Windows\ConnexionWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
