@@ -221,10 +221,21 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         {
             if (PlatSelectionne != null && QuantiteSelectionnee > 0)
             {
+                // Blocage de la quantité maximum à 100
+                if (QuantiteSelectionnee > 100)
+                {
+                    QuantiteSelectionnee = 100;
+                }
+
                 var existant = LignesCommande.FirstOrDefault(l => l.Plat.NumPlat == PlatSelectionne.NumPlat);
                 if (existant != null)
                 {
-                    existant.Quantite += QuantiteSelectionnee;
+                    int nouvelleQuantite = existant.Quantite + QuantiteSelectionnee;
+
+                    if (nouvelleQuantite > 100)
+                        existant.Quantite = 100;
+                    else
+                        existant.Quantite = nouvelleQuantite;
                 }
                 else
                 {
@@ -234,6 +245,7 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
                 OnPropertyChanged(nameof(TotalTTC));
             }
         }
+
         public void EnregistrerCommande()
         {
             // Vérifications de base avant insertion
