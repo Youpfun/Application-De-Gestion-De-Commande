@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application_Pour_Sibilia.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,11 @@ namespace Application_Pour_Sibilia.Views.Windows
     /// </summary>
     public partial class WindowDetailsCommande : Window
     {
-        public WindowDetailsCommande()
+        public WindowDetailsCommande(PlatCommande commande)
         {
             InitializeComponent();
+            
+            
         }
     }
 }
