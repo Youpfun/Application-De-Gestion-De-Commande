@@ -47,5 +47,10 @@ namespace Application_Pour_Sibilia.Views.Pages
         {
             CollectionViewSource.GetDefaultView(rechCommande.ItemsSource).Refresh();
         }
+
+        private void buttonDetailsCommande_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

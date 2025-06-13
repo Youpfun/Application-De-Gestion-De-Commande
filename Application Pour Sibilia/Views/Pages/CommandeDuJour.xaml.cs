@@ -84,5 +84,10 @@ namespace Application_Pour_Sibilia.Views.Pages
             return (comRecup.NomClient.StartsWith(textRechercheClientQuiARecup.Text, StringComparison.OrdinalIgnoreCase)
             );
         }
+
+        private void buttonDetailsCommande_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

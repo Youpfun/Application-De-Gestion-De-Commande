@@ -12,6 +12,9 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         private ObservableCollection<Plat> lesPlats;
 
         [ObservableProperty]
+        private ObservableCollection<PlatCommande> lesDetailsPlats;
+
+        [ObservableProperty]
         private ObservableCollection<Plat> lesPlatsFiltrés;
 
         [ObservableProperty]
@@ -48,6 +51,7 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         public GestionDesPlatsViewModel()
         {
             ChargerDonnees();
+            ChargerClients();
         }
 
         private void ChargerDonnees()
@@ -155,6 +159,12 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         {
             LesPlats.Add(nouveauPlat);
             AppliquerFiltres();
+        }
+        private void ChargerClients()
+        {
+            PlatCommande repo = new PlatCommande();
+            var details = repo.FindAll();
+            LesDetailsPlats = new ObservableCollection<PlatCommande>(details);
         }
     }
 }
