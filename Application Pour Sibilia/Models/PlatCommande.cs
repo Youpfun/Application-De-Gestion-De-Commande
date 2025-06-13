@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
+using System.Data;
 
 namespace Application_Pour_Sibilia.Models
 {
@@ -35,9 +36,66 @@ namespace Application_Pour_Sibilia.Models
                 cmdInsert.Parameters.AddWithValue("quantite", this.Quantite);
                 cmdInsert.Parameters.AddWithValue("prix", this.Prix);
 
-                return DataAccess.Instance.ExecuteSet(cmdInsert); // ExecuteSet sans retour
+                return DataAccess.Instance.ExecuteSet(cmdInsert);
             }
         }
-
+        
+        // Méthode pour récupérer tous les plats associés à une commande
+        public static List<PlatCommande> GetByNumCommande(int numCommande)
+        {
+            List<PlatCommande> result = new List<PlatCommande>();
+            
+            using (var cmdSelect = new NpgsqlCommand(
+                "SELECT numcommande, numplat, quantite, prix " +
+                "FROM platcommande " +
+                "WHERE numcommande = @numcommande"))
+            {
+                cmdSelect.Parameters.AddWithValue("numcommande", numCommande);
+                
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+                foreach (DataRow row in dt.Rows)
+                {
+                    result.Add(new PlatCommande(
+                        Convert.ToInt32(row["numcommande"]),
+                        Convert.ToInt32(row["numplat"]),
+                        Convert.ToInt32(row["quantite"]),
+                        Convert.ToDecimal(row["prix"])
+                    ));
+                }
+            }
+            
+            return result;
+        }
+        
+        // Méthode pour supprimer un plat d'une commande
+        public int Delete()
+        {
+            using (var cmdDelete = new NpgsqlCommand(
+                "DELETE FROM platcommande " +
+                "WHERE numcommande = @numcommande AND numplat = @numplat"))
+            {
+                cmdDelete.Parameters.AddWithValue("numcommande", this.NumCommande);
+                cmdDelete.Parameters.AddWithValue("numplat", this.NumPlat);
+                
+                return DataAccess.Instance.ExecuteSet(cmdDelete);
+            }
+        }
+        
+        // Méthode pour mettre à jour la quantité et le prix d'un plat dans une commande
+        public int Update()
+        {
+            using (var cmdUpdate = new NpgsqlCommand(
+                "UPDATE platcommande " +
+                "SET quantite = @quantite, prix = @prix " +
+                "WHERE numcommande = @numcommande AND numplat = @numplat"))
+            {
+                cmdUpdate.Parameters.AddWithValue("quantite", this.Quantite);
+                cmdUpdate.Parameters.AddWithValue("prix", this.Prix);
+                cmdUpdate.Parameters.AddWithValue("numcommande", this.NumCommande);
+                cmdUpdate.Parameters.AddWithValue("numplat", this.NumPlat);
+                
+                return DataAccess.Instance.ExecuteSet(cmdUpdate);
+            }
+        }
     }
 }

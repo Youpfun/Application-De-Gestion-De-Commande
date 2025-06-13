@@ -64,21 +64,8 @@ namespace Application_Pour_Sibilia.Views.Pages
 
             try
             {
-                // Création de la commande
-                Commande nouvelleCommande = new Commande
-                (
-                    0, // idCommande généré automatiquement par la BDD
-                    ViewModel.ClientSelectionne.IdClient,
-                    ViewModel.NumeroEmployeConnecte, // Utilisation du numéro d'employé connecté
-                    DateTime.Now,
-                    ViewModel.DateRetraitPrevue.Value,
-                    false, // Payée
-                    false, // Retirée
-                    ViewModel.TotalTTC // Prix total
-                );
-
-                // Sauvegarde en base
-                nouvelleCommande.IdCommande = nouvelleCommande.Create();
+                // Appel de la méthode du ViewModel qui enregistre la commande ET les platCommande
+                ViewModel.EnregistrerCommande();
 
                 MessageBox.Show("Commande enregistrée avec succès !", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
 
