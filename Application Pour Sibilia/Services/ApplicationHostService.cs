@@ -50,7 +50,7 @@ namespace Application_Pour_Sibilia.Services
                 )!;
                 _navigationWindow!.ShowWindow();
 
-                _navigationWindow.Navigate(typeof(Views.Pages.DashboardPage));
+                _navigationWindow.Navigate(typeof(Views.Pages.ConsulterCommandePage));
             }
 
             await Task.CompletedTask;

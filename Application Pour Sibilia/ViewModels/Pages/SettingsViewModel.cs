@@ -109,7 +109,7 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
                         // naviguez simplement vers la page d'accueil
                         if (mainWindow is INavigationWindow navWindow)
                         {
-                            navWindow.Navigate(typeof(Views.Pages.DashboardPage));
+                            navWindow.Navigate(typeof(Views.Pages.ConsulterCommandePage));
                         }
                     }
                     else
