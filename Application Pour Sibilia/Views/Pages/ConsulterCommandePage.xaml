@@ -12,7 +12,7 @@
    
     mc:Ignorable="d">
 
-    <Grid Margin="0">
+    <Grid x:Name="button" Margin="0">
         <Frame x:Name="FrameConsulterCommande" NavigationUIVisibility="Hidden"/>
 
 
@@ -28,12 +28,12 @@
         <ui:Button x:Name="button_Toutes" Width="120" Height="34"
         FontSize="16" FontWeight="Bold"
         Background="#D0021B" Foreground="White"
-        VerticalAlignment="Top" Margin="555,11,0,0" Click="button_Toutes_Click">
+        VerticalAlignment="Top" Margin="550,11,0,0" Click="button_Toutes_Click">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="Toutes" VerticalAlignment="Center"/>
             </StackPanel>
         </ui:Button>
-
+        
     </Grid>
 
 </Page>

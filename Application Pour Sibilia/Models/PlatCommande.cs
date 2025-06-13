@@ -11,11 +11,20 @@ namespace Application_Pour_Sibilia.Models
     public class PlatCommande
     {
         public int NumCommande { get; set; }
+
+        private string nomPlat;
         public int NumPlat { get; set; }
         public int Quantite { get; set; }
         public decimal Prix { get; set; }
-
         public PlatCommande() { }
+        public PlatCommande(int numCommande, string nomPlat, int quantite, decimal prix)
+        {
+            this.NumCommande = numCommande;
+            this.NomPlat = nomPlat;
+            this.Quantite = quantite;
+            this.Prix = prix;
+
+        }
 
         public PlatCommande(int numCommande, int numPlat, int quantite, decimal prix)
         {
@@ -23,7 +32,29 @@ namespace Application_Pour_Sibilia.Models
             this.NumPlat = numPlat;
             this.Quantite = quantite;
             this.Prix = prix;
+            
         }
+        
+
+        public PlatCommande(int numCommande, int numPlat, int quantite, decimal prix, string nomPlat) : this(numCommande, numPlat, quantite, prix)
+        {
+            this.NomPlat = nomPlat;
+        }
+
+        public string NomPlat
+        {
+            get
+            {
+                return this.nomPlat;
+            }
+
+            set
+            {
+                this.nomPlat = value;
+            }
+        }
+
+        
 
         public int Create()
         {
@@ -96,6 +127,17 @@ namespace Application_Pour_Sibilia.Models
                 
                 return DataAccess.Instance.ExecuteSet(cmdUpdate);
             }
+        }
+        public List<PlatCommande> FindAll()
+        {
+            List<PlatCommande> lesDetailsPlats = new List<PlatCommande>();
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select numcommande, nomplat, quantite,prix from platcommande p join plat pl on p.numplat=pl.numplat"))
+            {
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+                foreach (DataRow dr in dt.Rows)
+                    lesDetailsPlats.Add(new PlatCommande((int)dr["numcommande"], (String)dr["nomplat"], (int)dr["quantite"],(decimal)dr["prix"]));
+            }
+            return lesDetailsPlats;
         }
     }
 }

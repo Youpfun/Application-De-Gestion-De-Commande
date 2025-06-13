@@ -15,9 +15,12 @@
 
     <Grid Margin="0">
         <ui:TextBox x:Name="textGestionToutesCommandes" HorizontalAlignment="Left" 
-              Margin="10,40,0,0" TextWrapping="Wrap" Text="" PlaceholderText="Rechercher un client" 
+              Margin="10,11,0,0" TextWrapping="Wrap" Text="" PlaceholderText="Rechercher un client" 
               VerticalAlignment="Top" Width="161"  Height="34" TextChanged="textGestionToutesCommandes_TextChanged" 
                     Cursor="IBeam"/>
+        <ui:Button x:Name="buttonDetailsCommande"  Content="Détails" Height="34" Width="120"
+              Background="#D0021B" Margin="675,11,0,0"
+              FontWeight="Bold" Click="buttonDetailsCommande_Click" VerticalAlignment="Top"/>
         <ui:DataGrid x:Name="rechCommande"  Margin="0,79,0,0" AutoGenerateColumns="False"
                      IsReadOnly="true" ItemsSource="{Binding LesGestionCommandes}" RenderTransformOrigin="0.501,0.462"  >
             <ui:DataGrid.Columns>

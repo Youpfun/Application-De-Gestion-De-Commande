@@ -29,9 +29,9 @@
             <ui:Button x:Name="buttonRecuperer" Content="Récupérée" Height="34" Width="120"
                        Command="{Binding MarquerCommeRecupereeCommand}" Background="#D0021B" Margin="0,0,10,0"
                        FontWeight="Bold" Click="buttonRecuperer_Click"/>
-            <ui:Button  Content="Détails" Height="34" Width="120"
+            <ui:Button x:Name="buttonDetailsCommande"  Content="Détails" Height="34" Width="120"
             Background="#D0021B" Margin="275,0,0,0"
-            FontWeight="Bold" Click="buttonRecuperer_Click"/>
+            FontWeight="Bold" Click="buttonDetailsCommande_Click"/>
         </StackPanel>
 
         <TextBlock Text="Commandes du jour à récupérer" FontSize="18" FontWeight="Bold" Margin="0,0,0,10" Grid.Row="1" />
