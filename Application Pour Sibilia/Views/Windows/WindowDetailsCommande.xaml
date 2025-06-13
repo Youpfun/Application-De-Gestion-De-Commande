@@ -1,0 +1,19 @@
+﻿<Window x:Class="Application_Pour_Sibilia.Views.Windows.WindowDetailsCommande"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Application_Pour_Sibilia.Views.Windows"
+        mc:Ignorable="d"
+        Title="DetailsCommande" Height="450" Width="800">
+    <Grid>
+        <DataGrid x:Name="detailsCommande" ItemsSource="{Binding LesDetailsPlats }">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="NumCommande" Binding="{Binding NumCommande}" Width="*"/>
+                <DataGridTextColumn Header="Nomplat" Binding="{Binding NomPlat}" Width="*"/>
+                <DataGridTextColumn Header="Quantite" Binding="{Binding Quantite }" Width="*"/>
+                <DataGridTextColumn Header="Prix Unitaire" Binding="{Binding Prix ,StringFormat={}{0:N2}€}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

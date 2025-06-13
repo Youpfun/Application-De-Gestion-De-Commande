@@ -87,7 +87,33 @@ namespace Application_Pour_Sibilia.Views.Pages
 
         private void buttonDetailsCommande_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (commandeARecup.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez sélectionner une commande", "Attention",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                //PlatCommande detailsCommande = (PlatCommande)commandeARecup.SelectedItem;
+                //try
+                //{
+                //    detailsCommande.Retiree = true;
+                //    detailsCommande.EstPayee = true; // On considère que la commande est payée lors de la récupération
+                //    detailsCommande.Update();
+                //    var viewModel = DataContext as ConsulterCommandeViewModel;
+                //    viewModel?.LesCommandesDuJour.Remove(clientSelectionne);
+                //    viewModel?.LesCommandesRecupere.Add(clientSelectionne);
+
+                //}
+                //catch (Exception ex)
+                //{
+
+
+                //    MessageBox.Show("La commande n'a pas pu être récupéré.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                //}
+                //CollectionViewSource.GetDefaultView(commandeRecupere.ItemsSource)?.Refresh();
+
+            }
         }
     }
 }
