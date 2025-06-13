@@ -62,6 +62,10 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         private DateTime? dateRetraitPrevue;
 
         [ObservableProperty]
+        private LigneCommande ligneCommandeSelectionnee;
+
+
+        [ObservableProperty]
         private ObservableCollection<LigneCommande> lignesCommande = new ObservableCollection<LigneCommande>();
 
         public DateTime? DateRetraitPrevue
@@ -267,6 +271,20 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
                 pc.Create();
             }
         }
+        [RelayCommand]
+        private void SupprimerLigneCommande()
+        {
+            if (LigneCommandeSelectionnee != null)
+            {
+                LignesCommande.Remove(LigneCommandeSelectionnee);
+                OnPropertyChanged(nameof(TotalTTC));  // Pour recalculer le total
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Aucun plat sélectionné à supprimer.");
+            }
+        }
+
 
     }
 }
