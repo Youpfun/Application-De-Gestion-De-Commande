@@ -21,7 +21,7 @@
             <RowDefinition Height="95*" />
         </Grid.RowDefinitions>
 
-        <!-- Ligne 1 : Recherche et filtres -->
+        
         <StackPanel Orientation="Horizontal" Margin="0,0,0,10" Grid.Row="0">
             <ui:TextBox x:Name="textRechercheClientQuiARecup" Width="250" Height="34" PlaceholderText="Rechercher un client" 
                         Text="{Binding RechercheClient, UpdateSourceTrigger=PropertyChanged}"
@@ -29,12 +29,14 @@
             <ui:Button x:Name="buttonRecuperer" Content="Récupérée" Height="34" Width="120"
                        Command="{Binding MarquerCommeRecupereeCommand}" Background="#D0021B" Margin="0,0,10,0"
                        FontWeight="Bold" Click="buttonRecuperer_Click"/>
+            <ui:Button  Content="Détails" Height="34" Width="120"
+            Background="#D0021B" Margin="275,0,0,0"
+            FontWeight="Bold" Click="buttonRecuperer_Click"/>
         </StackPanel>
 
-        <!-- Ligne 2 : Titre -->
         <TextBlock Text="Commandes du jour à récupérer" FontSize="18" FontWeight="Bold" Margin="0,0,0,10" Grid.Row="1" />
 
-        <!-- Ligne 3 : DataGrid Commandes à récupérer -->
+     
 
         <ui:DataGrid x:Name="commandeARecup" Grid.Row="2" ItemsSource="{Binding LesCommandesDuJour}"
                      AutoGenerateColumns="False" HeadersVisibility="Column"
@@ -51,7 +53,6 @@
             </DataGrid.Columns>
         </ui:DataGrid>
 
-        <!-- Ligne 4 : Section Récupérées -->
         <StackPanel Grid.Row="3" >
             <TextBlock Text="Commandes récupérées" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
 
@@ -71,3 +72,4 @@
         </StackPanel>
     </Grid>
 </Page>
+ 
