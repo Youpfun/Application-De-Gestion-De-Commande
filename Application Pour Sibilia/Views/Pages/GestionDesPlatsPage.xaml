@@ -114,7 +114,7 @@
                     Header="Nom du Plat" />
                 <DataGridTextColumn  
                     Width="120"
-                    Binding="{Binding PrixUnitaire, ValidatesOnExceptions=True, StringFormat=C2}"
+                    Binding="{Binding PrixUnitaire, ValidatesOnExceptions=True, StringFormat={}{0:N2} €}"
                     Header="Prix Unitaire" />
                 <DataGridTextColumn  
                     Width="120"
