@@ -115,17 +115,7 @@ namespace Application_Pour_Sibilia.Models
                 return DataAccess.Instance.ExecuteSet(cmdUpdate);
             }
         }
-        //public List<PlatCommande> FindAll()
-        //{
-        //    List<PlatCommande> lesDetailsPlats = new List<PlatCommande>();
-        //    using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select numcommande, nomplat, quantite,prix from platcommande p join plat pl on p.numplat=pl.numplat"))
-        //    {
-        //        DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-        //        foreach (DataRow dr in dt.Rows)
-        //            lesDetailsPlats.Add(new PlatCommande((int)dr["numcommande"], (String)dr["nomplat"], (int)dr["quantite"],Convert.ToDecimal(dr["prix"])));
-        //    }
-        //    return lesDetailsPlats;
-        //}
+        // Methode pour récupérer le contenue d'une commande spécifique
         public static List<PlatCommande> DetailsCommandes(int numCommande)
         {
             List<PlatCommande> lesDetailsPlats = new List<PlatCommande>();

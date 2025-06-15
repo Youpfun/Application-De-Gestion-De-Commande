@@ -26,16 +26,10 @@ namespace Application_Pour_Sibilia.Views.Windows
             ChargerDetailsCommande(numCommande);
             
         }
+        // Permet de charger le contenue d'une commande spécifique dans une liste
         private void ChargerDetailsCommande(int numCommande)
         {
-            var details = PlatCommande.DetailsCommandes(numCommande);
-            MessageBox.Show($"Plats récupérés : {details.Count}");
-
-            // juste avant le bind
-            if (detailsCommande == null)
-            {
-                MessageBox.Show("DataGrid est null !");
-            }
+            List<PlatCommande> details = PlatCommande.DetailsCommandes(numCommande);
             detailsCommande.ItemsSource = details;
         }
     }
