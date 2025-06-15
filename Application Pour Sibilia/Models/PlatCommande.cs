@@ -11,8 +11,7 @@ namespace Application_Pour_Sibilia.Models
     public class PlatCommande
     {
         public int NumCommande { get; set; }
-
-        private string nomPlat;
+        public string NomPlat { get; set; }
         public int NumPlat { get; set; }
         public int Quantite { get; set; }
         public decimal Prix { get; set; }
@@ -41,19 +40,7 @@ namespace Application_Pour_Sibilia.Models
             this.NomPlat = nomPlat;
         }
 
-        public string NomPlat
-        {
-            get
-            {
-                return this.nomPlat;
-            }
-
-            set
-            {
-                this.nomPlat = value;
-            }
-        }
-
+        
         
 
         public int Create()
@@ -128,16 +115,39 @@ namespace Application_Pour_Sibilia.Models
                 return DataAccess.Instance.ExecuteSet(cmdUpdate);
             }
         }
-        public List<PlatCommande> FindAll()
+        //public List<PlatCommande> FindAll()
+        //{
+        //    List<PlatCommande> lesDetailsPlats = new List<PlatCommande>();
+        //    using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select numcommande, nomplat, quantite,prix from platcommande p join plat pl on p.numplat=pl.numplat"))
+        //    {
+        //        DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+        //        foreach (DataRow dr in dt.Rows)
+        //            lesDetailsPlats.Add(new PlatCommande((int)dr["numcommande"], (String)dr["nomplat"], (int)dr["quantite"],Convert.ToDecimal(dr["prix"])));
+        //    }
+        //    return lesDetailsPlats;
+        //}
+        public static List<PlatCommande> DetailsCommandes(int numCommande)
         {
             List<PlatCommande> lesDetailsPlats = new List<PlatCommande>();
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select numcommande, nomplat, quantite,prix from platcommande p join plat pl on p.numplat=pl.numplat"))
+
+            using (var cmdSelect = new NpgsqlCommand("select numcommande, nomplat, quantite,prix from platcommande p join plat pl on p.numplat=pl.numplat WHERE numcommande = @numcommande"))
             {
+                cmdSelect.Parameters.AddWithValue("numcommande", numCommande);
+
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
-                foreach (DataRow dr in dt.Rows)
-                    lesDetailsPlats.Add(new PlatCommande((int)dr["numcommande"], (String)dr["nomplat"], (int)dr["quantite"],Convert.ToDecimal(dr["prix"])));
+                foreach (DataRow row in dt.Rows)
+                {
+                    lesDetailsPlats.Add(new PlatCommande(
+                        Convert.ToInt32(row["numcommande"]),
+                        Convert.ToString(row["nomplat"]),
+                        Convert.ToInt32(row["quantite"]),
+                        Convert.ToDecimal(row["prix"])
+                    ));
+                }
             }
             return lesDetailsPlats;
+
         }
     }
+    
 }

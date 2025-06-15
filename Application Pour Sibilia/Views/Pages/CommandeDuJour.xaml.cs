@@ -29,6 +29,7 @@ namespace Application_Pour_Sibilia.Views.Pages
     {
         public ConsulterCommandeViewModel ViewModel { get; }
         public Magasin LeMagasin { get; set; }
+
         private ConsulterCommandeViewModel vm;
 
         /// <summary>
@@ -104,28 +105,29 @@ namespace Application_Pour_Sibilia.Views.Pages
         /// </summary>
         private void buttonDetailsCommande_Click(object sender, RoutedEventArgs e)
         {
-            //if (commandeARecup.SelectedItem == null)
-            //{
-            //    MessageBox.Show("Veuillez sélectionner une commande", "Attention",
-            //    MessageBoxButton.OK, MessageBoxImage.Information);
-            //}
-            //else
-            //{
-            //    PlatCommande detailsCommande = (PlatCommande)commandeARecup.SelectedItem;
-            //    try
-            //    {
-            //        var fenetreDetails = new WindowDetailsCommande(detailsCommande);
-            //        fenetreDetails.ShowDialog();
-            //    }
-            //    catch (Exception ex)
-            //    {
+            if (commandeARecup.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez sélectionner une commande", "Attention",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                try
+                {
+                    GestionCommande detailsCommande = (GestionCommande)commandeARecup.SelectedItem;
+                    int numCommande = detailsCommande.NumCommande;
+                    var fenetreDetails = new WindowDetailsCommande(numCommande);
+                    fenetreDetails.ShowDialog();
+                }
+                catch (Exception ex)
+                {
 
 
-            //        MessageBox.Show("La commande n'a pas pu être récupéré.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    }
-            //    CollectionViewSource.GetDefaultView(commandeRecupere.ItemsSource)?.Refresh();
+                    MessageBox.Show("La commande n'a pas pu être récupéré.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                CollectionViewSource.GetDefaultView(commandeRecupere.ItemsSource)?.Refresh();
 
-            //}
+            }
         }
     }
 }

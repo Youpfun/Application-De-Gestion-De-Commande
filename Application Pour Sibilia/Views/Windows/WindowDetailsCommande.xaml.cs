@@ -20,11 +20,23 @@ namespace Application_Pour_Sibilia.Views.Windows
     /// </summary>
     public partial class WindowDetailsCommande : Window
     {
-        public WindowDetailsCommande(PlatCommande commande)
+        public WindowDetailsCommande(int numCommande)
         {
             InitializeComponent();
+            ChargerDetailsCommande(numCommande);
             
-            
+        }
+        private void ChargerDetailsCommande(int numCommande)
+        {
+            var details = PlatCommande.DetailsCommandes(numCommande);
+            MessageBox.Show($"Plats récupérés : {details.Count}");
+
+            // juste avant le bind
+            if (detailsCommande == null)
+            {
+                MessageBox.Show("DataGrid est null !");
+            }
+            detailsCommande.ItemsSource = details;
         }
     }
 }

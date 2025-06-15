@@ -1,5 +1,6 @@
 ﻿using Application_Pour_Sibilia.Models;
 using Application_Pour_Sibilia.ViewModels.Pages;
+using Application_Pour_Sibilia.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,6 +64,28 @@ namespace Application_Pour_Sibilia.Views.Pages
         /// </summary>
         private void buttonDetailsCommande_Click(object sender, RoutedEventArgs e)
         {
+            if (rechCommande.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez sélectionner une commande", "Attention",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                try
+                {
+                    GestionCommande detailsCommande = (GestionCommande)rechCommande.SelectedItem;
+                    int numCommande = detailsCommande.NumCommande;
+                    var fenetreDetails = new WindowDetailsCommande(numCommande);
+                    fenetreDetails.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("La commande n'a pas pu être récupéré.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                CollectionViewSource.GetDefaultView(rechCommande.ItemsSource)?.Refresh();
+
+            }
 
         }
     }

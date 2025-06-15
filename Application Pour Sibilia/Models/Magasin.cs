@@ -27,7 +27,7 @@ namespace Application_Pour_Sibilia.Models
             this.LesGestionCommandes = new ObservableCollection<GestionCommande>(new GestionCommande().FindAll());
             this.LesCommandesDuJour = new ObservableCollection<GestionCommande>(new GestionCommande().FindAllCommandeAujourdhui());
             this.LesCommandesRecupere = new ObservableCollection<GestionCommande>(new GestionCommande().FindAllCommandeRecupere());
-            this.LesDetailsPlats = new ObservableCollection<PlatCommande>(new PlatCommande().FindAll());
+            //this.LesDetailsPlats = new ObservableCollection<PlatCommande>(new PlatCommande().DetailsCommandes());
 
         }
         public Magasin():this("")

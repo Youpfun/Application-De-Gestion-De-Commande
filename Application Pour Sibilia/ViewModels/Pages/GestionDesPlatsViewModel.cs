@@ -54,7 +54,7 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         public GestionDesPlatsViewModel()
         {
             ChargerDonnees();
-            ChargerClients();
+            //ChargerClients();
         }
 
         /// <summary>
@@ -182,11 +182,11 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         /// <summary>
         /// Charge les détails des plats pour l'affichage.
         /// </summary>
-        private void ChargerClients()
-        {
-            PlatCommande repo = new PlatCommande();
-            var details = repo.FindAll();
-            LesDetailsPlats = new ObservableCollection<PlatCommande>(details);
-        }
+        //private void ChargerClients()
+        //{
+        //    PlatCommande repo = new PlatCommande();
+        //    var details = repo.FindAll();
+        //    LesDetailsPlats = new ObservableCollection<PlatCommande>(details);
+        //}
     }
 }

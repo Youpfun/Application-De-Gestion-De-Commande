@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="DetailsCommande" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="detailsCommande" ItemsSource="{Binding LesDetailsPlats }">
+        <DataGrid x:Name="detailsCommande" AutoGenerateColumns="False" Background="#FFF48E8E" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="NumCommande" Binding="{Binding NumCommande}" Width="*"/>
-                <DataGridTextColumn Header="Nomplat" Binding="{Binding NomPlat}" Width="*"/>
-                <DataGridTextColumn Header="Quantite" Binding="{Binding Quantite }" Width="*"/>
-                <DataGridTextColumn Header="Prix Unitaire" Binding="{Binding Prix ,StringFormat={}{0:N2}€}" Width="*"/>
+                <DataGridTextColumn Header="NumCommande" Binding="{Binding NumCommande}" Width="*" FontWeight="Bold" Foreground="Black"/>
+                <DataGridTextColumn Header="Nomplat" Binding="{Binding NomPlat}" Width="*" FontWeight="Bold" Foreground="Black"/>
+                <DataGridTextColumn Header="Quantite" Binding="{Binding Quantite }" Width="*" FontWeight="Bold" Foreground="Black"/>
+                <DataGridTextColumn Header="Prix Unitaire" Binding="{Binding Prix ,StringFormat={}{0:N2}€}" Width="*" FontWeight="Bold" Foreground="Black"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
