@@ -26,6 +26,10 @@ namespace Application_Pour_Sibilia.Views.Pages
     {
         public ConsulterCommandeViewModel ViewModel { get; }
         public Magasin LeMagasin { get; set; }
+
+        /// <summary>
+        /// Initialise la page affichant toutes les commandes.
+        /// </summary>
         public ToutesLesCommandes(ConsulterCommandeViewModel viewModel)
         {
             ViewModel = viewModel;
@@ -34,6 +38,10 @@ namespace Application_Pour_Sibilia.Views.Pages
             InitializeComponent();
             rechCommande.Items.Filter = RechercheMotClefClient;
         }
+
+        /// <summary>
+        /// Filtre les commandes selon le nom du client.
+        /// </summary>
         public bool RechercheMotClefClient(object obj)
         {
             if (String.IsNullOrEmpty(textGestionToutesCommandes.Text))
@@ -42,12 +50,17 @@ namespace Application_Pour_Sibilia.Views.Pages
             return uneGestionCommande.NomClient.StartsWith(textGestionToutesCommandes.Text, StringComparison.OrdinalIgnoreCase);
         } 
         
-
+        /// <summary>
+        /// Rafraîchit la liste lors de la saisie dans la zone de recherche.
+        /// </summary>
         private void textGestionToutesCommandes_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(rechCommande.ItemsSource).Refresh();
         }
 
+        /// <summary>
+        /// Gère le clic sur le bouton pour afficher les détails d'une commande.
+        /// </summary>
         private void buttonDetailsCommande_Click(object sender, RoutedEventArgs e)
         {
 

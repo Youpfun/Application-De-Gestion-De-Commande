@@ -17,18 +17,24 @@ namespace Application_Pour_Sibilia.Views.Pages
 
         private GestionClientViewModel vm;
 
+        /// <summary>
+        /// Initialise la page de gestion des clients.
+        /// </summary>
         public GestionClientPage(GestionClientViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = this;
             DataContext = new GestionClientViewModel();
 
-          
             InitializeComponent();
             reClient.Items.Filter = RechercheMotClefClient;
             LeMagasin = new Magasin();
             DataContext = LeMagasin;
         }
+
+        /// <summary>
+        /// Filtre les clients selon le mot-clé saisi.
+        /// </summary>
         public bool RechercheMotClefClient(object obj)
         {
             if (String.IsNullOrEmpty(textMotClefClient.Text))
@@ -40,11 +46,18 @@ namespace Application_Pour_Sibilia.Views.Pages
             || unClient.AdresseVilleClient.StartsWith(textMotClefClient.Text, StringComparison.OrdinalIgnoreCase)
             || unClient.AdresseRueClient.StartsWith(textMotClefClient.Text, StringComparison.OrdinalIgnoreCase));
         }
+
+        /// <summary>
+        /// Rafraîchit la liste lors de la saisie dans la zone de recherche.
+        /// </summary>
         private void textMotClefClient_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(reClient.ItemsSource).Refresh();
         }
 
+        /// <summary>
+        /// Gère le clic sur le bouton pour créer un nouveau client.
+        /// </summary>
         private void buttonNouveau_Click(object sender, RoutedEventArgs e)
         {
             Client unClient = new Client();
@@ -67,6 +80,9 @@ namespace Application_Pour_Sibilia.Views.Pages
             }
         }
 
+        /// <summary>
+        /// Gère le clic sur le bouton pour modifier un client.
+        /// </summary>
         private void buttonModifier_Click(object sender, RoutedEventArgs e)
         {
             if (reClient.SelectedItem == null)
@@ -108,6 +124,9 @@ namespace Application_Pour_Sibilia.Views.Pages
 
         }
 
+        /// <summary>
+        /// Gère le clic sur le bouton pour supprimer un client.
+        /// </summary>
         private void buttonSupprimer_Click(object sender, RoutedEventArgs e)
         {
             if (reClient.SelectedItem != null)
@@ -136,6 +155,9 @@ namespace Application_Pour_Sibilia.Views.Pages
             }
         }
 
+        /// <summary>
+        /// Gère le clic sur le bouton pour créer une commande pour le client sélectionné.
+        /// </summary>
         private void buttonAjouterCommande_Click(object sender, RoutedEventArgs e)
         {
             if (reClient.SelectedItem == null)
@@ -150,6 +172,9 @@ namespace Application_Pour_Sibilia.Views.Pages
             NavigationService?.Navigate(pageCreationCommande);
         }
 
+        /// <summary>
+        /// Gère le clic sur le bouton pour ajouter le client sélectionné à une commande.
+        /// </summary>
         private void buttonAjouterALaCommande_Click(object sender, RoutedEventArgs e)
         {
             // Vérifie qu'un client est bien sélectionné

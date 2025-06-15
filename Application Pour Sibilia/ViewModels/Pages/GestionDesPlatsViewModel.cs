@@ -48,12 +48,18 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             "Période De Fêtes"
         };
 
+        /// <summary>
+        /// Initialise le ViewModel de gestion des plats.
+        /// </summary>
         public GestionDesPlatsViewModel()
         {
             ChargerDonnees();
             ChargerClients();
         }
 
+        /// <summary>
+        /// Charge les données de base (plats, catégories, sous-catégories).
+        /// </summary>
         private void ChargerDonnees()
         {
             // Charger les plats
@@ -74,6 +80,9 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             LesSousCategoriesFiltrées = new ObservableCollection<SousCategorie>(sousCategories);
         }
 
+        /// <summary>
+        /// Met à jour la liste des sous-catégories filtrées selon la catégorie sélectionnée.
+        /// </summary>
         partial void OnCategorieSelectionneeChanged(Categorie value)
         {
             // Filtrer les sous-catégories selon la catégorie sélectionnée
@@ -109,6 +118,9 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             AppliquerFiltres();
         }
 
+        /// <summary>
+        /// Applique les filtres sur la liste des plats.
+        /// </summary>
         private void AppliquerFiltres()
         {
             var platsFiltrés = LesPlats.AsEnumerable();
@@ -144,6 +156,9 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             LesPlatsFiltrés = new ObservableCollection<Plat>(platsFiltrés);
         }
 
+        /// <summary>
+        /// Réinitialise tous les filtres.
+        /// </summary>
         [RelayCommand]
         private void ReinitialiserFiltres()
         {
@@ -155,11 +170,18 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             LesPlatsFiltrés = new ObservableCollection<Plat>(LesPlats);
         }
 
+        /// <summary>
+        /// Ajoute un nouveau plat à la liste.
+        /// </summary>
         public void AjouterPlat(Plat nouveauPlat)
         {
             LesPlats.Add(nouveauPlat);
             AppliquerFiltres();
         }
+
+        /// <summary>
+        /// Charge les détails des plats pour l'affichage.
+        /// </summary>
         private void ChargerClients()
         {
             PlatCommande repo = new PlatCommande();

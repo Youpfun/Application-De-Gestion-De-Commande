@@ -17,6 +17,9 @@ namespace Application_Pour_Sibilia.Views.Pages
         public GestionDesPlatsViewModel ViewModel { get; }
         private readonly SessionService _sessionService;
 
+        /// <summary>
+        /// Initialise la page de gestion des plats et configure l'accès selon le rôle utilisateur.
+        /// </summary>
         public GestionDesPlatsPage(GestionDesPlatsViewModel viewModel)
         {
             ViewModel = viewModel;
@@ -30,6 +33,9 @@ namespace Application_Pour_Sibilia.Views.Pages
             ConfigurerAccesSelonRole();
         }
 
+        /// <summary>
+        /// Configure l'accès aux fonctionnalités selon le rôle de l'utilisateur connecté.
+        /// </summary>
         private void ConfigurerAccesSelonRole()
         {
             // Si l'utilisateur est un vendeur (rôle 1), masquer le bouton de création de plat
@@ -39,6 +45,10 @@ namespace Application_Pour_Sibilia.Views.Pages
             }
         }
 
+        /// <summary>
+        /// Gère le clic sur le bouton pour créer un nouveau plat.
+        /// Ouvre la fenêtre de création et ajoute le plat si la création est validée.
+        /// </summary>
         private void buttonNouveauPlat_Click(object sender, RoutedEventArgs e)
         {
             Plat unPlat = new Plat();
@@ -58,6 +68,10 @@ namespace Application_Pour_Sibilia.Views.Pages
             }
         }
 
+        /// <summary>
+        /// Gère le clic sur le bouton de réinitialisation des filtres.
+        /// Exécute la commande de réinitialisation des filtres du ViewModel.
+        /// </summary>
         private void buttonReinitialiser_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.ReinitialiserFiltresCommand.Execute(null);
