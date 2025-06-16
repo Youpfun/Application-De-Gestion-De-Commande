@@ -104,6 +104,9 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             get { return _sessionService.NumEmploye; }
         }
 
+        /// <summary>
+        /// Initialise le ViewModel de création de commande.
+        /// </summary>
         public CreationCommandeViewModel()
         {
             // Récupération du service de session pour accéder au numéro d'employé
@@ -117,24 +120,36 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             ChargerPlats();
         }
 
+        /// <summary>
+        /// Charge la liste des catégories disponibles.
+        /// </summary>
         private void ChargerCategories()
         {
             var categories = categorieRepo.FindAll();
             LesCategories = new ObservableCollection<Categorie>(categories);
         }
 
+        /// <summary>
+        /// Charge la liste des sous-catégories disponibles.
+        /// </summary>
         private void ChargerSousCategories()
         {
             toutesLesSousCategories = sousCategorieRepo.FindAll();
             LesSousCategories = new ObservableCollection<SousCategorie>(toutesLesSousCategories);
         }
 
+        /// <summary>
+        /// Charge la liste des plats disponibles.
+        /// </summary>
         private void ChargerPlats()
         {
             tousLesPlats = platRepo.FindAll().ToList();
             FiltrerPlats();
         }
 
+        /// <summary>
+        /// Filtre la liste des plats selon les critères sélectionnés.
+        /// </summary>
         [RelayCommand]
         private void FiltrerPlats()
         {
@@ -181,6 +196,9 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             LesPlats = new ObservableCollection<Plat>(platsFiltres);
         }
         
+        /// <summary>
+        /// Réinitialise tous les filtres de recherche.
+        /// </summary>
         [RelayCommand]
         private void ReinitialiserFiltres()
         {
@@ -195,7 +213,9 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             FiltrerPlats();
         }
 
-        // ⚠ Le cascade dynamique : appelé quand la catégorie change
+        /// <summary>
+        /// Met à jour la liste des sous-catégories selon la catégorie sélectionnée.
+        /// </summary>
         partial void OnSelectedCategorieChanged(Categorie value)
         {
             if (value != null)
@@ -216,6 +236,9 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             SelectedSousCategorie = null;
         }
 
+        /// <summary>
+        /// Ajoute un plat à la commande en cours.
+        /// </summary>
         [RelayCommand]
         private void AjouterPlat()
         {
@@ -246,6 +269,9 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
             }
         }
 
+        /// <summary>
+        /// Enregistre la commande et ses lignes dans la base de données.
+        /// </summary>
         public void EnregistrerCommande()
         {
             // Vérifications de base avant insertion
@@ -283,6 +309,10 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
                 pc.Create();
             }
         }
+
+        /// <summary>
+        /// Supprime la ligne de commande sélectionnée.
+        /// </summary>
         [RelayCommand]
         private void SupprimerLigneCommande()
         {
@@ -296,7 +326,5 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
                 System.Windows.MessageBox.Show("Aucun plat sélectionné à supprimer.");
             }
         }
-
-
     }
 }

@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="Client" Height="480" Width="300">
-     <StackPanel x:Name="FormClient" Margin="0,0,0,1" Background="#FF282629">
+     <StackPanel x:Name="FormClient" Margin="0,0,0,1" >
      <Label
          Width="150"
          Height="26"

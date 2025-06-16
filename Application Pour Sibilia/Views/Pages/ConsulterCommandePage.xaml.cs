@@ -27,6 +27,10 @@ namespace Application_Pour_Sibilia.Views.Pages
     {
         public ConsulterCommandeViewModel ViewModel { get; }
         public Magasin LeMagasin { get; set; }
+
+        /// <summary>
+        /// Initialise la page de consultation des commandes.
+        /// </summary>
         public ConsulterCommandePage(ConsulterCommandeViewModel viewModel)
         {
             ViewModel = viewModel;
@@ -34,11 +38,18 @@ namespace Application_Pour_Sibilia.Views.Pages
             InitializeComponent();
             FrameConsulterCommande.Navigate(new CommandeDuJour(ViewModel));
         }
+
+        /// <summary>
+        /// Affiche la liste de toutes les commandes.
+        /// </summary>
         private void button_Toutes_Click(object sender, RoutedEventArgs e)
         {
             FrameConsulterCommande.Navigate(new ToutesLesCommandes(ViewModel));
         }
 
+        /// <summary>
+        /// Affiche la liste des commandes du jour.
+        /// </summary>
         private void button_Ajourdhui_Click(object sender, RoutedEventArgs e)
         {
             FrameConsulterCommande.Navigate(new CommandeDuJour(ViewModel));

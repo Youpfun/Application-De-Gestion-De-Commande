@@ -29,7 +29,12 @@ namespace Application_Pour_Sibilia.Views.Pages
     {
         public ConsulterCommandeViewModel ViewModel { get; }
         public Magasin LeMagasin { get; set; }
+
         private ConsulterCommandeViewModel vm;
+
+        /// <summary>
+        /// Initialise la page des commandes du jour.
+        /// </summary>
         public CommandeDuJour(ConsulterCommandeViewModel viewModel)
         {
             ViewModel = viewModel;
@@ -41,6 +46,9 @@ namespace Application_Pour_Sibilia.Views.Pages
             //rechCommande.Items.Filter = RechercheMotClefClient;
         }
 
+        /// <summary>
+        /// Gère le clic sur le bouton pour marquer une commande comme récupérée.
+        /// </summary>
         private void buttonRecuperer_Click(object sender, RoutedEventArgs e)
         {
             // Vérifie que le ViewModel est bien instancié
@@ -72,10 +80,17 @@ namespace Application_Pour_Sibilia.Views.Pages
             }
         }
 
+        /// <summary>
+        /// Rafraîchit la liste lors de la saisie dans la zone de recherche client.
+        /// </summary>
         private void textRechercheClientQuiARecup_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(commandeRecupere.ItemsSource).Refresh();
         }
+
+        /// <summary>
+        /// Filtre les commandes récupérées selon le nom du client.
+        /// </summary>
         public bool RechercheMotCefNomClientRecup(object obj)
         {
             if (String.IsNullOrEmpty(textRechercheClientQuiARecup.Text))
@@ -85,9 +100,34 @@ namespace Application_Pour_Sibilia.Views.Pages
             );
         }
 
+        /// <summary>
+        /// Gère le clic sur le bouton pour afficher les détails d'une commande.
+        /// </summary>
         private void buttonDetailsCommande_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (commandeARecup.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez sélectionner une commande", "Attention",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                try
+                {
+                    GestionCommande detailsCommande = (GestionCommande)commandeARecup.SelectedItem;
+                    int numCommande = detailsCommande.NumCommande;
+                    var fenetreDetails = new WindowDetailsCommande(numCommande);
+                    fenetreDetails.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+
+
+                    MessageBox.Show("La commande n'a pas pu être récupéré.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                CollectionViewSource.GetDefaultView(commandeRecupere.ItemsSource)?.Refresh();
+
+            }
         }
     }
 }

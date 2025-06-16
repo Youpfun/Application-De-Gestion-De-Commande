@@ -15,12 +15,18 @@ namespace Application_Pour_Sibilia.ViewModels.Pages
         private ObservableCollection<Client> lesClients;
         [ObservableProperty]
         private string motClefClient;
+
+        /// <summary>
+        /// Initialise le ViewModel de gestion des clients.
+        /// </summary>
         public GestionClientViewModel()
         {
             ChargerClients();
-            
         }
 
+        /// <summary>
+        /// Charge la liste des clients.
+        /// </summary>
         private void ChargerClients()
         {
             Client repo = new Client();

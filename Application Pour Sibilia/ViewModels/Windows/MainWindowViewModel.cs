@@ -39,12 +39,7 @@ namespace Application_Pour_Sibilia.ViewModels.Windows
         [ObservableProperty]
         private ObservableCollection<object> _menuItems = new()
         {
-            new NavigationViewItem()
-            {
-                Content = "Menu principal",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
-                TargetPageType = typeof(Views.Pages.DashboardPage)
-            },
+            
             new NavigationViewItem()
             {
                 Content = "Gestion des plats",

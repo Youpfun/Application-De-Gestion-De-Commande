@@ -13,7 +13,9 @@ namespace Application_Pour_Sibilia.Views.Pages
 
         public CreationCommandeViewModel ViewModel { get; }
 
-        // Constructeur par défaut pour la page de création de commande
+        /// <summary>
+        /// Initialise la page de création de commande.
+        /// </summary>
         public CreationCommandePage()
         {
             InitializeComponent();
@@ -22,7 +24,9 @@ namespace Application_Pour_Sibilia.Views.Pages
             ViewModel.LignesCommande.CollectionChanged += LignesCommande_CollectionChanged;
         }
 
-        // Méthode pour initialiser la page avec un client sélectionné
+        /// <summary>
+        /// Initialise la page de création de commande avec un client sélectionné.
+        /// </summary>
         public CreationCommandePage(Client clientSelectionne)
         {
             InitializeComponent();
@@ -35,18 +39,25 @@ namespace Application_Pour_Sibilia.Views.Pages
             ViewModel.LignesCommande.CollectionChanged += LignesCommande_CollectionChanged;
         }
 
-
+        /// <summary>
+        /// Fait défiler la liste des lignes de commande lors d'un changement.
+        /// </summary>
         private void LignesCommande_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             ScrollCommande?.ScrollToEnd();
         }
 
+        /// <summary>
+        /// Ouvre la page de gestion des clients pour sélectionner un client.
+        /// </summary>
         private void buttonSelectionClient_Click(object sender, RoutedEventArgs e)
         {
             GestionClientPage gestionClientPage = new GestionClientPage(new GestionClientViewModel());
             NavigationService?.Navigate(gestionClientPage);
         }
-
+        /// <summary>
+        /// Valide et enregistre la commande.
+        /// </summary>
         private void buttonValiderCommande_Click(object sender, RoutedEventArgs e)
         {
             // Vérifie que les informations minimales sont bien renseignées

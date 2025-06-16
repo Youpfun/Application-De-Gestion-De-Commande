@@ -49,8 +49,8 @@ namespace Application_Pour_Sibilia
                 services.AddSingleton<MainWindowViewModel>();
                 services.AddSingleton<ConnexionWindowViewModel>();
 
-                services.AddSingleton<DashboardPage>();
-                services.AddSingleton<DashboardViewModel>();
+                
+                
                 services.AddSingleton<GestionDesPlatsPage>();
                 services.AddSingleton<GestionDesPlatsViewModel>();
                 services.AddSingleton<CreationCommandePage>();
